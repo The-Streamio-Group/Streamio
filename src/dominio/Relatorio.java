@@ -1,23 +1,33 @@
 package dominio;
-import java.time.LocalDate;
-import java.util.HashMap;
 
-public class Relatorio {
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class Relatorio extends Sistema {
     private int id;
     private LocalDate dataGerado;
 
-    /* Gerar um relatório com a quantidade de assinaturas (no futuro, separar por tipo), receita gerada, gênero mais consumido etc*/
-
-    public Relatorio (int id, LocalDate dataGerado) {
+    public Relatorio(int id, LocalDate dataGerado, ArrayList<Usuario> usuariosDoSistema, ArrayList<Conteudo> conteudosDoSistema, ArrayList<Assinatura> assinaturasDoSistemas) {
+        super(usuariosDoSistema, conteudosDoSistema, assinaturasDoSistemas);
         this.id = id;
         this.dataGerado = dataGerado;
     }
 
-    @Override
-    public String toString () {
-        return "Relatório ID: " + id + "\nData: " + dataGerado;
+    // getters e setters
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public LocalDate getDataGerado() {
+        return dataGerado;
+    }
+    public void setDataGerado(LocalDate dataGerado) {
+        this.dataGerado = dataGerado;
     }
 
-
+    // métodos específicos
+    public void imprimirRelatorio() {
+    }
 }
-

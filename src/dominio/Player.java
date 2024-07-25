@@ -1,36 +1,43 @@
 package dominio;
+import java.util.ArrayList;
 
 public class Player {
+
    private int id;
    private Conteudo conteudo;
-   private String timestamp;
+   private String Timestamp;
 
-
-
-   public void iniciarResumir() {
-      /**/
+   public Player(int id, Conteudo conteudo, String Timestamp) {
+      this.id = id;
+      this.conteudo = conteudo;
+      this.Timestamp = Timestamp;
    }
 
-   public void pausar() {
-      /**/
+   // getters e setters
+   public int getId() {
+      return id;
+   }
+   public void setId(int id) {
+      this.id = id;
+   }
+   public Conteudo getConteudo() {
+      return conteudo;
+   }
+   public void setConteudo(Conteudo conteudo) {
+      this.conteudo = conteudo;
    }
 
-   public void avancarTempo() {
-      /**/
-   }
+   // (adicionar) métodos específicos
+   public void IniciarResumir() {};
 
-   public void voltarTempo() {
-      /**/
-   }
+   public void pausar() {};
 
-   public void avancarEpisodio() {
-      /**/
-   }
+   public void avancarTempo() {};
 
-   public void voltarEpisodio() {
-      /**/
-   }
+   public void voltarTempo() {};
 
+   public void avancarEpisodio() {};
 
-
+   public void voltarEpisodio() {};
 }
+
