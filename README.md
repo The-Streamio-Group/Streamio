@@ -19,15 +19,15 @@ No aplicativo, os usuários deverão assinar um dos planos de pagamento disponí
 
 # Lista de Requisitos: 
 **REQ1**. O sistema deve controlar o acesso do usuário através do login e da senha e também da confirmação do pagamento da assinatura. Haverá perfil do usuário comum e do administrador.\
-**REQ2.** O sistema permitirá a criação de perfis de acordo com a assinatura feita previamente.\
-**REQ3.** O sistema deve possuir uma função para que o usuário faça listas de acordo com seu gosto pessoal (seus conteúdos favoritos).\
-**REQ4.** O sistema permitirá que o usuário veja o histórico de suas visualizações a partir de uma lista (WatchHistory).\
-**REQ5.** O sistema deve permitir que o usuário utilize uma forma de busca por conteúdo através da pesquisa pelo nome ou por ordenação de acordo com: (1) Categoria relacional, (2) Classificação de Idade.\
-**REQ6.** O sistema possibilita a avaliação do conteúdo assistido, e utiliza a média das notas inseridas para ranquear os melhores filmes da plataforma.\
+**REQ2.** O sistema possui interfaces gráficas que permitem a realização de todas as ações descritas nos requisitos.\
+**REQ3.** O sistema permitirá a criação de perfis de acordo com a assinatura feita previamente.\
+**REQ4.** O sistema deve permitir que o usuário utilize uma forma de busca por conteúdo através da pesquisa pelo nome ou por ordenação de acordo com: (1) Categoria relacional, (2) Classificação de Idade.\
+**REQ5.** O sistema permitirá que o usuário veja o histórico de suas visualizações a partir de uma lista (WatchHistory).\
+**REQ6.** O sistema irá gerar um relatório voltado para o cargo de Administrador a fim de aumentar a produtividade, contendo as seguintes informações: (1) Quantidades de Usuários cadastrados, (2) Contagem de usuários em cada assinatura, (3) Contagem de visualizações nos filmes do catálogo, (4) Saldo arrecadado com as assinaturas, (5) Comentários enviados pelos usuários comuns para a melhora do sistema e aplicação.\
 **REQ7.** O sistema coleta o número de visualizações dos programas e formula um sistema de ranking baseado nesses dados.\
-**REQ8.** O sistema deve permitir que os usuários consumidores enviem seus feedbacks em torno da aplicação.\
-**REQ9.** O sistema irá gerar um relatório voltado para o cargo de Administrador a fim de aumentar a produtividade, contendo as seguintes informações: (1) Quantidades de Usuários cadastrados, (2) Contagem de usuários em cada assinatura, (3) Contagem de visualizações nos filmes do catálogo, (4) Saldo arrecadado com as assinaturas, (5) Comentários enviados pelos usuários comuns para a melhora do sistema e aplicação.\
-**REQ10.** O sistema possui interfaces gráficas que permitem a realização de todas as ações descritas nos requisitos, bem como um botão de ajuda que explica como utilizar a interface.
+**REQ8.** O sistema possibilita a avaliação do conteúdo assistido, e utiliza a média das notas inseridas para ranquear os melhores filmes da plataforma.\
+**REQ9.** O sistema deve possuir uma função para que o usuário faça listas de acordo com seu gosto pessoal (seus conteúdos favoritos).\
+**REQ10.** O sistema deve permitir que os usuários consumidores enviem seus feedbacks em torno da aplicação, além de um botão de suporte ao usuário.
 
 
 	
