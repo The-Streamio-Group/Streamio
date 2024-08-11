@@ -1,21 +1,26 @@
-package dominio;
+package dominio.negocios.beans;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class Usuario {
+    private String usuarioID;
     private Assinatura assinatura;
     private String email;
     private String senha;
-    private ArrayList<Perfil> perfis;
+    private Perfil[] perfis;
 
-    public Usuario(Assinatura assinatura, boolean tipoPerfil, String email, String number) {
+    public Usuario(Assinatura assinatura, String email, String number) {
         this.assinatura = assinatura;
         this.email = email;
         this.senha = number;
-        perfis = new ArrayList<>();
+        this.perfis = new Perfil[4];
     }
 
     // getters e setters
+
+    public String getID() { return usuarioID; };
     public Assinatura getAssinatura() {
         return assinatura;
     }
@@ -29,12 +34,7 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public ArrayList<Perfil> getPerfis() {
-        return perfis;
-    }
-    public void setPerfis(ArrayList<Perfil> perfis) {
-        this.perfis = perfis;
-    }
+
     public String getSenha() {
         return senha;
     }
@@ -42,18 +42,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    // métodos específicos
-    public void adicionarPerfil(Perfil perfil) {
-        perfis.add(perfil);
-    };
 
-    public void removerPerfil(Perfil perfil) {
-        perfis.remove(perfil);
-    }
 
-    public void renovarAssinatura() {
 
-    }
-
-    // O cadastro vai ter que ser via construtor no momento
 }

@@ -1,11 +1,18 @@
-package dominio;
+package dominio.negocios.beans;
+
+import dominio.exceptions.CartaoNullException;
+import dominio.exceptions.ConteudoNullException;
+import dominio.exceptions.PerfilNullException;
+
 public class Avaliacao {
     private int avaliacaoID;
     private int nota;
     private Perfil perfil;
     private Conteudo conteudo;
 
-    public Avaliacao(int avaliacaoID, int nota, Perfil perfil, Conteudo conteudo) {
+    public Avaliacao(int avaliacaoID, int nota, Perfil perfil, Conteudo conteudo)  throws PerfilNullException, ConteudoNullException {
+        if(perfil == null){throw new PerfilNullException();}
+        if(conteudo == null){throw new ConteudoNullException();}
         this.avaliacaoID = avaliacaoID;
         this.nota = nota;
         this.perfil = perfil;

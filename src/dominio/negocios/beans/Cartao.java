@@ -1,25 +1,61 @@
-package dominio;
+package dominio.negocios.beans;
+
+import dominio.exceptions.UsuarioNullException;
 
 import java.time.LocalDate;
 public class Cartao {
 
     private String numero;
-    private String validade;
-    private String cvv;
+    private String validade; //Iremos mudar para qual classe?
     private String titular;
+    private Usuario usuario;
 
-    public Cartao(String numero, String validade, String cvv, String titular) {
+    public Cartao(String numero, String validade, String titular, Usuario usuario) throws UsuarioNullException {
+        if(usuario == null){
+            throw new UsuarioNullException();
+        }
         this.numero = numero;
         this.validade = validade;
-        this.cvv = cvv;
         this.titular = titular;
     }
 
     // Getters e setters
 
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getValidade() {
+        return validade;
+    }
+
+    public void setValidade(String validade) {
+        this.validade = validade;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public boolean validarCartao() {
-        return validarNumeroCartao() && validarDataValidade() && validarCVV();
+        return validarNumeroCartao() && validarDataValidade();
     }
 
     //Validando o número do cartão
@@ -56,8 +92,5 @@ public class Cartao {
         return true;
     }
 
-    //Para a verificação do CVV, só precisamos confirmar que ele tenha 3, e somente 3, números
-    private boolean validarCVV() {
-        return cvv.length() == 3 && cvv.chars().allMatch(Character::isDigit);
-    }
+
 }

@@ -1,4 +1,5 @@
-package dominio;
+package dominio.negocios.beans;
+
 public class Conteudo {
 
     private int conteudoID;
