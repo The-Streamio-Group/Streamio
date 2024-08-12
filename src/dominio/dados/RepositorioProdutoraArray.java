@@ -33,7 +33,7 @@ public class RepositorioProdutoraArray {
         }
     }
 
-    public void duplicaArrayProdutora() {
+    private void duplicaArrayProdutora() {
         if(this.produtoras != null && this.produtoras.length > 0) {
             Produtora[] arrayDuplicado = new Produtora[this.produtoras.length * 2];
             for(int i = 0; i < this.produtoras.length; i++) {

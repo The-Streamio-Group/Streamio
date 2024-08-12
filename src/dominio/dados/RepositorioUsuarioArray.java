@@ -2,7 +2,6 @@ package dominio.dados;
 
 import dominio.exceptions.UsuarioNullException;
 import dominio.negocios.beans.Usuario;
-import dominio.negocios.beans.Perfil;
 
 // Usuarios que adicionam perfis
 public class RepositorioUsuarioArray {

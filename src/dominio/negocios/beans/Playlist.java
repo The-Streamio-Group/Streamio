@@ -1,17 +1,17 @@
 package dominio.negocios.beans;
 
-import dominio.exceptions.PerfilNullException;
+import dominio.exceptions.UsuarioNullException;
 
 import java.util.*;
 
 public class Playlist {
 
     private List<Conteudo> playlist = new ArrayList<>();
-    private Perfil perfil;
+    private Usuario usuario;
 
-    public Playlist(Perfil perfil,String nome) throws PerfilNullException {
-        if(perfil == null){ throw new PerfilNullException();}
-        this.perfil = perfil;
+    public Playlist(Usuario usuario,String nome) throws UsuarioNullException {
+        if(usuario == null){ throw new UsuarioNullException();}
+        this.usuario = usuario;
 
     }
 
@@ -24,11 +24,11 @@ public class Playlist {
         this.playlist = playlist;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
+    public Usuario getPerfil() {
+        return usuario;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void setPerfil(Usuario perfil) {
+        this.usuario = perfil;
     }
 }

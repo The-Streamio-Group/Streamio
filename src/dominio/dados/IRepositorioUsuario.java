@@ -2,7 +2,6 @@ package dominio.dados;
 
 import dominio.exceptions.UsuarioNullException;
 import dominio.negocios.beans.Usuario;
-import dominio.negocios.beans.Perfil;
 
 public interface IRepositorioUsuario {
     void cadastrar(Usuario u);
@@ -14,9 +13,6 @@ public interface IRepositorioUsuario {
     boolean existe(String usuarioID);
 
     void remover(String usuarioID) throws UsuarioNullException;
-
-    void adicionarPerfil(Perfil p);
-    void removerPerfil(String perfilID);
 
 
 }

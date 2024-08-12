@@ -9,13 +9,11 @@ public class Usuario {
     private Assinatura assinatura;
     private String email;
     private String senha;
-    private Perfil[] perfis;
 
     public Usuario(Assinatura assinatura, String email, String number) {
         this.assinatura = assinatura;
         this.email = email;
         this.senha = number;
-        this.perfis = new Perfil[4];
     }
 
     // getters e setters
