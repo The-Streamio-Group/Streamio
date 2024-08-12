@@ -1,9 +1,10 @@
-package dominio;
+package dominio.negocios.beans;
+
 public class Conteudo {
 
     private int conteudoID;
     private String titulo;
-    private int anoLancamento;
+    //private int anoLancamento;
     private String descricao;
     private TipoGenero genero;
     private int classificacaoIdade;
@@ -12,7 +13,7 @@ public class Conteudo {
     public Conteudo(int conteudoID, String titulo, int anoLancamento, String descricao, TipoGenero genero, int classificacaoIdade, int numeroViews) {
         this.conteudoID = conteudoID;
         this.titulo = titulo;
-        this.anoLancamento = anoLancamento;
+        //this.anoLancamento = anoLancamento;
         this.descricao = descricao;
         this.genero = genero;
         this.classificacaoIdade = classificacaoIdade;
@@ -32,12 +33,12 @@ public class Conteudo {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    public int getAnoLancamento() {
-        return anoLancamento;
-    }
-    public void setAnoLancamento(int anoLancamento) {
-        this.anoLancamento = anoLancamento;
-    }
+//    public int getAnoLancamento() {
+//        return anoLancamento;
+//    }
+//    public void setAnoLancamento(int anoLancamento) {
+//        this.anoLancamento = anoLancamento;
+//    }
     public String getDescricao() {
         return descricao;
     }
