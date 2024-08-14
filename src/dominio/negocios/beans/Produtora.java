@@ -1,8 +1,7 @@
 package dominio.negocios.beans;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class Produtora extends Usuario {
     private List<Conteudo> produto;

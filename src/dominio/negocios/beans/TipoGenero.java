@@ -10,7 +10,7 @@ public enum TipoGenero {
     TERROR("Terror"),
     ROMANCE("Romance");
 
-    private String tipo;
+    private final String tipo;
 
    TipoGenero(String tipo){
         this.tipo = tipo;

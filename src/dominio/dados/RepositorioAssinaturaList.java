@@ -3,7 +3,7 @@ package dominio.dados;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.negocios.beans.Assinatura;
-import dominio.negocios.beans.Conteudo;
+
 
 import java.util.ArrayList;
 

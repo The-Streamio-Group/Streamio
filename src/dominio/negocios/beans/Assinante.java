@@ -3,7 +3,7 @@ package dominio.negocios.beans;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class Assinante extends Usuario {
     private List<Conteudo> conteudosFavoritos;

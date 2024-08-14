@@ -1,7 +1,5 @@
 package dominio.negocios.beans;
 
-import java.util.Random;
-import java.util.UUID;
 
 public class Avaliacao {
     private final String avaliacaoID;

@@ -1,7 +1,6 @@
 package dominio.negocios.beans;
 
 import java.util.Objects;
-import java.util.Random;
 import java.util.UUID;
 import java.util.List;
 
@@ -50,7 +49,9 @@ public class Conteudo {
         for(Avaliacao avaliacao : avaliacoes) {
             soma += avaliacao.getNota();
         }
-        this.notaGeral = soma/this.avaliacoes.size();
+
+            this.notaGeral = (float) soma / this.avaliacoes.size();
+
     }
 
     @Override
@@ -60,5 +61,11 @@ public class Conteudo {
         return Objects.equals(getConteudoID(), conteudo.getConteudoID());
     }
 
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
 
+    public float getNotaGeral() {
+        return notaGeral;
+    }
 }

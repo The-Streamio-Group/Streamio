@@ -1,7 +1,7 @@
 package dominio.negocios.beans;
 
 import java.time.LocalDate;
-import java.util.Random;
+
 import java.util.UUID;
 
 public class Assinatura {
@@ -10,7 +10,6 @@ public class Assinatura {
     private String numeroCartao;
     private LocalDate dataAssinatura;
     private final Assinante assinante;
-    // private String tipo;
 
     public Assinatura(String numeroCartao, Assinante assinante) {
         this.assinaturaID = UUID.randomUUID();

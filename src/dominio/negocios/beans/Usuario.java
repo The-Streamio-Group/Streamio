@@ -1,7 +1,6 @@
 package dominio.negocios.beans;
 
 import java.util.Objects;
-import java.util.Random;
 import java.util.UUID;
 
 public abstract class Usuario {
