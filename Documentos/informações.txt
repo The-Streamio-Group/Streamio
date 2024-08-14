@@ -1,7 +1,4 @@
-package dominio.dados;
-
-public class Explicacoes {
-    /*   //HORAS GASTAS NESSE PROJETO: 0 horas
+ /*   //HORAS GASTAS NESSE PROJETO: 3 horas
      *
      * TODO: UUID ou concatenar ID's
      *
@@ -87,10 +84,10 @@ public class Explicacoes {
      *
      *
      *
-     *
-     *
-     *
-     *
-     *
+     * Porque eu acho uma boa ideia criar uma classe abstrata intermediária entre usuário e produtora
+     * 1. Produtora e usuário são ambos usuários da plataforma, independente da proposta que eles possuem
+     * 2. Facilitaria a questão de adicionar repositórios, pois para adicionar um usuário podemos utilizar
+     *    do poliformismo para dois repositórios, já que a produtora e usuário possuem praticamente os mesmos
+     *    atributos
+     * 
      */
-}

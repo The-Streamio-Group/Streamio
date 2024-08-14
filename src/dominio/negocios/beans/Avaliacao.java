@@ -1,47 +1,40 @@
 package dominio.negocios.beans;
 
-import dominio.exceptions.ConteudoNullException;
-import dominio.exceptions.UsuarioNullException;
+import java.util.Random;
+import java.util.UUID;
 
 public class Avaliacao {
-    private int avaliacaoID;
+    private final String avaliacaoID;
     private int nota;
-    private Usuario usuario;
-    private Conteudo conteudo;
+    private final Assinante assinante;
+    private static int proxima = 1;
 
-    public Avaliacao(int avaliacaoID, int nota, Usuario usuario, Conteudo conteudo)  throws UsuarioNullException, ConteudoNullException {
-        if(usuario == null){throw new UsuarioNullException();}
-        if(conteudo == null){throw new ConteudoNullException();}
-        this.avaliacaoID = avaliacaoID;
+
+    public Avaliacao(int nota, Assinante assinante) {
+        this.avaliacaoID = Integer.toString(proxima);
         this.nota = nota;
-        this.usuario = usuario;
-        this.conteudo = conteudo;
+        this.assinante = assinante;
+        proxima++;
     }
 
-    // getters e setters
-    public int getAvaliacaoID() {
+    //Getters e setters
+
+
+    public String getAvaliacaoID() {
         return avaliacaoID;
     }
-    public void setAvaliacaoID(int avaliacaoID) {
-        this.avaliacaoID = avaliacaoID;
-    }
+
     public int getNota() {
         return nota;
     }
     public void setNota(int nota) {
         this.nota = nota;
     }
-    public Usuario getPerfil() {
-        return usuario;
+
+    public Assinante getUsuario() {
+        return assinante;
     }
-    public void setPerfil(Usuario perfil) {
-        this.usuario = perfil;
-    }
-    public Conteudo getConteudo() {
-        return conteudo;
-    }
-    public void setConteudo(Conteudo conteudo) {
-        this.conteudo = conteudo;
-    }
+
+
 
 }

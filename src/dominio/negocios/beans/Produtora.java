@@ -2,35 +2,31 @@ package dominio.negocios.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class Produtora {
-    private int produtoraID;
-    private List<Conteudo> produto = new ArrayList<>();
+public class Produtora extends Usuario {
+    private List<Conteudo> produto;
+
 
     //Caso a produtora seja nova e não adicione nada por agora
-    public Produtora(int produtoraID) {
-        this.produtoraID = produtoraID;
+    public Produtora(String nickname, String email, String senha) {
+        super(nickname,email,senha);
+
     }
 
     //Caso a produtora já tenha produtos(filmes e séries) catalogados
-    public Produtora(int produtoraID, List<Conteudo> produto) {
-        this(produtoraID);
+    public Produtora(String nickname,String email, String senha, List<Conteudo> produto) {
+        this(nickname, email, senha);
         this.produto = produto;
     }
 
-    public int getProdutoraID() {
-        return produtoraID;
-    }
+    //Getters e setters
 
-    public void setProdutoraID(int produtoraID) {
-        this.produtoraID = produtoraID;
-    }
 
-    public List<Conteudo> getProduto() {
-        return produto;
-    }
-
-    public void setProduto(List<Conteudo> produto) {
-        this.produto = produto;
+    @Override
+    public String toString() {
+        return super.toString() + "Produtora{" +
+                "produto=" + produto +
+                '}';
     }
 }
