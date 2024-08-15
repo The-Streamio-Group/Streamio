@@ -22,14 +22,12 @@ public abstract class Usuario {
 
     //Equals e toString
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Usuario usuario)) return false;
         return Objects.equals(getUsuarioID(), usuario.getUsuarioID()) && Objects.equals(getEmail(), usuario.getEmail());
     }
-
 
     @Override
     public String toString() {
@@ -40,8 +38,8 @@ public abstract class Usuario {
 
     //Getters e Setters
 
-    public String getUsuarioID() {
-        return usuarioID.toString();
+    public UUID getUsuarioID() {
+        return usuarioID;
     }
 
     public String getNickname() {

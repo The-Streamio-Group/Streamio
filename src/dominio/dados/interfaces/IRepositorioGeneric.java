@@ -3,6 +3,8 @@ package dominio.dados.interfaces;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 
+import java.util.UUID;
+
 
 /*  Interface genérica que nela, você acessa todos os repositórios
  *  T -> Type
@@ -25,7 +27,7 @@ public interface IRepositorioGeneric<T>{
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não exista
      *
      */
-    T procurar(String id) throws ElementoNaoExisteException;
+    T procurar(UUID id) throws ElementoNaoExisteException;
 
     /*  Procura o indice do objeto na lista do seu respectivo repositório baseado no id do objeto
      *
@@ -35,7 +37,7 @@ public interface IRepositorioGeneric<T>{
      *
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não exista
      */
-    int procurarIndice(String id) throws ElementoNaoExisteException;
+    int procurarIndice(UUID id) throws ElementoNaoExisteException;
 
     /*  Atualiza as informações do objeto,
      *
@@ -45,7 +47,7 @@ public interface IRepositorioGeneric<T>{
      *
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não existe
      */
-    void atualizar(T antigo, T novo) throws ElementoNullException;
+    void atualizar(UUID idAntigo, T novo) throws ElementoNullException, ElementoNaoExisteException;
 
     /*  Remove o objeto da Lista de acordo com o id do objeto dado
      *
@@ -54,7 +56,7 @@ public interface IRepositorioGeneric<T>{
      *  @throws ElementoNullException -> Exceção caso o elemento seja nulo
      *
      */
-    void remover(String id) throws ElementoNaoExisteException;
+    void remover(UUID id) throws ElementoNaoExisteException;
 
     /*  Método que informa se o
      *
@@ -62,7 +64,7 @@ public interface IRepositorioGeneric<T>{
      *
      *  @return true para se existe na lista, ou false para o contrário
      */
-    boolean existe(String id);
+    boolean existe(UUID id);
 
 
 

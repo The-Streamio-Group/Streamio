@@ -3,10 +3,11 @@ package dominio.dados;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
+// import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.Assinatura;
 
-
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura> {
 
@@ -14,8 +15,9 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
      * Classe que contém o repositório de todas as Assinaturas
      * e seus respectivos CRUDs.
      */
+    // não usa mais numeroCartao, usa UUID
 
-    private ArrayList<Assinatura> assinaturasList;
+    private final ArrayList<Assinatura> assinaturasList;
 
     private static RepositorioAssinaturaList instance;
 
@@ -34,14 +36,13 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
     @Override
     public void cadastrar(Assinatura assinatura) {
         this.assinaturasList.add(assinatura);
-
     }
 
     //READ
     @Override
-    public Assinatura procurar(String numeroCartao) throws ElementoNaoExisteException {
+    public Assinatura procurar(UUID assinaturaID) throws ElementoNaoExisteException {
         for (Assinatura assinatura : assinaturasList) {
-            if (assinatura.getNumeroCartao().equals(numeroCartao)) {
+            if (assinatura.getAssinaturaID().equals(assinaturaID)) {
                 return assinatura;
             }
         }
@@ -50,8 +51,8 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
 
     //DELETE
     @Override
-    public void remover(String numeroCartao) throws ElementoNaoExisteException {
-            Assinatura removido = procurar(numeroCartao);
+    public void remover(UUID assinaturaID) throws ElementoNaoExisteException {
+        Assinatura removido = procurar(assinaturaID);
         if (removido == null) {
             throw new ElementoNaoExisteException();
         } else {
@@ -61,23 +62,25 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
 
     //UPDATE
     @Override
-    public void atualizar(Assinatura antigo, Assinatura novo) throws ElementoNullException {
-        if(novo == null){throw new ElementoNullException();}
-
-        boolean antigoE = existe(antigo.getNumeroCartao());
-        if(antigoE){
-            int indice = assinaturasList.indexOf(antigo);
+    public void atualizar(UUID antigoid, Assinatura novo) throws ElementoNullException, ElementoNaoExisteException {
+        if (novo == null) {
+            throw new ElementoNullException();
+        }
+        boolean antigoE = existe(antigoid);
+        if (antigoE) {
+            int indice = assinaturasList.indexOf(antigoid);
             this.assinaturasList.set(indice, novo);
-
+        } else {
+            throw new ElementoNaoExisteException();
         }
     }
 
-    //Método que procura assinaturas apartir do numeroCartao
+    //Método que procura assinaturas a partir do --numeroCartao-- (agora UUID)
     @Override
-    public boolean existe(String numeroCartao) {
+    public boolean existe(UUID assinaturaID) {
         boolean existe = false;
         for (Assinatura assinatura : assinaturasList) {
-            if(assinatura.getNumeroCartao().equals(numeroCartao)) {
+            if (assinatura.getAssinaturaID().equals(assinaturaID)) {
                 existe = true;
                 break;
             }
@@ -85,25 +88,19 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
         return existe;
     }
 
-
-    //Método que procura o índice a partir do numeroCartao
+    //Método que procura o índice a partir do --numeroCartao-- (agora UUID)
     @Override
-    public int procurarIndice(String numeroCartao) throws ElementoNaoExisteException {
-        for(int i = 0; i < this.assinaturasList.size(); i++){
-            if(assinaturasList.get(i).getNumeroCartao().equals(numeroCartao)){
+    public int procurarIndice(UUID assinaturaID) throws ElementoNaoExisteException {
+        for (int i = 0; i < this.assinaturasList.size(); i++) {
+            if (assinaturasList.get(i).getAssinaturaID().equals(assinaturaID)) {
                 return i;
             }
         }
         throw new ElementoNaoExisteException();
     }
 
-
-    public int totalUsuarios(){
-
+    public int totalUsuarios() {
         return this.assinaturasList.size();
     }
-
-
-
 }
 

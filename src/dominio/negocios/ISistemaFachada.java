@@ -31,6 +31,7 @@ public interface ISistemaFachada {
     void realizarAssinatura(String email, String numCartao) throws ElementoNaoExisteException, ElementoNullException, NaoAssinanteException;
 
     Usuario getUsuariologado();
+
     String getUsuarioString(String email) throws ElementoNaoExisteException;
 
 }

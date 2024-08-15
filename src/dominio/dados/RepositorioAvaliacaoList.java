@@ -3,20 +3,23 @@ package dominio.dados;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
-import dominio.negocios.beans.Assinante;
+// import ElementoJaExisteException para o método cadastrar [?]
+import dominio.negocios.beans.Perfil;
 import dominio.negocios.beans.Avaliacao;
-import dominio.negocios.beans.Conteudo;
+// removido o import de Conteudo
 
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao>{
+public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao> {
 
     /*
      * Classe que contém o repositório de todas as Avaliações
      * e seus respectivos CRUDs.
      */
+    // permanece usando UUID
 
-    private ArrayList<Avaliacao> avaliacoesList;
+    private final ArrayList<Avaliacao> avaliacoesList;
     private static RepositorioAvaliacaoList instance;
 
     public RepositorioAvaliacaoList() {
@@ -24,7 +27,7 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao>{
     }
 
     public static IRepositorioGeneric<Avaliacao> getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new RepositorioAvaliacaoList();
         }
         return (IRepositorioGeneric<Avaliacao>) instance;
@@ -32,23 +35,21 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao>{
 
     //CREATE
     @Override
-    public void cadastrar(Avaliacao avaliacao){
+    public void cadastrar(Avaliacao avaliacao) {
         this.avaliacoesList.add(avaliacao);
-
     }
 
     //Cadastrando a partir de dados
-    public void cadastrar(int nota, Assinante assinante){
-        Avaliacao nova = new Avaliacao(nota, assinante);
+    public void cadastrar(int nota, Perfil perfil) {
+        Avaliacao nova = new Avaliacao(nota, perfil);
         this.cadastrar(nova);
-
-     }
+    }
 
     //READ
     @Override
-    public Avaliacao procurar(String avaliacaoID) throws ElementoNaoExisteException {
+    public Avaliacao procurar(UUID avaliacaoID) throws ElementoNaoExisteException {
         for (Avaliacao avaliacao : this.avaliacoesList) {
-            if(avaliacao.getAvaliacaoID().equals(avaliacaoID)){
+            if (avaliacao.getAvaliacaoID().equals(avaliacaoID)) {
                 return avaliacao;
             }
         }
@@ -57,9 +58,9 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao>{
 
     //Método que pergunta para o repositório se existe a avaliação
     @Override
-    public boolean existe(String avaliacaoID){
+    public boolean existe(UUID avaliacaoID) {
         for (Avaliacao avaliacao : this.avaliacoesList) {
-            if(avaliacao.getAvaliacaoID().equals(avaliacaoID)){
+            if (avaliacao.getAvaliacaoID().equals(avaliacaoID)) {
                 return true;
             }
         }
@@ -68,34 +69,36 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao>{
 
     //DELETE
     @Override
-    public void remover(String avaliacaoID) throws ElementoNaoExisteException {
+    public void remover(UUID avaliacaoID) throws ElementoNaoExisteException {
         Avaliacao avaliacaoRemovida = procurar(avaliacaoID);
-        if(avaliacaoRemovida == null){throw new ElementoNaoExisteException();}
+        if (avaliacaoRemovida == null) {
+            throw new ElementoNaoExisteException();
+        }
         this.avaliacoesList.remove(avaliacaoRemovida);
     }
 
     //UPDATE
     @Override
-    public void atualizar(Avaliacao antigo, Avaliacao novo) throws ElementoNullException {
-        if(novo == null){throw new ElementoNullException();}
-
-        boolean antigoE = existe(antigo.getAvaliacaoID());
-        if(antigoE){
-            int indice = avaliacoesList.indexOf(antigo);
+    public void atualizar(UUID antigoid, Avaliacao novo) throws ElementoNullException, ElementoNaoExisteException {
+        if (novo == null) {
+            throw new ElementoNullException();
+        }
+        boolean antigoE = existe(antigoid);
+        if (antigoE) {
+            int indice = avaliacoesList.indexOf(antigoid);
             this.avaliacoesList.set(indice, novo);
-
+        } else {
+            throw new ElementoNaoExisteException();
         }
     }
 
     @Override
-    public int procurarIndice(String avaliacaoID) throws ElementoNaoExisteException {
-        for(int i = 0; i < this.avaliacoesList.size(); i++){
-            if(avaliacoesList.get(i).getAvaliacaoID().equals(avaliacaoID)){
+    public int procurarIndice(UUID avaliacaoID) throws ElementoNaoExisteException {
+        for (int i = 0; i < this.avaliacoesList.size(); i++) {
+            if (avaliacoesList.get(i).getAvaliacaoID().equals(avaliacaoID)) {
                 return i;
             }
         }
         throw new ElementoNaoExisteException();
     }
-
-
 }

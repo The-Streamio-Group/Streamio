@@ -2,20 +2,22 @@ package dominio.dados;
 
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
-
 import dominio.exceptions.ElementoNullException;
+// import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.Usuario;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
-public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario>{
+public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario> {
 
     /*
      * Classe que contém o repositório de todos os usuários
      * e seus respectivos CRUDs.
      */
+    // não usa mais nickname, usa UUID
 
-    private ArrayList<Usuario> usuariosList;
+    private final ArrayList<Usuario> usuariosList;
 
     private static RepositorioUsuarioList instance;
 
@@ -36,25 +38,24 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario>{
     public void cadastrar(Usuario u) {
         usuariosList.add(u);
     }
+    // checar se o usuário já existe e lançar exceção [?]
 
     //READ
     @Override
-    public Usuario procurar(String email) throws ElementoNaoExisteException {
+    public Usuario procurar(UUID usuarioID) throws ElementoNaoExisteException {
         for (Usuario usuario : this.usuariosList) {
-            if(usuario.getEmail().equals(email)){
+            if (usuario.getUsuarioID().equals(usuarioID)) {
                 return usuario;
             }
         }
-
         //Caso ele não exista, exceção
         throw new ElementoNaoExisteException();
     }
 
     //Método que procura o índice a partir do email
-    @Override
-    public int procurarIndice(String email) throws ElementoNaoExisteException {
-        for(int i = 0; i < this.usuariosList.size(); i++){
-            if(usuariosList.get(i).getEmail().equals(email)){
+    public int procurarIndice(UUID usuarioID) throws ElementoNaoExisteException {
+        for (int i = 0; i < this.usuariosList.size(); i++) {
+            if (usuariosList.get(i).getUsuarioID().equals(usuarioID)) {
                 return i;
             }
         }
@@ -63,37 +64,39 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario>{
 
     //DELETE
     @Override
-    public void remover(String email) throws ElementoNaoExisteException {
-        Usuario removido = procurar(email);
-        if(removido == null){throw new ElementoNaoExisteException();}
+    public void remover(UUID usuarioID) throws ElementoNaoExisteException {
+        Usuario removido = procurar(usuarioID);
+        if (removido == null) {
+            throw new ElementoNaoExisteException();
+        }
         this.usuariosList.remove(removido);
     }
 
     //UPDATE
     @Override
-    public void atualizar(Usuario antigo, Usuario novo) throws ElementoNullException {
-        if(novo == null){throw new ElementoNullException();}
-
-        boolean antigoE = existe(antigo.getEmail());
-        if(antigoE){
-            int indice = usuariosList.indexOf(antigo);
-            this.usuariosList.set(indice, novo);
-
+    public void atualizar(UUID antigoid, Usuario novo) throws ElementoNullException, ElementoNaoExisteException {
+        if (novo == null) {
+            throw new ElementoNullException();
         }
-
+        boolean antigoE = existe(antigoid);
+        if (antigoE) {
+            int indice = usuariosList.indexOf(antigoid);
+            this.usuariosList.set(indice, novo);
+        }
+        else{
+            throw new ElementoNaoExisteException();
+        }
     }
 
     //Método que pergunta se existe o usuário para o Repositório
     @Override
-    public boolean existe(String email){
+    public boolean existe(UUID id) {
         for (Usuario usuario : this.usuariosList) {
-            if(usuario.getEmail().equals(email)){
+            if (usuario.getUsuarioID().equals(id)) {
                 return true;
             }
         }
         return false;
     }
-
-
 }
 

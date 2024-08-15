@@ -12,11 +12,11 @@ public enum TipoGenero {
 
     private final String tipo;
 
-   TipoGenero(String tipo){
+    TipoGenero(String tipo) {
         this.tipo = tipo;
     }
 
-    public String getTipo(){
+    public String getTipo() {
         return this.tipo;
     }
 }

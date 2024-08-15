@@ -6,168 +6,166 @@ import dominio.negocios.beans.*;
 import java.util.List;
 
 public class SistemaFachada implements ISistemaFachada {
-    private final CadastroAssinatura cadastroAssinatura;
-    private final CadastroAvaliacao cadastroAvaliacao;
-    private final CadastroConteudo cadastroConteudo;
-    private final CadastroUsuario cadastroUsuario;
+    private final ControllerAssinatura controllerAssinatura;
+    private final ControllerAvaliacao controllerAvaliacao;
+    private final ControllerConteudo controllerConteudo;
+    private final ControllerUsuario controllerUsuario;
 
     private static SistemaFachada instancia;
     private Usuario usuariologado; //Instância do usuário logado
 
     public SistemaFachada() {
-        this.cadastroUsuario = CadastroUsuario.getInstance();
-        this.cadastroAssinatura = CadastroAssinatura.getInstance();
-        this.cadastroAvaliacao = CadastroAvaliacao.getInstance();
-        this.cadastroConteudo = CadastroConteudo.getInstance();
+        this.controllerUsuario = ControllerUsuario.getInstance();
+        this.controllerAssinatura = ControllerAssinatura.getInstance();
+        this.controllerAvaliacao = ControllerAvaliacao.getInstance();
+        this.controllerConteudo = ControllerConteudo.getInstance();
     }
 
-    public static SistemaFachada getInstance(){
-        if(instancia == null){
+    public static SistemaFachada getInstance() {
+        if (instancia == null) {
             instancia = new SistemaFachada();
         }
         return instancia;
     }
 
-    public void realizarLogin(String email, String senha) throws ElementoNaoExisteException, UsuarioJaLogadoException, AssinaturaExpiradaException, SenhaErradaException{
+    public void realizarLogin(String email, String senha) throws ElementoNaoExisteException, UsuarioJaLogadoException, AssinaturaExpiradaException, SenhaErradaException {
 
         //Verificar se o usuário já está logado
-        if(usuariologado != null){
+        if (usuariologado != null) {
             throw new UsuarioJaLogadoException();
         }
 
-        Usuario userLog = this.cadastroUsuario.procurarUsuario(email);
+        Usuario userLog = this.controllerUsuario.procurarUsuario(email);
 
 
         //Caso a assinatura expire
-        if(userLog instanceof Assinante){
-           if(!((Assinante) userLog).getAssinatura().isStatusPagamento()) {
-               throw new AssinaturaExpiradaException();
-           }
+        if (userLog instanceof Assinante) {
+            if (!((Assinante) userLog).getAssinatura().isStatusPagamento()) {
+                throw new AssinaturaExpiradaException();
+            }
         }
 
 
         //Verificar se a senha bate
-        if(userLog.getSenha().equals(senha)){
+        if (userLog.getSenha().equals(senha)) {
             this.usuariologado = userLog;
-        }else{throw new SenhaErradaException(email);}
+        } else {
+            throw new SenhaErradaException(email);
+        }
     }
 
-    public void logoff(){
+    public void logoff() {
         this.usuariologado = null;
     }
 
-    public void cadastrarUsuario(Usuario u) throws ElementoJaExisteException, ElementoNullException{
-        this.cadastroUsuario.cadastrarUsuario(u);
+    public void cadastrarUsuario(Usuario u) throws ElementoJaExisteException, ElementoNullException {
+        this.controllerUsuario.cadastrarUsuario(u);
     }
 
-    public void removerUsuario(String email) throws ElementoNaoExisteException{
-        this.cadastroUsuario.removerUsuario(email);
+    public void removerUsuario(String email) throws ElementoNaoExisteException {
+        this.controllerUsuario.removerUsuario(email);
     }
 
 
     //Parte da Produtora
     public void adicionarConteudo(Conteudo adicionado) throws ElementoNullException, NaoProdutoraException {
-        if(usuariologado instanceof Produtora){
-            this.cadastroConteudo.cadastrarConteudo(adicionado);
-           ((Produtora) usuariologado).getProduto().add(adicionado);
+        if (usuariologado instanceof Produtora) {
+            this.controllerConteudo.cadastrarConteudo(adicionado);
+            ((Produtora) usuariologado).getProduto().add(adicionado);
 
 
-
-        }
-        else{
+        } else {
             throw new NaoProdutoraException();
         }
     }
 
     public void removerConteudo(String titulo) throws ElementoNaoExisteException, NaoProdutoraException {
-        if(usuariologado instanceof Produtora) {
-            Conteudo r = this.cadastroConteudo.procurarConteudo(titulo);
-            this.cadastroConteudo.removerConteudo(titulo);
+        if (usuariologado instanceof Produtora) {
+            Conteudo r = this.controllerConteudo.procurarConteudo(titulo);
+            this.controllerConteudo.removerConteudo(titulo);
             ((Produtora) usuariologado).getProduto().remove(r);
-        }
-        else {
+        } else {
             throw new NaoProdutoraException();
         }
 
     }
 
     public void atualizarConteudo(Conteudo antigo, Conteudo novo) throws ElementoJaExisteException, ElementoNullException, MesmoElementoException, NaoProdutoraException {
-        if(usuariologado instanceof Produtora) {
+        if (usuariologado instanceof Produtora) {
             int index = ((Produtora) usuariologado).getProduto().indexOf(antigo);
             ((Produtora) usuariologado).getProduto().set(index, novo);
-            this.cadastroConteudo.atualizarConteudo(antigo, novo);
-        }
-        else {
+            this.controllerConteudo.atualizarConteudo(antigo, novo);
+        } else {
             throw new NaoProdutoraException();
         }
     }
 
     public String gerarRelatorio() throws NaoProdutoraException {
         String resultado = "";
-        if(usuariologado instanceof Produtora){
+        if (usuariologado instanceof Produtora) {
             resultado += "-------------RELATÓRIO DOS PRODUTOS-------------\n";
             List<Conteudo> conteudo = ((Produtora) usuariologado).getProduto();
-            for (Conteudo c: conteudo){
+            for (Conteudo c : conteudo) {
                 resultado += "Título: " + c.getTitulo() +
                         " | Nota do Público: " + c.getNotaGeral()
-                        +" | Visualizações: " + c.getNumeroViews() + "\n";
+                        + " | Visualizações: " + c.getNumeroViews() + "\n";
             }
+        } else {
+            throw new NaoProdutoraException();
         }
-        else{throw new NaoProdutoraException();}
         return resultado;
     }
 
     //Parte dos Assinantes
     public void assistirConteudo(String titulo) throws ElementoNaoExisteException, NaoAssinanteException {
-        if(usuariologado instanceof Assinante){
-            Assinante u = (Assinante) this.cadastroUsuario.procurarUsuario(usuariologado.getEmail());
-            u.getHistorico().add(this.cadastroConteudo.procurarConteudo(titulo));
-            this.cadastroConteudo.assistirConteudo(titulo);
+        if (usuariologado instanceof Assinante) {
+            Assinante u = (Assinante) this.controllerUsuario.procurarUsuario(usuariologado.getEmail());
+            u.getHistorico().add(this.controllerConteudo.procurarConteudo(titulo));
+            this.controllerConteudo.assistirConteudo(titulo);
 
-        }
-        else {
+        } else {
             throw new NaoAssinanteException();
         }
+
+        //Colocar pra séries e filmes
     }
 
     public void adicionarFavorito(String titulo) throws ElementoNaoExisteException, NaoAssinanteException {
-        if(usuariologado instanceof Assinante){
-            Assinante u = (Assinante) this.cadastroUsuario.procurarUsuario(usuariologado.getEmail());
-            u.getConteudosFavoritos().add(this.cadastroConteudo.procurarConteudo(titulo));
-        }
-        else {
+        if (usuariologado instanceof Assinante) {
+            Assinante u = (Assinante) this.controllerUsuario.procurarUsuario(usuariologado.getEmail());
+            u.getConteudosFavoritos().add(this.controllerConteudo.procurarConteudo(titulo));
+        } else {
             throw new NaoAssinanteException();
         }
 
     }
 
     public void realizarAvaliacao(int nota, String titulo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException {
-        if(usuariologado instanceof Assinante){
-            Conteudo addNota = this.cadastroConteudo.procurarConteudo(titulo);
+        if (usuariologado instanceof Assinante) {
+            Conteudo addNota = this.controllerConteudo.procurarConteudo(titulo);
             Avaliacao novaAV = new Avaliacao(nota, (Assinante) usuariologado);
             addNota.getAvaliacoes().add(novaAV);
             addNota.atualizarNota();
-            this.cadastroAvaliacao.cadastrarAvaliacao(novaAV);
-        }
-        else {
+            this.controllerAvaliacao.cadastrarAvaliacao(novaAV);
+        } else {
             throw new NaoAssinanteException();
         }
     }
 
 
-
     public void realizarAssinatura(String email, String numCartao) throws ElementoNaoExisteException, ElementoNullException, NaoAssinanteException {
-        if (this.cadastroUsuario.procurarUsuario(email) instanceof Assinante) {
-            if (this.cadastroUsuario.existeUsuario(email)) {
+        if (this.controllerUsuario.procurarUsuario(email) instanceof Assinante) {
+            if (this.controllerUsuario.existeUsuario(email)) {
 
-                Assinante m = (Assinante) this.cadastroUsuario.procurarUsuario(email);
-                m.getAssinatura().setStatusPagamento(true);
+                Assinante m = (Assinante) this.controllerUsuario.procurarUsuario(email);
+                m.getAssinatura().setStatusPagamento(true); //Verificar
                 m.getAssinatura().setNumeroCartao(numCartao);
-                this.cadastroAssinatura.cadastrarAssinatura(m.getAssinatura());
+                this.controllerAssinatura.cadastrarAssinatura(m.getAssinatura());
 
             }
+        } else {
+            throw new NaoAssinanteException();
         }
-        else{throw new NaoAssinanteException();}
     }
 
     public Usuario getUsuariologado() {
@@ -175,7 +173,7 @@ public class SistemaFachada implements ISistemaFachada {
     }
 
     public String getUsuarioString(String email) throws ElementoNaoExisteException {
-        return this.cadastroUsuario.procurarUsuario(email).toString();
+        return this.controllerUsuario.procurarUsuario(email).toString();
     }
 
 }

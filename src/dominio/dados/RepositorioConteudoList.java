@@ -3,9 +3,12 @@ package dominio.dados;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
+// import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.Conteudo;
+import dominio.negocios.beans.Usuario;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
 
@@ -13,8 +16,9 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
      * Classe que contém o repositório de todos os Conteúdos
      * e seus respectivos CRUDs.
      */
+    // não usa mais titulo, usa UUID
 
-    private ArrayList<Conteudo> conteudosList;
+    private final ArrayList<Conteudo> conteudosList;
 
     private static RepositorioConteudoList instance;
 
@@ -24,7 +28,7 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
 
     //Instância do repositório
     public static IRepositorioGeneric<Conteudo> getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new RepositorioConteudoList();
         }
         return (IRepositorioGeneric<Conteudo>) instance;
@@ -32,15 +36,15 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
 
     //CREATE
     @Override
-    public void cadastrar(Conteudo c)  {
+    public void cadastrar(Conteudo c) {
         this.conteudosList.add(c);
     }
 
     //READ
     @Override
-    public Conteudo procurar(String titulo) throws ElementoNaoExisteException {
+    public Conteudo procurar(UUID conteudoID) throws ElementoNaoExisteException {
         for (Conteudo conteudo : conteudosList) {
-            if (conteudo.getTitulo().equals(titulo)) {
+            if (conteudo.getConteudoID().equals(conteudoID)) {
                 return conteudo;
             }
         }
@@ -49,32 +53,33 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
 
     //DELETE
     @Override
-    public void remover(String titulo) throws ElementoNaoExisteException {
-        Conteudo removido = procurar(titulo);
-            if(removido == null) {
-                throw new ElementoNaoExisteException();
-            } else {
-                this.conteudosList.remove(removido);
+    public void remover(UUID conteudoID) throws ElementoNaoExisteException {
+        Conteudo removido = procurar(conteudoID);
+        if (removido == null) {
+            throw new ElementoNaoExisteException();
+        } else {
+            this.conteudosList.remove(removido);
         }
     }
 
     //UPDATE
     @Override
-    public void atualizar(Conteudo antigo, Conteudo novo) throws ElementoNullException {
-        if(novo == null){throw new ElementoNullException();}
-
-
-        if(existe(antigo.getTitulo())){
-            this.conteudosList.set(conteudosList.indexOf(antigo), novo);
-
+    public void atualizar(UUID antigoid, Conteudo novo) throws ElementoNullException, ElementoNaoExisteException {
+        if (novo == null) {
+            throw new ElementoNullException();
+        }
+        if (existe(antigoid)) {
+            this.conteudosList.set(conteudosList.indexOf(antigoid), novo);
+        } else {
+            throw new ElementoNaoExisteException();
         }
     }
 
-    //Método que procura o índice do Conteúdo a partir do título
+    //Método que procura o índice do Conteúdo a partir do --título--
     @Override
-    public int procurarIndice(String titulo) throws ElementoNaoExisteException {
-        for(int i = 0; i < this.conteudosList.size(); i++){
-            if(conteudosList.get(i).getTitulo().equals(titulo)){
+    public int procurarIndice(UUID conteudoID) throws ElementoNaoExisteException {
+        for (int i = 0; i < this.conteudosList.size(); i++) {
+            if (conteudosList.get(i).getConteudoID().equals(conteudoID)) {
                 return i;
             }
         }
@@ -83,16 +88,14 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
 
     //Método que pergunta para o repositório se o Conteúdo existe.
     @Override
-    public boolean existe(String titulo) {
+    public boolean existe(UUID conteudoID) {
         boolean existe = false;
-        for(Conteudo conteudo : conteudosList) {
-            if(conteudo.getTitulo().equals(titulo)) {
+        for (Conteudo conteudo : conteudosList) {
+            if (conteudo.getConteudoID().equals(conteudoID)) {
                 existe = true;
                 break;
             }
         }
         return existe;
     }
-
-
 }

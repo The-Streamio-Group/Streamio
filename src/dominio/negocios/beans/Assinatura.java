@@ -9,29 +9,30 @@ public class Assinatura {
     private boolean statusPagamento;
     private String numeroCartao;
     private LocalDate dataAssinatura;
-    //private final Assinante assinante;
+    //Cálculo da expiração da Data
 
-    public Assinatura(){
+    public Assinatura() {
         this.assinaturaID = UUID.randomUUID();
         this.statusPagamento = false;
-        this.numeroCartao = "00000";
+        this.numeroCartao = "0000-0000-0000-0000";
         //this.assinante = assinante;
     }
+
     public Assinatura(String numeroCartao) {
         this.assinaturaID = UUID.randomUUID();
         this.statusPagamento = true;
         this.numeroCartao = numeroCartao;
-
     }
 
     //Getters e setters
-    public String getAssinaturaID() {
-        return assinaturaID.toString();
+    public UUID getAssinaturaID() {
+        return assinaturaID;
     }
 
     public String getNumeroCartao() {
         return numeroCartao;
     }
+
     public void setNumeroCartao(String numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
@@ -39,6 +40,7 @@ public class Assinatura {
     public boolean isStatusPagamento() {
         return statusPagamento;
     }
+
     public void setStatusPagamento(boolean statusPagamento) {
         this.statusPagamento = statusPagamento;
     }
@@ -46,6 +48,7 @@ public class Assinatura {
     public LocalDate getDataAssinatura() {
         return dataAssinatura;
     }
+
     public void setDataAssinatura(LocalDate dataAssinatura) {
         this.dataAssinatura = dataAssinatura;
     }
