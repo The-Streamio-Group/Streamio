@@ -1,29 +1,54 @@
 package dominio.negocios.beans;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
-public class Usuario {
-    private String usuarioID;
-    private Assinatura assinatura;
+public abstract class Usuario {
+    private final UUID usuarioID;
+    private String nickname;
     private String email;
     private String senha;
 
-    public Usuario(Assinatura assinatura, String email, String number) {
-        this.assinatura = assinatura;
+    public Usuario(){
+        usuarioID = UUID.randomUUID();
+    }
+
+    public Usuario(String nickname, String email, String senha) {
+        this();
+        this.nickname = nickname;
         this.email = email;
-        this.senha = number;
+        this.senha = senha;
     }
 
-    // getters e setters
+    //Equals e toString
 
-    public String getID() { return usuarioID; };
-    public Assinatura getAssinatura() {
-        return assinatura;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario usuario)) return false;
+        return Objects.equals(getUsuarioID(), usuario.getUsuarioID()) && Objects.equals(getEmail(), usuario.getEmail());
     }
-    public void setAssinatura(Assinatura assinatura) {
-        this.assinatura = assinatura;
+
+
+    @Override
+    public String toString() {
+        return "nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'';
+    }
+
+    //Getters e Setters
+
+    public String getUsuarioID() {
+        return usuarioID.toString();
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getEmail() {
@@ -39,8 +64,4 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-
-
-
 }

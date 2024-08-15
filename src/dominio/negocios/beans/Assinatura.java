@@ -1,46 +1,69 @@
 package dominio.negocios.beans;
 
-import dominio.exceptions.CartaoNullException;
+import java.time.LocalDate;
+
+import java.util.UUID;
 
 public class Assinatura {
-    private String assinaturaID; //Exemplo de Ideia pra facilitar a generalização do projeto
-    private String tipo; //Pode ser retirado
+    private final UUID assinaturaID;
     private boolean statusPagamento;
     private String numeroCartao;
+    private LocalDate dataAssinatura;
+    //private final Assinante assinante;
 
-    public Assinatura(int assinaturaID, String tipo, boolean statusPagamento, String numeroCartao) throws CartaoNullException {
-        if(numeroCartao == null){throw new CartaoNullException(); }
-        this.assinaturaID = "AS" + assinaturaID;
-        this.tipo = tipo; //Pode ser retirado
-        this.statusPagamento = statusPagamento;
+    public Assinatura(){
+        this.assinaturaID = UUID.randomUUID();
+        this.statusPagamento = false;
+        this.numeroCartao = "00000";
+        //this.assinante = assinante;
+    }
+    public Assinatura(String numeroCartao) {
+        this.assinaturaID = UUID.randomUUID();
+        this.statusPagamento = true;
+        this.numeroCartao = numeroCartao;
+
+    }
+
+    //Getters e setters
+    public String getAssinaturaID() {
+        return assinaturaID.toString();
+    }
+
+    public String getNumeroCartao() {
+        return numeroCartao;
+    }
+    public void setNumeroCartao(String numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
 
-    // getters e setters
-    public String getAssinaturaID() {
-        return assinaturaID;
-    }
-    public void setAssinaturaID(String assinaturaID) {
-        this.assinaturaID = assinaturaID;
-    }
-    public String getTipo() {
-        return tipo;
-    }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
     public boolean isStatusPagamento() {
         return statusPagamento;
     }
     public void setStatusPagamento(boolean statusPagamento) {
         this.statusPagamento = statusPagamento;
     }
-    public String getNumeroCartao() {
-        return numeroCartao;
+
+    public LocalDate getDataAssinatura() {
+        return dataAssinatura;
     }
-    public void setNumeroCartao(String cartaoUsuario) {
-        this.numeroCartao = cartaoUsuario;
+    public void setDataAssinatura(LocalDate dataAssinatura) {
+        this.dataAssinatura = dataAssinatura;
     }
+
+//    public Assinante getAssinante() {
+//        return assinante;
+//    }
+
+    @Override
+    public String toString() {
+        return "Assinatura{" +
+                "statusPagamento=" + statusPagamento +
+                ", numeroCartao='" + numeroCartao + '\'' +
+                ", dataAssinatura=" + dataAssinatura;
+    }
+
+    // * statusPagamento torna-se false após 30 dias (LocalDate), sem que seja feita a renovação
+    // * revisar LocalDate para que, quando a assinatura for feita, avançar no tempo para instanciar
 
 }
 
