@@ -36,6 +36,11 @@ No aplicativo, os usuários deverão assinar o plano de pagamento disponível e 
 
 **REQ9.** O sistema deve permitir que os usuários consumidores enviem seus feedbacks em torno da aplicação, além de um botão de suporte ao usuário.
 
+# UML:
+
+
+![Entrega 02 - UML (atualizada)](https://github.com/user-attachments/assets/11481eff-63c0-44f2-a072-82c115a169f3)
+
 
 	
 
