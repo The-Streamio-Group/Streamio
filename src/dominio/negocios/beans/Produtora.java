@@ -21,7 +21,6 @@ public class Produtora extends Usuario {
         this.produto = produto;
     }
 
-    //Getters e setters
 
 
     @Override
