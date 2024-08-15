@@ -19,13 +19,21 @@ No aplicativo, os usuários deverão assinar o plano de pagamento disponível e 
 
 # Lista de Requisitos: 
 **REQ1.** Haverá um usuário do tipo assinante e outro do tipo produtora. O sistema deve controlar o acesso do usuário através do login e da senha e também da confirmação do pagamento da assinatura (no caso do assinante).
+
 **REQ2.** O sistema permitirá a criação de assinantes de acordo com a assinatura feita previamente.
+
 **REQ3.** O sistema deve permitir que o assinante utilize uma ferramenta que busca conteúdos através da pesquisa pelo nome, categoria relacional ou classificação de idade.
+
 **REQ4.** O sistema permitirá que o assinante veja seus conteúdos assistidos a partir de uma lista de histórico.
+
 **REQ5.** O sistema irá gerar um relatório voltado para o cargo de Produtora a fim de aumentar a produtividade, contendo as seguintes informações: (1) Conteúdos pertencentes à Produtora, (2) Contagem de visualizações dos seus conteúdos, (3) Média de avaliações dos seus conteúdos.
+
 **REQ6.** O sistema coleta o número de visualizações dos programas e formula um sistema de ranking baseado nesses dados.
+
 **REQ7.** O sistema possibilita a avaliação do conteúdo assistido, permitindo o feedback entre assinante e produtora.
+
 **REQ8.** O sistema deve possuir uma função para que o usuário faça uma lista de acordo com seu gosto pessoal (seus conteúdos favoritos).
+
 **REQ9.** O sistema deve permitir que os usuários consumidores enviem seus feedbacks em torno da aplicação, além de um botão de suporte ao usuário.
 
 
