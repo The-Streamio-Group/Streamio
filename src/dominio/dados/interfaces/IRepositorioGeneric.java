@@ -1,13 +1,13 @@
 package dominio.dados.interfaces;
 
 import dominio.exceptions.ElementoNaoExisteException;
+import dominio.exceptions.ElementoNullException;
 
 
 /*  Interface genérica que nela, você acessa todos os repositórios
  *  T -> Type
  */
 public interface IRepositorioGeneric<T>{
-
 
 
     /*  Cadastra um novo objeto na lista do seu respectivo repositório
@@ -45,13 +45,13 @@ public interface IRepositorioGeneric<T>{
      *
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não existe
      */
-    void atualizar(T antigo, T novo) throws ElementoNaoExisteException;
+    void atualizar(T antigo, T novo) throws ElementoNullException;
 
     /*  Remove o objeto da Lista de acordo com o id do objeto dado
      *
      *  @param id -> ID do objeto
      *
-     *  @throws ElementoNaoExisteException -> Exceção caso o elemento não exista
+     *  @throws ElementoNullException -> Exceção caso o elemento seja nulo
      *
      */
     void remover(String id) throws ElementoNaoExisteException;
@@ -64,8 +64,6 @@ public interface IRepositorioGeneric<T>{
      */
     boolean existe(String id);
 
-    //Métodos para testes
-    int totalUsuarios();
 
-    String dadosString(String id) throws ElementoNaoExisteException;
+
 }

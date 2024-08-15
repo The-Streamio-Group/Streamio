@@ -2,6 +2,7 @@ package dominio.dados;
 
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
+import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Assinatura;
 
 
@@ -58,10 +59,10 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
         }
     }
 
-    //UPTADE
+    //UPDATE
     @Override
-    public void atualizar(Assinatura antigo, Assinatura novo) throws ElementoNaoExisteException {
-        if(novo == null){throw new ElementoNaoExisteException();}
+    public void atualizar(Assinatura antigo, Assinatura novo) throws ElementoNullException {
+        if(novo == null){throw new ElementoNullException();}
 
         boolean antigoE = existe(antigo.getNumeroCartao());
         if(antigoE){
@@ -102,10 +103,7 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
         return this.assinaturasList.size();
     }
 
-    @Override
-    public String dadosString(String numeroCartao) throws ElementoNaoExisteException {
-        Assinatura impresso = this.procurar(numeroCartao);
-        return impresso.toString();
-    }
+
+
 }
 

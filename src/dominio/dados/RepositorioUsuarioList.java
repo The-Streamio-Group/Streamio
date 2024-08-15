@@ -3,6 +3,7 @@ package dominio.dados;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
 
+import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Usuario;
 
 import java.util.ArrayList;
@@ -70,8 +71,8 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario>{
 
     //UPDATE
     @Override
-    public void atualizar(Usuario antigo, Usuario novo) throws ElementoNaoExisteException {
-        if(novo == null){throw new ElementoNaoExisteException();}
+    public void atualizar(Usuario antigo, Usuario novo) throws ElementoNullException {
+        if(novo == null){throw new ElementoNullException();}
 
         boolean antigoE = existe(antigo.getEmail());
         if(antigoE){
@@ -93,16 +94,6 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario>{
         return false;
     }
 
-    @Override
-    public int totalUsuarios(){
 
-        return this.usuariosList.size();
-    }
-
-    @Override
-    public String dadosString(String email) throws ElementoNaoExisteException {
-        Usuario impresso = this.procurar(email);
-        return impresso.toString();
-    }
 }
 

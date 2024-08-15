@@ -35,4 +35,9 @@ public class Avaliacao {
 
 
 
+
+    @Override
+    public String toString() {
+        return "nota=" + nota;
+    }
 }

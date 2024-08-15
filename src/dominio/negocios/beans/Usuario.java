@@ -33,12 +33,9 @@ public abstract class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "usuarioID='" + usuarioID + '\'' +
-                ", nickname='" + nickname + '\'' +
+        return "nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
-                '}';
+                ", senha='" + senha + '\'';
     }
 
     //Getters e Setters

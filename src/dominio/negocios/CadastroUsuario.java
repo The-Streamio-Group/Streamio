@@ -1,5 +1,6 @@
 package dominio.negocios;
 
+import dominio.dados.RepositorioUsuarioList;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoJaExisteException;
 import dominio.exceptions.ElementoNaoExisteException;
@@ -20,8 +21,8 @@ public class CadastroUsuario {
             if (!repositorio.existe(u.getEmail())) {
                 this.repositorio.cadastrar(u);
             }
-        } else{
-            //tratar exceção
+        } else {
+            throw new ElementoNullException();
         }
 
     }
@@ -50,24 +51,16 @@ public class CadastroUsuario {
 
     public void atualizar(Usuario antigo, Usuario novo) throws ElementoNaoExisteException, ElementoJaExisteException {
         if(!antigo.equals(novo)) {
-            this.repositorio.atualizar(antigo, novo);
+            if(!this.repositorio.existe(novo.getEmail())) {
+                this.repositorio.atualizar(antigo, novo);
+            }
+            else{throw new ElementoJaExisteException();}
         }
-        else{throw new ElementoJaExisteException();}
+        else{throw new MesmoElementoException();}
     }
 
     public void imprimirDados(String email) throws ElementoNaoExisteException{
         this.repositorio.dadosString(email);
     }
-
-    public void adicionarConteudo(Produtora produtora, Conteudo conteudo){
-        //Implementar
-    }
-
-    public void removerConteudo(Produtora produtora, Conteudo conteudo){
-        //Implementar
-    }
-
-
-
 
 }

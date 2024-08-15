@@ -1,5 +1,6 @@
 package dominio.negocios.beans;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.List;
@@ -11,18 +12,19 @@ public class Conteudo {
     private String descricao;
     private TipoGenero genero;
     private int classificacaoIdade;
-    private List<Avaliacao> avaliacoes;
+    private List<Avaliacao> avaliacoes; //Melhor relacionamento
     private int numeroViews;
     private float notaGeral;
 
-    public Conteudo(String titulo, String descricao, TipoGenero genero, int classificacaoIdade, int numeroViews) {
+    public Conteudo(String titulo, String descricao, TipoGenero genero, int classificacaoIdade) {
         this.conteudoID = UUID.randomUUID();
         this.titulo = titulo;
         this.descricao = descricao;
         this.genero = genero;
         this.classificacaoIdade = classificacaoIdade;
-        this.numeroViews = numeroViews;
+        this.numeroViews = 0;
         this.notaGeral = 0;
+        this.avaliacoes = new ArrayList<>();
     }
 
     //Getters e setters
@@ -41,7 +43,7 @@ public class Conteudo {
     public void setClassificacaoIdade(int classificacaoIdade) { this.classificacaoIdade = classificacaoIdade; }
 
     public int getNumeroViews() { return numeroViews; }
-    public void setNumeroViews(int numeroViews) { this.numeroViews = numeroViews; }
+    public void setNumeroViews(int numeroViews) { this.numeroViews += numeroViews; }
 
 
     public void atualizarNota() {
@@ -67,5 +69,10 @@ public class Conteudo {
 
     public float getNotaGeral() {
         return notaGeral;
+    }
+
+    @Override
+    public String toString() {
+        return titulo;
     }
 }

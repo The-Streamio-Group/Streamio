@@ -2,8 +2,10 @@ package dominio.dados;
 
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
+import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Assinante;
 import dominio.negocios.beans.Avaliacao;
+import dominio.negocios.beans.Conteudo;
 
 import java.util.ArrayList;
 
@@ -72,10 +74,10 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao>{
         this.avaliacoesList.remove(avaliacaoRemovida);
     }
 
-    //UPTADE
+    //UPDATE
     @Override
-    public void atualizar(Avaliacao antigo, Avaliacao novo) throws ElementoNaoExisteException {
-        if(novo == null){throw new ElementoNaoExisteException();}
+    public void atualizar(Avaliacao antigo, Avaliacao novo) throws ElementoNullException {
+        if(novo == null){throw new ElementoNullException();}
 
         boolean antigoE = existe(antigo.getAvaliacaoID());
         if(antigoE){
@@ -95,15 +97,5 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao>{
         throw new ElementoNaoExisteException();
     }
 
-    @Override
-    public int totalUsuarios(){
 
-        return this.avaliacoesList.size();
-    }
-
-    @Override
-    public String dadosString(String avaliacaoID) throws ElementoNaoExisteException {
-        Avaliacao impresso = this.procurar(avaliacaoID);
-        return impresso.toString();
-    }
 }

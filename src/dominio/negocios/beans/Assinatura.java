@@ -9,13 +9,19 @@ public class Assinatura {
     private boolean statusPagamento;
     private String numeroCartao;
     private LocalDate dataAssinatura;
-    private final Assinante assinante;
+    //private final Assinante assinante;
 
-    public Assinatura(String numeroCartao, Assinante assinante) {
+    public Assinatura(){
+        this.assinaturaID = UUID.randomUUID();
+        this.statusPagamento = false;
+        this.numeroCartao = "00000";
+        //this.assinante = assinante;
+    }
+    public Assinatura(String numeroCartao) {
         this.assinaturaID = UUID.randomUUID();
         this.statusPagamento = true;
         this.numeroCartao = numeroCartao;
-        this.assinante = assinante;
+
     }
 
     //Getters e setters
@@ -44,18 +50,16 @@ public class Assinatura {
         this.dataAssinatura = dataAssinatura;
     }
 
-    public Assinante getUsuario() {
-        return assinante;
-    }
+//    public Assinante getAssinante() {
+//        return assinante;
+//    }
 
     @Override
     public String toString() {
         return "Assinatura{" +
                 "statusPagamento=" + statusPagamento +
                 ", numeroCartao='" + numeroCartao + '\'' +
-                ", dataAssinatura=" + dataAssinatura +
-                ", assinante=" + assinante +
-                '}';
+                ", dataAssinatura=" + dataAssinatura;
     }
 
     // * statusPagamento torna-se false após 30 dias (LocalDate), sem que seja feita a renovação

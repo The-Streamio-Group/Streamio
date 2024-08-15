@@ -2,6 +2,7 @@ package dominio.dados;
 
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoNaoExisteException;
+import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Conteudo;
 
 import java.util.ArrayList;
@@ -57,15 +58,14 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
         }
     }
 
-    //UPTADE
+    //UPDATE
     @Override
-    public void atualizar(Conteudo antigo, Conteudo novo) throws ElementoNaoExisteException {
-        if(novo == null){throw new ElementoNaoExisteException();}
+    public void atualizar(Conteudo antigo, Conteudo novo) throws ElementoNullException {
+        if(novo == null){throw new ElementoNullException();}
 
-        boolean antigoE = existe(antigo.getTitulo());
-        if(antigoE){
-            int indice = conteudosList.indexOf(antigo);
-            this.conteudosList.set(indice, novo);
+
+        if(existe(antigo.getTitulo())){
+            this.conteudosList.set(conteudosList.indexOf(antigo), novo);
 
         }
     }
@@ -94,15 +94,5 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
         return existe;
     }
 
-    @Override
-    public int totalUsuarios(){
 
-        return this.conteudosList.size();
-    }
-
-    @Override
-    public String dadosString(String titulo) throws ElementoNaoExisteException {
-        Conteudo impresso = this.procurar(titulo);
-        return impresso.toString();
-    }
 }

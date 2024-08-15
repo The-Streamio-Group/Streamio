@@ -1,5 +1,6 @@
 package dominio.negocios.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,6 +11,7 @@ public class Produtora extends Usuario {
     //Caso a produtora seja nova e não adicione nada por agora
     public Produtora(String nickname, String email, String senha) {
         super(nickname,email,senha);
+        this.produto = new ArrayList<>();
 
     }
 
@@ -24,8 +26,16 @@ public class Produtora extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + "Produtora{" +
+        return "Produtora{" +
                 "produto=" + produto +
                 '}';
+    }
+
+    public List<Conteudo> getProduto() {
+        return produto;
+    }
+
+    public void setProduto(List<Conteudo> produto) {
+        this.produto = produto;
     }
 }
