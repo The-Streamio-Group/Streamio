@@ -4,58 +4,52 @@ import dominio.dados.RepositorioUsuarioList;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoJaExisteException;
 import dominio.exceptions.ElementoNaoExisteException;
-import dominio.exceptions.ElementoNullException;
-import dominio.exceptions.MesmoElementoException;
+import dominio.negocios.beans.Conteudo;
+import dominio.negocios.beans.Produtora;
 import dominio.negocios.beans.Usuario;
 
-public class ControllerUsuario {
-    private static ControllerUsuario instancia;
-    private final IRepositorioGeneric<Usuario> repositorio;
+public class CadastroUsuario {
 
-    private ControllerUsuario() {
-        this.repositorio = RepositorioUsuarioList.getInstance();
+    private IRepositorioGeneric<Usuario> repositorio;
+
+    public CadastroUsuario(IRepositorioGeneric<Usuario> repositorio) {
+        this.repositorio = repositorio;
     }
 
-    public static ControllerUsuario getInstance() {
-        if(instancia == null) {
-            instancia = new ControllerUsuario();
-
-        }
-        return instancia;
-    }
-
-    public void cadastrarUsuario(Usuario u) throws ElementoJaExisteException, ElementoNullException {
+    public void cadastrar(Usuario u){
         if(u != null) {
             if (!repositorio.existe(u.getEmail())) {
                 this.repositorio.cadastrar(u);
-            } else {
-                throw new ElementoJaExisteException();
             }
         } else {
             throw new ElementoNullException();
         }
+
     }
 
-    public void removerUsuario(String email) throws ElementoNaoExisteException {
+    public void remover(String email) throws ElementoNaoExisteException {
         Usuario removido = this.repositorio.procurar(email);
         if(removido != null){
             this.repositorio.remover(email);
         }
+        else{
+            throw new ElementoNaoExisteException();
+        }
     }
 
-    public Usuario procurarUsuario(String email) throws ElementoNaoExisteException {
+    public Usuario procurar(String email) throws ElementoNaoExisteException {
         return this.repositorio.procurar(email);
     }
 
-    public int procurarIndiceUsuario(String email) throws ElementoNaoExisteException{
+    public int procurarIndice(String email) throws ElementoNaoExisteException{
         return this.repositorio.procurarIndice(email);
     }
 
-    public boolean existeUsuario(String email){
+    public boolean existe(String email){
         return this.repositorio.existe(email);
     }
 
-    public void atualizarUsuario(Usuario antigo, Usuario novo) throws ElementoNullException, MesmoElementoException, ElementoJaExisteException {
+    public void atualizar(Usuario antigo, Usuario novo) throws ElementoNaoExisteException, ElementoJaExisteException {
         if(!antigo.equals(novo)) {
             if(!this.repositorio.existe(novo.getEmail())) {
                 this.repositorio.atualizar(antigo, novo);
@@ -65,6 +59,8 @@ public class ControllerUsuario {
         else{throw new MesmoElementoException();}
     }
 
-
+    public void imprimirDados(String email) throws ElementoNaoExisteException{
+        this.repositorio.dadosString(email);
+    }
 
 }
