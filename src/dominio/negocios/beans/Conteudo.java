@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.List;
 
-public abstract class Conteudo {
+public class Conteudo {
 
     private final UUID conteudoID;
     private String titulo;

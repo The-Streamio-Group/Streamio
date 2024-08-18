@@ -3,8 +3,11 @@ package dominio.negocios;
 import dominio.dados.RepositorioReproducaoConteudoList;
 import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.exceptions.ElementoJaExisteException;
+import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.ReprodutoraConteudo;
+
+import java.util.UUID;
 
 public class ControllerReprodutoraConteudo {
     private static ControllerReprodutoraConteudo instancia;
@@ -23,8 +26,23 @@ public class ControllerReprodutoraConteudo {
 
 
     public void cadastrarReprodutoraConteudo(ReprodutoraConteudo r) throws ElementoJaExisteException, ElementoNullException {
-        if (this.repositorio.existe(r.getReprodutoraConteudoID())) {
-            this.repositorio.cadastrar(r);
+        if(r != null) {
+            if (!this.repositorio.existe(r.getReprodutoraConteudoID())) {
+
+                this.repositorio.cadastrar(r);
+            } else {
+                throw new ElementoJaExisteException();
+            }
+
+        }
+        else{
+            throw new ElementoNullException();
+        }
+    }
+
+    public ReprodutoraConteudo procurarReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
+        if(this.repositorio.existe(id)){
+            this.repositorio.procurar(id);
         }
 
     }
