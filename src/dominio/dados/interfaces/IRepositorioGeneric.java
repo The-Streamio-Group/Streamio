@@ -9,7 +9,7 @@ import java.util.UUID;
 /*  Interface genérica que nela, você acessa todos os repositórios
  *  T -> Type
  */
-public interface IRepositorioGeneric<T>{
+public interface IRepositorioGeneric<T> {
 
 
     /*  Cadastra um novo objeto na lista do seu respectivo repositório
@@ -28,16 +28,6 @@ public interface IRepositorioGeneric<T>{
      *
      */
     T procurar(UUID id) throws ElementoNaoExisteException;
-
-    /*  Procura o indice do objeto na lista do seu respectivo repositório baseado no id do objeto
-     *
-     *  @param id -> o id que define o objeto
-     *
-     *  @return o índice do objeto na lista do repositório
-     *
-     *  @throws ElementoNaoExisteException -> Exceção caso o elemento não exista
-     */
-    int procurarIndice(UUID id) throws ElementoNaoExisteException;
 
     /*  Atualiza as informações do objeto,
      *
@@ -65,7 +55,6 @@ public interface IRepositorioGeneric<T>{
      *  @return true para se existe na lista, ou false para o contrário
      */
     boolean existe(UUID id);
-
 
 
 }

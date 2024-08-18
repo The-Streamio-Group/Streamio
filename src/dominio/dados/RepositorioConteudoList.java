@@ -69,15 +69,15 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
             throw new ElementoNullException();
         }
         if (existe(antigoid)) {
-            this.conteudosList.set(conteudosList.indexOf(antigoid), novo);
+            this.conteudosList.set(procurarIndice(antigoid), novo);
         } else {
             throw new ElementoNaoExisteException();
         }
     }
 
     //Método que procura o índice do Conteúdo a partir do --título--
-    @Override
-    public int procurarIndice(UUID conteudoID) throws ElementoNaoExisteException {
+
+    private int procurarIndice(UUID conteudoID) throws ElementoNaoExisteException {
         for (int i = 0; i < this.conteudosList.size(); i++) {
             if (conteudosList.get(i).getConteudoID().equals(conteudoID)) {
                 return i;

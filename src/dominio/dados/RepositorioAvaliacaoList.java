@@ -85,15 +85,15 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao> 
         }
         boolean antigoE = existe(antigoid);
         if (antigoE) {
-            int indice = avaliacoesList.indexOf(antigoid);
+            int indice = procurarIndice(antigoid);
             this.avaliacoesList.set(indice, novo);
         } else {
             throw new ElementoNaoExisteException();
         }
     }
 
-    @Override
-    public int procurarIndice(UUID avaliacaoID) throws ElementoNaoExisteException {
+
+    private int procurarIndice(UUID avaliacaoID) throws ElementoNaoExisteException {
         for (int i = 0; i < this.avaliacoesList.size(); i++) {
             if (avaliacoesList.get(i).getAvaliacaoID().equals(avaliacaoID)) {
                 return i;

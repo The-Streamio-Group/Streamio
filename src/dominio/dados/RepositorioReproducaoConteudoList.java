@@ -41,7 +41,7 @@ public class RepositorioReproducaoConteudoList implements IRepositorioGeneric<Re
         throw new ElementoNaoExisteException();
     }
 
-    public int procurarIndice(UUID id) throws ElementoNaoExisteException {
+    private int procurarIndice(UUID id) throws ElementoNaoExisteException {
         for (int i = 0; i < this.repositorio.size(); i++) {
             if (repositorio.get(i).getReprodutoraConteudoID().equals(id)) {
                 return i;
@@ -57,10 +57,9 @@ public class RepositorioReproducaoConteudoList implements IRepositorioGeneric<Re
         }
         boolean antigoE = existe(novo.getReprodutoraConteudoID());
         if (antigoE) {
-            int indice = repositorio.indexOf(antigoid);
+            int indice = procurarIndice(antigoid);
             this.repositorio.set(indice, novo);
-        }
-        else {
+        } else {
             throw new ElementoNaoExisteException();
         }
     }

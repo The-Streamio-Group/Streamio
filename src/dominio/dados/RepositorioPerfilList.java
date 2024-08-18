@@ -46,7 +46,7 @@ public class RepositorioPerfilList implements IRepositorioGeneric<Perfil> {
     }
 
     //Método que procura o índice a partir do email
-    public int procurarIndice(UUID perfilID) throws ElementoNaoExisteException {
+    private int procurarIndice(UUID perfilID) throws ElementoNaoExisteException {
         for (int i = 0; i < this.perfilList.size(); i++) {
             if (perfilList.get(i).getPerfilID().equals(perfilID)) {
                 return i;
@@ -73,7 +73,7 @@ public class RepositorioPerfilList implements IRepositorioGeneric<Perfil> {
         }
         boolean antigoE = existe(antigoid);
         if (antigoE) {
-            int indice = perfilList.indexOf(antigoid);
+            int indice = procurarIndice(antigoid);
             this.perfilList.set(indice, novo);
         } else {
             throw new ElementoNaoExisteException();

@@ -53,7 +53,7 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario> {
     }
 
     //Método que procura o índice a partir do email
-    public int procurarIndice(UUID usuarioID) throws ElementoNaoExisteException {
+    private int procurarIndice(UUID usuarioID) throws ElementoNaoExisteException {
         for (int i = 0; i < this.usuariosList.size(); i++) {
             if (usuariosList.get(i).getUsuarioID().equals(usuarioID)) {
                 return i;
@@ -80,10 +80,9 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario> {
         }
         boolean antigoE = existe(antigoid);
         if (antigoE) {
-            int indice = usuariosList.indexOf(antigoid);
+            int indice = procurarIndice(antigoid);
             this.usuariosList.set(indice, novo);
-        }
-        else{
+        } else {
             throw new ElementoNaoExisteException();
         }
     }
