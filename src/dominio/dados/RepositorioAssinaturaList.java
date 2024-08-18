@@ -68,7 +68,7 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
         }
         boolean antigoE = existe(antigoid);
         if (antigoE) {
-            int indice = assinaturasList.indexOf(antigoid);
+            int indice = procurarIndice(antigoid);
             this.assinaturasList.set(indice, novo);
         } else {
             throw new ElementoNaoExisteException();
@@ -89,8 +89,7 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
     }
 
     //Método que procura o índice a partir do --numeroCartao-- (agora UUID)
-    @Override
-    public int procurarIndice(UUID assinaturaID) throws ElementoNaoExisteException {
+    private int procurarIndice(UUID assinaturaID) throws ElementoNaoExisteException {
         for (int i = 0; i < this.assinaturasList.size(); i++) {
             if (assinaturasList.get(i).getAssinaturaID().equals(assinaturaID)) {
                 return i;

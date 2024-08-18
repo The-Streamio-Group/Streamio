@@ -23,6 +23,7 @@ public class Assinante extends Usuario {
     public List<ReprodutoraConteudo> getConteudosFavoritos() {
         return conteudosFavoritos;
     }
+
     public void setConteudosFavoritos(List<ReprodutoraConteudo> conteudosFavoritos) {
         this.conteudosFavoritos = conteudosFavoritos;
     }
@@ -30,6 +31,7 @@ public class Assinante extends Usuario {
     public List<ReprodutoraConteudo> getHistorico() {
         return historico;
     }
+
     public void setHistorico(List<ReprodutoraConteudo> historico) {
         this.historico = historico;
     }

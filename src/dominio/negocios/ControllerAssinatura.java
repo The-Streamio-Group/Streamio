@@ -2,11 +2,12 @@ package dominio.negocios;
 
 import dominio.dados.RepositorioAssinaturaList;
 import dominio.dados.interfaces.IRepositorioGeneric;
-import dominio.exceptions.ElementoJaExisteException;
-import dominio.exceptions.ElementoNaoExisteException;
-import dominio.exceptions.ElementoNullException;
-import dominio.exceptions.MesmoElementoException;
+import dominio.exceptions.*;
 import dominio.negocios.beans.Assinatura;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.UUID;
 
 public class ControllerAssinatura {
     private static ControllerAssinatura instancia;
@@ -36,33 +37,40 @@ public class ControllerAssinatura {
         }
     }
 
+    public void cadastrarAssinatura(UUID id, String numeroCartao) throws ElementoNullException, ElementoNaoExisteException {
+        if (numeroCartao != null) {
+            if (repositorio.existe(this.repositorio.procurar(id).getAssinaturaID())) {
+                Assinatura assinatura = this.repositorio.procurar(id);
+                assinatura.setNumeroCartao(numeroCartao);
+            } else {
+                throw new ElementoNullException();
+            }
+        }
+    }
+
     //DELETE
-    public void removerAssinatura(String numeroCartao) throws ElementoNaoExisteException {
-        Assinatura removido = this.repositorio.procurar(numeroCartao);
+    public void removerAssinatura(UUID id) throws ElementoNaoExisteException {
+        Assinatura removido = this.repositorio.procurar(id);
         if (removido != null) {
-            this.repositorio.remover(numeroCartao);
+            this.repositorio.remover(id);
         }
     }
 
     //READ
-    public Assinatura procurarAssinatura(String numeroCartao) throws ElementoNaoExisteException {
-        return this.repositorio.procurar(numeroCartao);
+    public Assinatura procurarAssinatura(UUID id) throws ElementoNaoExisteException {
+        return this.repositorio.procurar(id);
     }
 
 
-    public int procurarIndiceAssinatura(String numeroCartao) throws ElementoNaoExisteException {
-        return this.repositorio.procurarIndice(numeroCartao);
-    }
-
-    public boolean existeAssinatura(String numeroCartao) {
-        return this.repositorio.existe(numeroCartao);
+    public boolean existeAssinatura(UUID id) {
+        return this.repositorio.existe(id);
     }
 
     //UPDATE
-    public void atualizarAssinatura(Assinatura antigo, Assinatura novo) throws ElementoNullException, MesmoElementoException, ElementoJaExisteException {
-        if (!antigo.equals(novo)) {
-            if (!this.repositorio.existe(novo.getNumeroCartao())) {
-                this.repositorio.atualizar(antigo, novo);
+    public void atualizarAssinatura(UUID antigoid, Assinatura novo) throws ElementoNullException, MesmoElementoException, ElementoJaExisteException, ElementoNaoExisteException {
+        if (this.repositorio.procurar(antigoid).equals(novo)) {
+            if (!this.repositorio.existe(novo.getAssinaturaID())) {
+                this.repositorio.atualizar(antigoid, novo);
             } else {
                 throw new ElementoJaExisteException();
             }
@@ -70,6 +78,22 @@ public class ControllerAssinatura {
         } else {
             throw new MesmoElementoException();
         }
+    }
+
+    public void renovarAssinatura(UUID id) throws ElementoNaoExisteException, AssinaturaNaoExpiradaException {
+        if (verificarAssinatura(id)) {
+            Assinatura renovar = this.repositorio.procurar(id);
+            renovar.setStatusPagamento(true);
+        }
+
+    }
+
+    public boolean verificarAssinatura(UUID id) throws ElementoNaoExisteException {
+        Assinatura v = this.repositorio.procurar(id);
+        if(v.estaExpirada()){
+            v.setStatusPagamento(false); //setar como false o status do pagamento
+        }
+        return v.estaExpirada();
     }
 
 

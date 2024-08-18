@@ -9,19 +9,22 @@ public class Assinatura {
     private boolean statusPagamento;
     private String numeroCartao;
     private LocalDate dataAssinatura;
-    //Cálculo da expiração da Data
+    private LocalDate dataExpiracao;
 
+    //Assinatura sem estar sendo paga
     public Assinatura() {
         this.assinaturaID = UUID.randomUUID();
         this.statusPagamento = false;
         this.numeroCartao = "0000-0000-0000-0000";
-        //this.assinante = assinante;
     }
 
+    //Assinatura já feita com um cartão
     public Assinatura(String numeroCartao) {
         this.assinaturaID = UUID.randomUUID();
         this.statusPagamento = true;
         this.numeroCartao = numeroCartao;
+        this.dataAssinatura = LocalDate.now();
+        this.dataExpiracao = dataAssinatura.plusDays(30);
     }
 
     //Getters e setters
@@ -53,9 +56,13 @@ public class Assinatura {
         this.dataAssinatura = dataAssinatura;
     }
 
-//    public Assinante getAssinante() {
-//        return assinante;
-//    }
+    public LocalDate getDataExpiracao() {
+        return dataExpiracao;
+    }
+
+    public void setDataExpiracao(LocalDate dataExpiracao) {
+        this.dataExpiracao = dataExpiracao;
+    }
 
     @Override
     public String toString() {
@@ -67,6 +74,12 @@ public class Assinatura {
 
     // * statusPagamento torna-se false após 30 dias (LocalDate), sem que seja feita a renovação
     // * revisar LocalDate para que, quando a assinatura for feita, avançar no tempo para instanciar
+
+
+    //Métodos específicos
+    public boolean estaExpirada(){
+        return LocalDate.now().isAfter(dataExpiracao);
+    }
 
 }
 
