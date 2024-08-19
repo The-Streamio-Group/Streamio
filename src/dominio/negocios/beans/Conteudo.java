@@ -32,6 +32,23 @@ public class Conteudo {
     }
 
     //Getters e setters
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public void setNotaGeral(float notaGeral) {
+        this.notaGeral = notaGeral;
+    }
+
+    public Duration getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(Duration duracao) {
+        this.duracao = duracao;
+    }
+
     public UUID getConteudoID() {
         return conteudoID;
     }
@@ -84,9 +101,21 @@ public class Conteudo {
         return notaGeral;
     }
 
-    @Override
-    public String toString() {
-        return titulo;
+
+    public void adicionarAvalicao(Avaliacao nova) {
+        this.avaliacoes.add(nova);
+    }
+
+    public void removerAvalicao(Avaliacao a) {
+        this.avaliacoes.remove(a);
+    }
+
+    public boolean possuiAvaliacao(Avaliacao a) {
+        return this.avaliacoes.contains(a);
+    }
+
+    public int tamanhoAvaliacoes(){
+        return this.avaliacoes.size();
     }
 
     public void atualizarNota() {
@@ -97,6 +126,13 @@ public class Conteudo {
 
         this.notaGeral = (float) soma / this.avaliacoes.size();
 
+    }
+
+
+
+    @Override
+    public String toString() {
+        return titulo;
     }
 
     @Override

@@ -16,6 +16,7 @@ public class Assinatura {
         this.assinaturaID = UUID.randomUUID();
         this.statusPagamento = false;
         this.numeroCartao = "0000-0000-0000-0000";
+
     }
 
     //Assinatura já feita com um cartão
@@ -78,7 +79,11 @@ public class Assinatura {
 
     //Métodos específicos
     public boolean estaExpirada(){
-        return LocalDate.now().isAfter(dataExpiracao);
+        boolean TF = LocalDate.now().isAfter(dataExpiracao);
+        if(TF) {
+            this.setStatusPagamento(false);
+        }
+        return TF;
     }
 
 }

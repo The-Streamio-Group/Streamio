@@ -6,45 +6,56 @@ import java.util.List;
 
 
 public class Assinante extends Usuario {
-    private List<ReprodutoraConteudo> conteudosFavoritos;
-    private List<ReprodutoraConteudo> historico;
-    private final Assinatura assinatura;
+    private Assinatura assinatura;
     private List<Perfil> perfis;
 
     public Assinante(String nickname, String email, String senha, Assinatura assinatura) {
         super(nickname, email, senha);
-        this.conteudosFavoritos = new ArrayList<>();
-        this.historico = new ArrayList<>();
         this.assinatura = assinatura;
+        this.perfis = new ArrayList<>();
     }
 
     //Getters e setters
 
-    public List<ReprodutoraConteudo> getConteudosFavoritos() {
-        return conteudosFavoritos;
-    }
-
-    public void setConteudosFavoritos(List<ReprodutoraConteudo> conteudosFavoritos) {
-        this.conteudosFavoritos = conteudosFavoritos;
-    }
-
-    public List<ReprodutoraConteudo> getHistorico() {
-        return historico;
-    }
-
-    public void setHistorico(List<ReprodutoraConteudo> historico) {
-        this.historico = historico;
-    }
 
     public Assinatura getAssinatura() {
         return assinatura;
     }
 
+    public void setAssinatura(Assinatura assinatura) {
+        this.assinatura = assinatura;
+    }
+
+    public List<Perfil> getPerfis() {
+        return perfis;
+    }
+
+    public void setPerfis(List<Perfil> perfis) {
+        this.perfis = perfis;
+    }
+
+    public void adicionarPerfil(Perfil novo){
+        this.perfis.add(novo);
+    }
+
+    public int tamanhoPerfis(){
+        return this.perfis.size();
+    }
+
+
+    public void removerPerfil(Perfil p){
+        this.perfis.remove(p);
+    }
+
+    public boolean possuiPerfil(Perfil p){
+        return this.perfis.contains(p);
+    }
+
     @Override
     public String toString() {
-        return super.toString() + "Assinante{" +
-                "conteudosFavoritos=" + conteudosFavoritos +
-                ", historico=" + historico +
+        return "Assinante{" +
+                "assinatura=" + assinatura +
+                ", perfis=" + perfis +
                 '}';
     }
 }

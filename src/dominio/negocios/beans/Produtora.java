@@ -3,7 +3,6 @@ package dominio.negocios.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Produtora extends Usuario {
     private List<Conteudo> produto;
 
@@ -23,14 +22,6 @@ public class Produtora extends Usuario {
 
     //Getters e setters
 
-
-    @Override
-    public String toString() {
-        return "Produtora{" +
-                "produto=" + produto +
-                '}';
-    }
-
     public List<Conteudo> getProduto() {
         return produto;
     }
@@ -38,4 +29,21 @@ public class Produtora extends Usuario {
     public void setProduto(List<Conteudo> produto) {
         this.produto = produto;
     }
+
+    //Métodos Específicos
+    public void adicionarProduto(Conteudo novo){
+        this.produto.add(novo);
+    }
+
+    public void removerProduto(Conteudo c){
+        this.produto.remove(c);
+    }
+
+    @Override
+    public String toString() {
+        return "Produtora{" +
+                "produto=" + produto +
+                '}';
+    }
 }
+

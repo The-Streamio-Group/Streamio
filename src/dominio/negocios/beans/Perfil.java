@@ -55,6 +55,30 @@ public class Perfil {
         this.historico = historico;
     }
 
+    public void adicionarHistorico(ReprodutoraConteudo nova){
+        this.historico.add(nova);
+    }
+
+    public boolean possuiHistorico(ReprodutoraConteudo r){
+        return this.historico.contains(r);
+    }
+
+    public void removerHistorico(ReprodutoraConteudo r){
+        this.historico.remove(r);
+    }
+
+    public void adicionarFavoritos(ReprodutoraConteudo nova) {
+        this.conteudosFavoritos.add(nova);
+    }
+
+    public void removerFavoritos(ReprodutoraConteudo r){
+        this.conteudosFavoritos.remove(r);
+    }
+
+    public boolean possuiFavoritos(ReprodutoraConteudo r){
+        return this.historico.contains(r);
+    }
+
     @Override
     public String toString() {
         return "Perfil{" +
