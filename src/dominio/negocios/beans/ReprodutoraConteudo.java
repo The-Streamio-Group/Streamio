@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class ReprodutoraConteudo {
-    private UUID reprodutoraConteudoID;
+    private final UUID reprodutoraConteudoID;
     private LocalDate dataAssistido;
     private Duration tempoAssistido;
     private final Conteudo conteudo;
@@ -41,9 +41,6 @@ public class ReprodutoraConteudo {
         return reprodutoraConteudoID;
     }
 
-    public void setReprodutoraConteudoID(UUID reprodutoraConteudoID) {
-        this.reprodutoraConteudoID = reprodutoraConteudoID;
-    }
 
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 package dominio.dados;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioAssinatura;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
@@ -9,7 +9,7 @@ import dominio.negocios.beans.Assinatura;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura> {
+public class RepositorioAssinaturaList implements IRepositorioAssinatura {
 
     /*
      * Classe que contém o repositório de todas as Assinaturas
@@ -25,11 +25,11 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
         this.assinaturasList = new ArrayList<>();
     }
 
-    public static IRepositorioGeneric<Assinatura> getInstance() {
+    public static IRepositorioAssinatura getInstance() {
         if (instance == null) {
             instance = new RepositorioAssinaturaList();
         }
-        return (IRepositorioGeneric<Assinatura>) instance;
+        return instance;
     }
 
     //CREATE
@@ -43,6 +43,16 @@ public class RepositorioAssinaturaList implements IRepositorioGeneric<Assinatura
     public Assinatura procurar(UUID assinaturaID) throws ElementoNaoExisteException {
         for (Assinatura assinatura : assinaturasList) {
             if (assinatura.getAssinaturaID().equals(assinaturaID)) {
+                return assinatura;
+            }
+        }
+        throw new ElementoNaoExisteException();
+    }
+
+    @Override
+    public Assinatura procurarPorNumCartao(String numCartao) throws ElementoNaoExisteException {
+        for (Assinatura assinatura : assinaturasList) {
+            if (assinatura.getNumeroCartao().equals(numCartao)) {
                 return assinatura;
             }
         }

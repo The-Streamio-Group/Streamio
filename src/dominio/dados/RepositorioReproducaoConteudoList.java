@@ -1,16 +1,15 @@
 package dominio.dados;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioReprodutoraConteudo;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.ReprodutoraConteudo;
-import dominio.negocios.beans.Usuario;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioReproducaoConteudoList implements IRepositorioGeneric<ReprodutoraConteudo> {
+public class RepositorioReproducaoConteudoList implements IRepositorioReprodutoraConteudo {
 
     private final ArrayList<ReprodutoraConteudo> repositorio;
 
@@ -20,7 +19,7 @@ public class RepositorioReproducaoConteudoList implements IRepositorioGeneric<Re
         this.repositorio = new ArrayList<>();
     }
 
-    public static IRepositorioGeneric<ReprodutoraConteudo> getInstance() {
+    public static IRepositorioReprodutoraConteudo getInstance() {
         if (instance == null) {
             instance = new RepositorioReproducaoConteudoList();
         }
@@ -30,6 +29,7 @@ public class RepositorioReproducaoConteudoList implements IRepositorioGeneric<Re
     public void cadastrar(ReprodutoraConteudo reprodutoraConteudo) {
         this.repositorio.add(reprodutoraConteudo);
     }
+
 
     @Override
     public ReprodutoraConteudo procurar(UUID id) throws ElementoNaoExisteException {

@@ -1,16 +1,15 @@
 package dominio.dados;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioConteudo;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.Conteudo;
-import dominio.negocios.beans.Usuario;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
+public class RepositorioConteudoList implements IRepositorioConteudo{
 
     /*
      * Classe que contém o repositório de todos os Conteúdos
@@ -27,11 +26,11 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
     }
 
     //Instância do repositório
-    public static IRepositorioGeneric<Conteudo> getInstance() {
+    public static IRepositorioConteudo getInstance() {
         if (instance == null) {
             instance = new RepositorioConteudoList();
         }
-        return (IRepositorioGeneric<Conteudo>) instance;
+        return instance;
     }
 
     //CREATE
@@ -45,6 +44,16 @@ public class RepositorioConteudoList implements IRepositorioGeneric<Conteudo> {
     public Conteudo procurar(UUID conteudoID) throws ElementoNaoExisteException {
         for (Conteudo conteudo : conteudosList) {
             if (conteudo.getConteudoID().equals(conteudoID)) {
+                return conteudo;
+            }
+        }
+        throw new ElementoNaoExisteException();
+    }
+
+    @Override
+    public Conteudo procurarPorTitulo(String titulo) throws ElementoNaoExisteException {
+        for (Conteudo conteudo : conteudosList) {
+            if (conteudo.getTitulo().equals(titulo)) {
                 return conteudo;
             }
         }

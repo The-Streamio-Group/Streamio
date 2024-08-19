@@ -1,6 +1,6 @@
 package dominio.dados;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioPerfil;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Perfil;
@@ -8,7 +8,7 @@ import dominio.negocios.beans.Perfil;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioPerfilList implements IRepositorioGeneric<Perfil> {
+public class RepositorioPerfilList implements IRepositorioPerfil {
 
     private final ArrayList<Perfil> perfilList;
 
@@ -19,7 +19,7 @@ public class RepositorioPerfilList implements IRepositorioGeneric<Perfil> {
     }
 
     //Instância do repositório
-    public static IRepositorioGeneric<Perfil> getInstance() {
+    public static IRepositorioPerfil getInstance() {
         if (instance == null) {
             instance = new RepositorioPerfilList();
         }
@@ -38,6 +38,17 @@ public class RepositorioPerfilList implements IRepositorioGeneric<Perfil> {
     public Perfil procurar(UUID perfilID) throws ElementoNaoExisteException {
         for (Perfil perfil : this.perfilList) {
             if (perfil.getPerfilID().equals(perfilID)) {
+                return perfil;
+            }
+        }
+        //Caso ele não exista, exceção
+        throw new ElementoNaoExisteException();
+    }
+
+    @Override
+    public Perfil procurarPorNick(String nickname) throws ElementoNaoExisteException {
+        for (Perfil perfil : this.perfilList) {
+            if (perfil.getNick().equals(nickname)) {
                 return perfil;
             }
         }

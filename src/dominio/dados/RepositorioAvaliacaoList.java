@@ -1,6 +1,6 @@
 package dominio.dados;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioAvaliacao;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
@@ -11,7 +11,7 @@ import dominio.negocios.beans.Avaliacao;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao> {
+public class RepositorioAvaliacaoList implements IRepositorioAvaliacao {
 
     /*
      * Classe que contém o repositório de todas as Avaliações
@@ -26,11 +26,11 @@ public class RepositorioAvaliacaoList implements IRepositorioGeneric<Avaliacao> 
         this.avaliacoesList = new ArrayList<>();
     }
 
-    public static IRepositorioGeneric<Avaliacao> getInstance() {
+    public static IRepositorioAvaliacao getInstance() {
         if (instance == null) {
             instance = new RepositorioAvaliacaoList();
         }
-        return (IRepositorioGeneric<Avaliacao>) instance;
+        return instance;
     }
 
     //CREATE

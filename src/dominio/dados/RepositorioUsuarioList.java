@@ -1,6 +1,6 @@
 package dominio.dados;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioUsuario;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
@@ -9,7 +9,7 @@ import dominio.negocios.beans.Usuario;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario> {
+public class RepositorioUsuarioList implements IRepositorioUsuario {
 
     /*
      * Classe que contém o repositório de todos os usuários
@@ -26,11 +26,11 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario> {
     }
 
     //Instância do repositório
-    public static IRepositorioGeneric<Usuario> getInstance() {
+    public static IRepositorioUsuario getInstance() {
         if (instance == null) {
             instance = new RepositorioUsuarioList();
         }
-        return (IRepositorioGeneric<Usuario>) instance;
+        return instance;
     }
 
     //CREATE
@@ -51,6 +51,18 @@ public class RepositorioUsuarioList implements IRepositorioGeneric<Usuario> {
         //Caso ele não exista, exceção
         throw new ElementoNaoExisteException();
     }
+
+    @Override
+    public Usuario procurarPorEmail(String email) throws ElementoNaoExisteException {
+        for (Usuario usuario : this.usuariosList) {
+            if (usuario.getEmail().equals(email)) {
+                return usuario;
+            }
+        }
+        //Caso ele não exista, exceção
+        throw new ElementoNaoExisteException();
+    }
+
 
     //Método que procura o índice a partir do email
     private int procurarIndice(UUID usuarioID) throws ElementoNaoExisteException {
