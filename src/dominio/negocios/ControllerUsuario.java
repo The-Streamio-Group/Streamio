@@ -1,22 +1,31 @@
 package dominio.negocios;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
-import dominio.exceptions.ElementoJaExisteException;
-import dominio.exceptions.ElementoNaoExisteException;
-import dominio.exceptions.ElementoNullException;
+import dominio.dados.RepositorioUsuarioList;
+import dominio.dados.interfaces.IRepositorioUsuario;
+import dominio.exceptions.*;
 import dominio.negocios.beans.Usuario;
 
+import java.util.UUID;
+
 public class ControllerUsuario {
+    private static ControllerUsuario instance;
 
-    private IRepositorioGeneric<Usuario> repositorio;
+    private IRepositorioUsuario repositorio;
 
-    public ControllerUsuario(IRepositorioGeneric<Usuario> repositorio) {
-        this.repositorio = repositorio;
+    private ControllerUsuario() {
+        this.repositorio = RepositorioUsuarioList.getInstance();
     }
 
-    public void cadastrar(Usuario u) throws ElementoNullException {
+    public static ControllerUsuario getInstance() {
+        if (instance == null) {
+            instance = new ControllerUsuario();
+        }
+        return instance;
+    }
+
+    public void cadastrarUsuario(Usuario u) throws ElementoNullException {
         if (u != null) {
-            if (!repositorio.existe(u.getUsuarioID()) {
+            if (!existeUsuario(u.getUsuarioID())) {
                 this.repositorio.cadastrar(u);
             }
         } else {
@@ -25,41 +34,58 @@ public class ControllerUsuario {
 
     }
 
-    public void remover(String email) throws ElementoNaoExisteException {
-        Usuario removido = this.repositorio.procurar(email);
+
+    public void removerUsuario(UUID id) throws ElementoNaoExisteException {
+        Usuario removido = procurarUsuario(id);
         if (removido != null) {
-            this.repositorio.remover(email);
+            this.repositorio.remover(id);
         } else {
             throw new ElementoNaoExisteException();
         }
     }
 
-    public Usuario procurar(String email) throws ElementoNaoExisteException {
-        return this.repositorio.procurar(email);
+    public Usuario procurarUsuario(UUID id) throws ElementoNaoExisteException {
+        return this.repositorio.procurar(id);
     }
 
-    public int procurarIndice(String email) throws ElementoNaoExisteException {
-        return this.repositorio.procurarIndice(email);
+    public Usuario procurarUsuarioPorEmail(String email) throws ElementoNaoExisteException {
+        return this.repositorio.procurarPorEmail(email);
     }
 
-    public boolean existe(String email) {
-        return this.repositorio.existe(email);
+    public boolean existeUsuario(UUID id) {
+        return this.repositorio.existe(id);
     }
 
-    public void atualizar(Usuario antigo, Usuario novo) throws ElementoNaoExisteException, ElementoJaExisteException {
-        if (!antigo.equals(novo)) {
-            if (!this.repositorio.existe(novo.getEmail())) {
-                this.repositorio.atualizar(antigo, novo);
+    public void atualizarUsuario(UUID antigoid, Usuario novo) throws ElementoNaoExisteException, ElementoJaExisteException, ElementoNullException, MesmoElementoException {
+        if (procurarUsuario(antigoid).equals(novo)) {
+            if (!this.repositorio.existe(novo.getUsuarioID())) {
+                repositorio.atualizar(antigoid, novo);
             } else {
                 throw new ElementoJaExisteException();
             }
         } else {
             throw new MesmoElementoException();
         }
+
     }
 
-    public void imprimirDados(String email) throws ElementoNaoExisteException {
-        this.repositorio.dadosString(email);
+    public void atualizarNomeUsuario(UUID id, String nomeNovo) throws ElementoNaoExisteException, MesmoNomeException {
+        Usuario novo = procurarUsuario(id);
+        if (!novo.getNickname().equals(nomeNovo)) {
+            novo.setNickname(nomeNovo);
+        } else {
+            throw new MesmoNomeException();
+        }
     }
+
+    public void alterarSenhaUsuario(UUID id, String senhaNova) throws ElementoNaoExisteException, MesmoNomeException {
+        Usuario novo = procurarUsuario(id);
+        if (!novo.getSenha().equals(senhaNova)) {
+            novo.setSenha(senhaNova);
+        } else {
+            throw new MesmoNomeException();
+        }
+    }
+
 
 }

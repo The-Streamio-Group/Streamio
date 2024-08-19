@@ -1,7 +1,7 @@
 package dominio.negocios;
 
 import dominio.dados.RepositorioConteudoList;
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioConteudo;
 import dominio.exceptions.ElementoJaExisteException;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ControllerConteudo {
 
     private static ControllerConteudo instancia;
-    private final IRepositorioGeneric<Conteudo> repositorio;
+    private final IRepositorioConteudo repositorio;
 
     private ControllerConteudo() {
         this.repositorio = RepositorioConteudoList.getInstance();
@@ -29,7 +29,7 @@ public class ControllerConteudo {
     //CREATE
     public void cadastrarConteudo(Conteudo c) throws ElementoNullException {
         if (c != null) {
-            if (!repositorio.existe(c.getConteudoID())){
+            if (!existeConteudo(c.getConteudoID())) {
                 this.repositorio.cadastrar(c);
             }
 
@@ -41,7 +41,7 @@ public class ControllerConteudo {
 
     //DELETE
     public void removerConteudo(UUID id) throws ElementoNaoExisteException {
-        Conteudo removido = this.repositorio.procurar(id);
+        Conteudo removido = procurarConteudo(id);
 
         if (removido != null) {
             this.repositorio.remover(id);
@@ -50,8 +50,8 @@ public class ControllerConteudo {
 
     //UPDATE
     public void atualizarConteudo(UUID antigoid, Conteudo novo) throws MesmoElementoException, ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException {
-        if (this.repositorio.procurar(antigoid).equals(novo)) {
-            if (!this.repositorio.existe(novo.getConteudoID())) {
+        if (!procurarConteudo(antigoid).equals(novo.getConteudoID())) {
+            if (!existeConteudo(novo.getConteudoID())) {
                 repositorio.atualizar(antigoid, novo);
             } else {
                 throw new ElementoJaExisteException();
@@ -73,7 +73,7 @@ public class ControllerConteudo {
 
 
     public void assistirConteudo(UUID id) throws ElementoNaoExisteException {
-        Conteudo conteudo = this.repositorio.procurar(id);
+        Conteudo conteudo = procurarConteudo(id);
         conteudo.setNumeroViews(1);
     }
 }

@@ -1,17 +1,16 @@
 package dominio.negocios;
 
 import dominio.dados.RepositorioAssinaturaList;
-import dominio.dados.interfaces.IRepositorioGeneric;
+import dominio.dados.interfaces.IRepositorioAssinatura;
 import dominio.exceptions.*;
 import dominio.negocios.beans.Assinatura;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 public class ControllerAssinatura {
     private static ControllerAssinatura instancia;
-    private final IRepositorioGeneric<Assinatura> repositorio;
+    private final IRepositorioAssinatura repositorio;
 
     private ControllerAssinatura() {
         this.repositorio = RepositorioAssinaturaList.getInstance();
@@ -24,12 +23,11 @@ public class ControllerAssinatura {
         return instancia;
     }
 
-    // Controller: receber numeroCartao, adquirir UUID, realizar mudanças
 
     //CREATE
     public void cadastrarAssinatura(Assinatura assinatura) throws ElementoNullException {
         if (assinatura != null) {
-            if (!repositorio.existe(assinatura.getAssinaturaID())) {
+            if (!existeAssinatura(assinatura.getAssinaturaID())) {
                 this.repositorio.cadastrar(assinatura);
             } else {
                 throw new ElementoNullException();
@@ -39,8 +37,8 @@ public class ControllerAssinatura {
 
     public void cadastrarAssinatura(UUID id, String numeroCartao) throws ElementoNullException, ElementoNaoExisteException {
         if (numeroCartao != null) {
-            if (repositorio.existe(this.repositorio.procurar(id).getAssinaturaID())) {
-                Assinatura assinatura = this.repositorio.procurar(id);
+            if (existeAssinatura(procurarAssinatura(id).getAssinaturaID())) {
+                Assinatura assinatura = procurarAssinatura(id);
                 assinatura.setNumeroCartao(numeroCartao);
             } else {
                 throw new ElementoNullException();
@@ -50,7 +48,7 @@ public class ControllerAssinatura {
 
     //DELETE
     public void removerAssinatura(UUID id) throws ElementoNaoExisteException {
-        Assinatura removido = this.repositorio.procurar(id);
+        Assinatura removido = procurarAssinatura(id);
         if (removido != null) {
             this.repositorio.remover(id);
         }
@@ -68,8 +66,8 @@ public class ControllerAssinatura {
 
     //UPDATE
     public void atualizarAssinatura(UUID antigoid, Assinatura novo) throws ElementoNullException, MesmoElementoException, ElementoJaExisteException, ElementoNaoExisteException {
-        if (this.repositorio.procurar(antigoid).equals(novo)) {
-            if (!this.repositorio.existe(novo.getAssinaturaID())) {
+        if (procurarAssinatura(antigoid).equals(novo)) {
+            if (!existeAssinatura(novo.getAssinaturaID())) {
                 this.repositorio.atualizar(antigoid, novo);
             } else {
                 throw new ElementoJaExisteException();
@@ -80,20 +78,30 @@ public class ControllerAssinatura {
         }
     }
 
+    public void atualizarCartaoAssinatura(UUID antigoid, String numCartao) throws ElementoNaoExisteException {
+        Assinatura novoCartao = this.repositorio.procurar(antigoid);
+        novoCartao.setNumeroCartao(numCartao);
+        novoCartao.setStatusPagamento(true);
+        novoCartao.setDataAssinatura(LocalDate.now());
+        novoCartao.setDataExpiracao(LocalDate.now().plusDays(30));
+
+    }
+
+
     public void renovarAssinatura(UUID id) throws ElementoNaoExisteException, AssinaturaNaoExpiradaException {
-        if (verificarAssinatura(id)) {
-            Assinatura renovar = this.repositorio.procurar(id);
+        if (!verificarAssinatura(id)) {
+            Assinatura renovar = procurarAssinatura(id);
             renovar.setStatusPagamento(true);
+        } else {
+            throw new AssinaturaNaoExpiradaException();
         }
 
     }
 
     public boolean verificarAssinatura(UUID id) throws ElementoNaoExisteException {
-        Assinatura v = this.repositorio.procurar(id);
-        if(v.estaExpirada()){
-            v.setStatusPagamento(false); //setar como false o status do pagamento
-        }
-        return v.estaExpirada();
+        Assinatura v = procurarAssinatura(id);
+        return !v.estaExpirada();
+
     }
 
 

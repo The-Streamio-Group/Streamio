@@ -1,7 +1,8 @@
 package dominio.negocios;
 
-import dominio.dados.interfaces.IRepositorioGeneric;
 import dominio.dados.RepositorioAvaliacaoList;
+import dominio.dados.interfaces.IRepositorioAssinatura;
+import dominio.dados.interfaces.IRepositorioAvaliacao;
 import dominio.exceptions.ElementoJaExisteException;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
@@ -12,7 +13,7 @@ import java.util.UUID;
 
 public class ControllerAvaliacao {
     private static ControllerAvaliacao instancia;
-    private final IRepositorioGeneric<Avaliacao> repositorio;
+    private final IRepositorioAvaliacao repositorio;
 
     private ControllerAvaliacao() {
         this.repositorio = RepositorioAvaliacaoList.getInstance();
@@ -27,7 +28,7 @@ public class ControllerAvaliacao {
 
     public void cadastrarAvaliacao(Avaliacao a) throws ElementoJaExisteException, ElementoNullException {
         if (a != null) {
-            if (!repositorio.existe(a.getAvaliacaoID())) {
+            if (!existeAvaliacao(a.getAvaliacaoID())) {
                 this.repositorio.cadastrar(a);
             } else {
                 throw new ElementoJaExisteException();
@@ -37,8 +38,8 @@ public class ControllerAvaliacao {
         }
     }
 
-    public void removerAvaliacao(UUID id) throws ElementoNaoExisteException {
-        Avaliacao removido = this.repositorio.procurar(id);
+    public void remover(UUID id) throws ElementoNaoExisteException {
+        Avaliacao removido = procurarAvaliacao(id);
         if (removido != null) {
             this.repositorio.remover(id);
         }
@@ -54,9 +55,9 @@ public class ControllerAvaliacao {
 
     public void atualizarAvaliacao(UUID antigoid, Avaliacao novo) throws ElementoNullException, ElementoJaExisteException, MesmoElementoException, ElementoNaoExisteException {
         //Verifica os parâmetros são iguais
-        if (!this.repositorio.procurar(antigoid).equals(novo)) {
+        if (!procurarAvaliacao(antigoid).equals(novo)) {
             //Verifica se existe no repositório
-            if (!this.repositorio.existe(novo.getAvaliacaoID())) {
+            if (!existeAvaliacao(novo.getAvaliacaoID())) {
                 this.repositorio.atualizar(antigoid, novo);
             } else {
                 throw new ElementoJaExisteException();

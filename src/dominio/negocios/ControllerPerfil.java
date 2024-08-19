@@ -25,7 +25,7 @@ public class ControllerPerfil {
     //CREATE
     public void cadastrarPerfil(Perfil p) throws ElementoNullException {
         if (p != null) {
-            if (!repositorio.existe(p.getPerfilID())) {
+            if (!existePerfil(p.getPerfilID())) {
                 this.repositorio.cadastrar(p);
             }
 
@@ -37,7 +37,7 @@ public class ControllerPerfil {
 
     //DELETE
     public void removerPerfil(UUID id) throws ElementoNaoExisteException {
-        Perfil removido = this.repositorio.procurar(id);
+        Perfil removido = procurarPerfil(id);
 
         if (removido != null) {
             this.repositorio.remover(id);
@@ -46,8 +46,8 @@ public class ControllerPerfil {
 
     //UPDATE
     public void atualizarPerfil(UUID antigoid, Perfil novo) throws MesmoElementoException, ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException {
-        if (this.repositorio.procurar(antigoid).equals(novo)) {
-            if (!this.repositorio.existe(novo.getPerfilID())) {
+        if (procurarPerfil(antigoid).equals(novo)) {
+            if (!existePerfil(novo.getPerfilID())) {
                 repositorio.atualizar(antigoid, novo);
             } else {
                 throw new ElementoJaExisteException();
@@ -71,8 +71,8 @@ public class ControllerPerfil {
     }
 
     public void mudarFaixaEtaria(UUID id, int idadeNova) throws ElementoNaoExisteException, MesmoElementoException {
-        if (this.repositorio.existe(id)) {
-            Perfil faixa = this.repositorio.procurar(id);
+        if (existePerfil(id)) {
+            Perfil faixa = procurarPerfil(id);
             if (!(idadeNova == faixa.getIdade())) {
                 faixa.setIdade(idadeNova);
             } else {
