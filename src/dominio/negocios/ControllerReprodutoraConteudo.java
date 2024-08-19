@@ -24,7 +24,6 @@ public class ControllerReprodutoraConteudo {
         return instancia;
     }
 
-
     public void cadastrarReprodutoraConteudo(ReprodutoraConteudo r) throws ElementoJaExisteException, ElementoNullException {
         if(r != null) {
             if (!this.repositorio.existe(r.getReprodutoraConteudoID())) {
