@@ -2,21 +2,16 @@ package dominio.dados.interfaces;
 
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
+import dominio.negocios.beans.Perfil;
 
 import java.util.UUID;
 
-
-/*  Interface genérica que nela, você acessa todos os repositórios
- *  T -> Type
- */
-public interface IRepositorioGeneric<T> {
-
-
+public interface IRepositorioPerfil {
     /*  Cadastra um novo objeto na lista do seu respectivo repositório
      *
      *  @param obj -> Objeto que vai ser cadastrado
      */
-    void cadastrar(T obj);
+    void cadastrar(Perfil perfil);
 
     /*  Procura um objeto na lista do seu respectivo repositório baseado no id do objeto
      *
@@ -27,9 +22,21 @@ public interface IRepositorioGeneric<T> {
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não exista
      *
      */
-    T procurar(UUID id) throws ElementoNaoExisteException;
+    Perfil procurar(UUID id) throws ElementoNaoExisteException;
 
-    /*  Atualiza as informações do objeto,
+    /*  Reimplementação do método procurar, onde ele usa nickname de parâmetro
+     *
+     *  @param nickname -> nickname do Pefil
+     *
+     *  @return o próprio objeto ou null se o id não existir na lista
+     *
+     *  @throws ElementoNaoExisteException -> Exceção caso o elemento não exista
+     *
+     */
+
+    Perfil procurarPorNick(String nickname) throws ElementoNaoExisteException;
+
+    /*  Atualiza as informações do objeto
      *
      *  @param antigo -> Objeto antigo que vamos pegar o índice
      *
@@ -37,7 +44,7 @@ public interface IRepositorioGeneric<T> {
      *
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não existe
      */
-    void atualizar(UUID idAntigo, T novo) throws ElementoNullException, ElementoNaoExisteException;
+    void atualizar(UUID idAntigo, Perfil novo) throws ElementoNullException, ElementoNaoExisteException;
 
     /*  Remove o objeto da Lista de acordo com o id do objeto dado
      *
@@ -48,13 +55,11 @@ public interface IRepositorioGeneric<T> {
      */
     void remover(UUID id) throws ElementoNaoExisteException;
 
-    /*  Método que informa se o
+    /*  Método que informa se o objeto existe
      *
      *  @param id -> ID do objeto
      *
      *  @return true para se existe na lista, ou false para o contrário
      */
     boolean existe(UUID id);
-
-
 }
