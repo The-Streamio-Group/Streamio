@@ -2,23 +2,42 @@ package dominio.negocios;
 
 import dominio.exceptions.*;
 import dominio.negocios.beans.*;
+import dominio.negocios.services.GerenciarAssinatura;
+import dominio.negocios.services.GerenciarAvaliacao;
+import dominio.negocios.services.GerenciarPerfil;
+import dominio.negocios.services.GerenciarRelatorio;
 
-import java.util.List;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.UUID;
 
 public class SistemaFachada implements ISistemaFachada {
     private final ControllerAssinatura controllerAssinatura;
     private final ControllerAvaliacao controllerAvaliacao;
     private final ControllerConteudo controllerConteudo;
+    private final ControllerPerfil controllerPerfil;
+    private final ControllerReprodutoraConteudo controllerReprodutoraConteudo;
     private final ControllerUsuario controllerUsuario;
+    private final GerenciarAssinatura gerenciarAssinatura;
+    private final GerenciarAvaliacao gerenciarAvaliacao;
+    private final GerenciarPerfil gerenciarPerfil;
+    private final GerenciarRelatorio gerenciarRelatorio;
 
     private static SistemaFachada instancia;
     private Usuario usuariologado; //Instância do usuário logado
+    private Perfil perfilLogado;  //Instância do Perfil logado
 
     public SistemaFachada() {
-        this.controllerUsuario = ControllerUsuario.getInstance();
         this.controllerAssinatura = ControllerAssinatura.getInstance();
         this.controllerAvaliacao = ControllerAvaliacao.getInstance();
         this.controllerConteudo = ControllerConteudo.getInstance();
+        this.controllerPerfil = ControllerPerfil.getInstance();
+        this.controllerReprodutoraConteudo = ControllerReprodutoraConteudo.getInstance();
+        this.gerenciarAssinatura = GerenciarAssinatura.getInstance();
+        this.gerenciarAvaliacao = GerenciarAvaliacao.getInstance();
+        this.gerenciarPerfil = GerenciarPerfil.getInstance();
+        this.controllerUsuario = ControllerUsuario.getInstance();
+        this.gerenciarRelatorio = GerenciarRelatorio.getInstance();
     }
 
     public static SistemaFachada getInstance() {
@@ -28,6 +47,7 @@ public class SistemaFachada implements ISistemaFachada {
         return instancia;
     }
 
+
     public void realizarLogin(String email, String senha) throws ElementoNaoExisteException, UsuarioJaLogadoException, AssinaturaExpiradaException, SenhaErradaException {
 
         //Verificar se o usuário já está logado
@@ -35,18 +55,19 @@ public class SistemaFachada implements ISistemaFachada {
             throw new UsuarioJaLogadoException();
         }
 
-        Usuario userLog = this.controllerUsuario.procurarUsuario(email);
-
-
-        //Caso a assinatura expire
-        if (userLog instanceof Assinante) {
-            if (!((Assinante) userLog).getAssinatura().isStatusPagamento()) {
-                throw new AssinaturaExpiradaException();
-            }
-        }
+        Usuario userLog = this.controllerUsuario.procurarUsuarioPorEmail(email);
 
 
         //Verificar se a senha bate
+
+
+        if (userLog instanceof Assinante) {
+            //Caso a assinatura expire
+            if (((Assinante) userLog).getAssinatura().estaExpirada()) {
+                throw new AssinaturaExpiradaException();
+            }
+
+        }
         if (userLog.getSenha().equals(senha)) {
             this.usuariologado = userLog;
         } else {
@@ -56,14 +77,69 @@ public class SistemaFachada implements ISistemaFachada {
 
     public void logoff() {
         this.usuariologado = null;
+        this.perfilLogado = null;
     }
 
-    public void cadastrarUsuario(Usuario u) throws ElementoJaExisteException, ElementoNullException {
+
+    //Perfil
+    public void cadastrarPerfil(Perfil p) throws ElementoNullException {
+        this.controllerPerfil.cadastrarPerfil(p);
+    }
+
+    public void removerPerfil(UUID idPerfil) throws ElementoNaoExisteException {
+        this.controllerPerfil.removerPerfil(idPerfil);
+    }
+
+    public void trocarPerfil(String nickname) throws NaoAssinanteException, ElementoNaoExisteException {
+        if (usuariologado instanceof Assinante) {
+            if (this.gerenciarPerfil.existePerfilAssinante((Assinante) usuariologado, nickname)) {
+                perfilLogado = this.controllerPerfil.procurarPerfilPorNick(nickname);
+            }
+        }
+    }
+
+    public void mudarNomePerfil(UUID idPerfil, String novoNome) throws MesmoNomeException, ElementoNaoExisteException {
+        this.controllerPerfil.mudarNomePerfil(idPerfil, novoNome);
+
+    }
+
+    public void mudarFaixaEtaria(UUID idPerfil, int novaIdade) throws ElementoNaoExisteException, MesmoElementoException {
+        this.controllerPerfil.mudarFaixaEtaria(idPerfil, novaIdade);
+
+    }
+
+    public void atualizarPerfil(UUID antigoId, Perfil p) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
+        this.controllerPerfil.atualizarPerfil(antigoId, p);
+    }
+
+    public Perfil procurarPerfil(UUID idPerfil) throws ElementoNaoExisteException {
+        return this.controllerPerfil.procurarPerfil(idPerfil);
+    }
+
+    public Perfil procurarPerfilPorNome(String nome) throws ElementoNaoExisteException {
+        return this.controllerPerfil.procurarPerfilPorNick(nome);
+    }
+
+
+    //Usuário
+    public void cadastrarUsuario(Usuario u) throws ElementoNullException {
         this.controllerUsuario.cadastrarUsuario(u);
     }
 
-    public void removerUsuario(String email) throws ElementoNaoExisteException {
-        this.controllerUsuario.removerUsuario(email);
+    public void removerUsuario(UUID idUsuario) throws ElementoNaoExisteException {
+        this.controllerUsuario.removerUsuario(idUsuario);
+    }
+
+    public void procurarUsuario(UUID idUsuario) throws ElementoNaoExisteException {
+        this.controllerUsuario.procurarUsuario(idUsuario);
+    }
+
+    public void alterarNomeUsuario(UUID antigoID, String nome) throws MesmoNomeException, ElementoNaoExisteException {
+        this.controllerUsuario.atualizarNomeUsuario(antigoID, nome);
+    }
+
+    public void alterarSenhaUsuario(UUID antigoID, String senha) throws MesmoNomeException, ElementoNaoExisteException {
+        this.controllerUsuario.alterarSenhaUsuario(antigoID, senha);
     }
 
 
@@ -71,7 +147,7 @@ public class SistemaFachada implements ISistemaFachada {
     public void adicionarConteudo(Conteudo adicionado) throws ElementoNullException, NaoProdutoraException {
         if (usuariologado instanceof Produtora) {
             this.controllerConteudo.cadastrarConteudo(adicionado);
-            ((Produtora) usuariologado).getProduto().add(adicionado);
+            ((Produtora) usuariologado).adicionarProduto(adicionado);
 
 
         } else {
@@ -79,102 +155,94 @@ public class SistemaFachada implements ISistemaFachada {
         }
     }
 
-    public void removerConteudo(String titulo) throws ElementoNaoExisteException, NaoProdutoraException {
+    public void removerConteudo(UUID id) throws ElementoNaoExisteException, NaoProdutoraException {
         if (usuariologado instanceof Produtora) {
-            Conteudo r = this.controllerConteudo.procurarConteudo(titulo);
-            this.controllerConteudo.removerConteudo(titulo);
-            ((Produtora) usuariologado).getProduto().remove(r);
+            Conteudo r = this.controllerConteudo.procurarConteudo(id);
+            this.controllerConteudo.removerConteudo(id);
+            ((Produtora) usuariologado).removerProduto(r);
         } else {
             throw new NaoProdutoraException();
         }
 
     }
 
-    public void atualizarConteudo(Conteudo antigo, Conteudo novo) throws ElementoJaExisteException, ElementoNullException, MesmoElementoException, NaoProdutoraException {
+    public void atualizarConteudo(UUID antigoid, Conteudo novo) throws ElementoJaExisteException, ElementoNullException, MesmoElementoException, NaoProdutoraException, ElementoNaoExisteException {
         if (usuariologado instanceof Produtora) {
-            int index = ((Produtora) usuariologado).getProduto().indexOf(antigo);
-            ((Produtora) usuariologado).getProduto().set(index, novo);
-            this.controllerConteudo.atualizarConteudo(antigo, novo);
+            this.controllerConteudo.atualizarConteudo(antigoid, novo);
+
         } else {
             throw new NaoProdutoraException();
         }
     }
 
-    public String gerarRelatorio() throws NaoProdutoraException {
-        String resultado = "";
-        if (usuariologado instanceof Produtora) {
-            resultado += "-------------RELATÓRIO DOS PRODUTOS-------------\n";
-            List<Conteudo> conteudo = ((Produtora) usuariologado).getProduto();
-            for (Conteudo c : conteudo) {
-                resultado += "Título: " + c.getTitulo() +
-                        " | Nota do Público: " + c.getNotaGeral()
-                        + " | Visualizações: " + c.getNumeroViews() + "\n";
-            }
-        } else {
-            throw new NaoProdutoraException();
-        }
-        return resultado;
+    public String gerarRelatorioProdutora() throws NaoProdutoraException, ElementoNaoExisteException {
+        return this.gerenciarRelatorio.GerarRelatorio(usuariologado);
     }
+
 
     //Parte dos Assinantes
-    public void assistirConteudo(String titulo) throws ElementoNaoExisteException, NaoAssinanteException {
+    public void assistirConteudo(ReprodutoraConteudo reprodutoraConteudo) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException {
         if (usuariologado instanceof Assinante) {
-            Assinante u = (Assinante) this.controllerUsuario.procurarUsuario(usuariologado.getEmail());
-            u.getHistorico().add(this.controllerConteudo.procurarConteudo(titulo));
-            this.controllerConteudo.assistirConteudo(titulo);
+            this.gerenciarPerfil.assistirConteudoPerfil(perfilLogado.getPerfilID(), reprodutoraConteudo);
 
-        } else {
-            throw new NaoAssinanteException();
-        }
-
-        //Colocar pra séries e filmes
-    }
-
-    public void adicionarFavorito(String titulo) throws ElementoNaoExisteException, NaoAssinanteException {
-        if (usuariologado instanceof Assinante) {
-            Assinante u = (Assinante) this.controllerUsuario.procurarUsuario(usuariologado.getEmail());
-            u.getConteudosFavoritos().add(this.controllerConteudo.procurarConteudo(titulo));
         } else {
             throw new NaoAssinanteException();
         }
 
     }
 
-    public void realizarAvaliacao(int nota, String titulo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException {
-        if (usuariologado instanceof Assinante) {
-            Conteudo addNota = this.controllerConteudo.procurarConteudo(titulo);
-            Avaliacao novaAV = new Avaliacao(nota, (Assinante) usuariologado);
-            addNota.getAvaliacoes().add(novaAV);
-            addNota.atualizarNota();
-            this.controllerAvaliacao.cadastrarAvaliacao(novaAV);
+    public void adicionarFavorito(ReprodutoraConteudo reprodutoraConteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException {
+        if (perfilLogado != null) {
+            this.gerenciarPerfil.adicionarFavoritoPerfil(perfilLogado.getPerfilID(), reprodutoraConteudo);
+        } else {
+            throw new NaoAssinanteException();
+        }
+
+    }
+
+
+    //Avaliacao
+    public void realizarAvaliacao(Avaliacao a, ReprodutoraConteudo reprodutoraConteudo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException {
+        if (perfilLogado != null) {
+            this.gerenciarAvaliacao.realizarAvaliacao(a, perfilLogado, reprodutoraConteudo);
+
         } else {
             throw new NaoAssinanteException();
         }
     }
 
-
-    public void realizarAssinatura(String email, String numCartao) throws ElementoNaoExisteException, ElementoNullException, NaoAssinanteException {
-        if (this.controllerUsuario.procurarUsuario(email) instanceof Assinante) {
-            if (this.controllerUsuario.existeUsuario(email)) {
-
-                Assinante m = (Assinante) this.controllerUsuario.procurarUsuario(email);
-                m.getAssinatura().setStatusPagamento(true); //Verificar
-                m.getAssinatura().setNumeroCartao(numCartao);
-                this.controllerAssinatura.cadastrarAssinatura(m.getAssinatura());
-
-            }
-        } else {
-            throw new NaoAssinanteException();
-        }
+    public void atualizarAvaliacao(UUID idAvaliacao, Avaliacao avaliacao) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
+        this.controllerAvaliacao.atualizarAvaliacao(idAvaliacao, avaliacao);
     }
+
+
+    //Assinatura
+    public void realizarAssinatura(UUID idConta, String numCartao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException {
+        this.gerenciarAssinatura.atualizarCartaoAssinaturaUsuario(idConta, numCartao);
+    }
+
+
+    public void atualizarAssinatura(UUID idAssinatura, Assinatura assinatura) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
+        this.controllerAssinatura.atualizarAssinatura(idAssinatura, assinatura);
+    }
+
+
+    //ReprodutoraConteudo
+    public void atualizarDataReprodutora(UUID idReprodutora, LocalDate data) throws ElementoNaoExisteException, MesmoElementoException {
+        this.controllerReprodutoraConteudo.atualizarDataAssistido(idReprodutora, data);
+    }
+
+    public void atualizarTempoAssistido(UUID idReprodutora, Duration duracao) throws ElementoNaoExisteException, MesmoElementoException {
+        this.controllerReprodutoraConteudo.atualizarTempoAssistido(idReprodutora, duracao);
+    }
+
 
     public Usuario getUsuariologado() {
         return usuariologado;
     }
 
-    public String getUsuarioString(String email) throws ElementoNaoExisteException {
-        return this.controllerUsuario.procurarUsuario(email).toString();
+    public Perfil getPerfilLogado() {
+        return perfilLogado;
     }
-
 }
 
