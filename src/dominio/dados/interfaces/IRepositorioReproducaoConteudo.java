@@ -2,17 +2,17 @@ package dominio.dados.interfaces;
 
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
-import dominio.negocios.beans.ReprodutoraConteudo;
+import dominio.negocios.beans.ReproducaoConteudo;
 
 import java.util.UUID;
 
-public interface IRepositorioReprodutoraConteudo {
+public interface IRepositorioReproducaoConteudo {
 
     /*  Cadastra um novo objeto na lista do seu respectivo repositório
      *
      *  @param obj -> Objeto que vai ser cadastrado
      */
-    void cadastrar(ReprodutoraConteudo r);
+    void cadastrar(ReproducaoConteudo r);
 
     /*  Procura um objeto na lista do seu respectivo repositório baseado no id do objeto
      *
@@ -24,7 +24,7 @@ public interface IRepositorioReprodutoraConteudo {
      *
      */
 
-    ReprodutoraConteudo procurar(UUID id) throws ElementoNaoExisteException;
+    ReproducaoConteudo procurar(UUID id) throws ElementoNaoExisteException;
 
     /*  Atualiza as informações do objeto
      *
@@ -35,7 +35,7 @@ public interface IRepositorioReprodutoraConteudo {
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não existe
      */
 
-    void atualizar(UUID idAntigo, ReprodutoraConteudo novo) throws ElementoNullException, ElementoNaoExisteException;
+    void atualizar(UUID idAntigo, ReproducaoConteudo novo) throws ElementoNullException, ElementoNaoExisteException;
 
     /*  Remove o objeto da Lista de acordo com o id do objeto dado
      *

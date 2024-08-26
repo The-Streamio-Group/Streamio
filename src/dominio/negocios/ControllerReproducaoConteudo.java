@@ -1,32 +1,32 @@
 package dominio.negocios;
 
 import dominio.dados.RepositorioReproducaoConteudoList;
-import dominio.dados.interfaces.IRepositorioConteudo;
-import dominio.dados.interfaces.IRepositorioReprodutoraConteudo;
+import dominio.dados.interfaces.IRepositorioReproducaoConteudo;
 import dominio.exceptions.*;
 import dominio.negocios.beans.Conteudo;
-import dominio.negocios.beans.ReprodutoraConteudo;
+import dominio.negocios.beans.Perfil;
+import dominio.negocios.beans.ReproducaoConteudo;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class ControllerReprodutoraConteudo {
-    private static ControllerReprodutoraConteudo instancia;
-    private final IRepositorioReprodutoraConteudo repositorio;
+public class ControllerReproducaoConteudo {
+    private static ControllerReproducaoConteudo instancia;
+    private final IRepositorioReproducaoConteudo repositorio;
 
-    private ControllerReprodutoraConteudo() {
+    private ControllerReproducaoConteudo() {
         this.repositorio = RepositorioReproducaoConteudoList.getInstance();
     }
 
-    public static ControllerReprodutoraConteudo getInstance() {
+    public static ControllerReproducaoConteudo getInstance() {
         if (instancia == null) {
-            instancia = new ControllerReprodutoraConteudo();
+            instancia = new ControllerReproducaoConteudo();
         }
         return instancia;
     }
 
-    public void cadastrarReprodutoraConteudo(ReprodutoraConteudo r) throws ElementoJaExisteException, ElementoNullException {
+    public void cadastrarReprodutoraConteudo(ReproducaoConteudo r) throws ElementoJaExisteException, ElementoNullException {
         if (r != null) {
             if (!existeReprodutoraConteudo(r.getReprodutoraConteudoID())) {
 
@@ -40,8 +40,8 @@ public class ControllerReprodutoraConteudo {
         }
     }
 
-    public void cadastrarReprodutoraConteudo(Conteudo c, long minutos) throws ElementoJaExisteException, ElementoNullException {
-        ReprodutoraConteudo r = new ReprodutoraConteudo(c, minutos);
+    public void cadastrarReprodutoraConteudo(Conteudo c, long minutos, Perfil p) throws ElementoJaExisteException, ElementoNullException {
+        ReproducaoConteudo r = new ReproducaoConteudo(c, minutos, p);
 
         if (!existeReprodutoraConteudo(r.getReprodutoraConteudoID())) {
 
@@ -53,20 +53,21 @@ public class ControllerReprodutoraConteudo {
     }
 
 
-    public ReprodutoraConteudo procurarReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
+    public ReproducaoConteudo procurarReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
         return this.repositorio.procurar(id);
     }
 
     public void removerReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
-        ReprodutoraConteudo removido = procurarReprodutoraConteudo(id);
+        ReproducaoConteudo removido = procurarReprodutoraConteudo(id);
 
         if (removido != null) {
             this.repositorio.remover(id);
         }
+
     }
 
     //UPDATE
-    public void atualizarReprodutoraConteudo(UUID antigoid, ReprodutoraConteudo novo) throws MesmoElementoException, ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException {
+    public void atualizarReprodutoraConteudo(UUID antigoid, ReproducaoConteudo novo) throws MesmoElementoException, ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException {
         if (procurarReprodutoraConteudo(antigoid).equals(novo)) {
             if (!existeReprodutoraConteudo(novo.getReprodutoraConteudoID())) {
                 repositorio.atualizar(antigoid, novo);
@@ -79,7 +80,7 @@ public class ControllerReprodutoraConteudo {
     }
 
     public void atualizarDataAssistido(UUID id, LocalDate novaData) throws ElementoNaoExisteException, MesmoElementoException {
-        ReprodutoraConteudo data = procurarReprodutoraConteudo(id);
+        ReproducaoConteudo data = procurarReprodutoraConteudo(id);
         if (!novaData.equals(data.getDataAssistido())) {
             data.setDataAssistido(novaData);
         } else {
@@ -88,7 +89,7 @@ public class ControllerReprodutoraConteudo {
     }
 
     public void atualizarTempoAssistido(UUID id, Duration novoTempo) throws ElementoNaoExisteException, MesmoElementoException {
-        ReprodutoraConteudo tempo = procurarReprodutoraConteudo(id);
+        ReproducaoConteudo tempo = procurarReprodutoraConteudo(id);
         if (!novoTempo.equals(tempo.getTempoAssistido())) {
             tempo.setTempoAssistido(novoTempo);
         } else {

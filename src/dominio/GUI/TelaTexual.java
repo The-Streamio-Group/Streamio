@@ -27,9 +27,9 @@ public class TelaTexual {
         Conteudo teste4 = new Conteudo("Rambo", "2", TipoGenero.ANIMACAO, 2, 69);
         Conteudo teste5 = new Conteudo("Jujutsu Kaisen", "2", TipoGenero.ANIMACAO, 2, 66);
         Conteudo teste6 = new Conteudo("Deadpool", "2", TipoGenero.ANIMACAO, 2, 120);
-        ReprodutoraConteudo testefilme3 = new ReprodutoraConteudo(teste3, 60);
-        ReprodutoraConteudo testefilme32 = new ReprodutoraConteudo(teste3, 32);
-        ReprodutoraConteudo testefilme6 = new ReprodutoraConteudo(teste6, 33);
+        ReproducaoConteudo testefilme3 = new ReproducaoConteudo(teste3, 60,perfilTeste);
+        ReproducaoConteudo testefilme32 = new ReproducaoConteudo(teste3, 32,perfilTeste);
+        ReproducaoConteudo testefilme6 = new ReproducaoConteudo(teste6, 33, perfilTeste2);
         try {
             //Teste de instanciar uma produtora
             novo.cadastrarUsuario(teste1);

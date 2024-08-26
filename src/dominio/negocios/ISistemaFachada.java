@@ -45,11 +45,11 @@ public interface ISistemaFachada {
     String gerarRelatorioProdutora() throws NaoProdutoraException, ElementoNaoExisteException;
 
 
-    void assistirConteudo(ReprodutoraConteudo reprodutoraConteudo) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException;
+    void assistirConteudo(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException;
 
-    void adicionarFavorito(ReprodutoraConteudo reprodutoraConteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException;
+    void adicionarFavorito(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException;
 
-    void realizarAvaliacao(Avaliacao a, ReprodutoraConteudo reprodutoraConteudo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException;
+    void realizarAvaliacao(Avaliacao a, ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException;
 
     void atualizarAvaliacao(UUID idAvaliacao, Avaliacao avaliacao) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException;
 
