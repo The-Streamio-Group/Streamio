@@ -1,17 +1,17 @@
 package dominio.dados;
 
-import dominio.dados.interfaces.IRepositorioReprodutoraConteudo;
+import dominio.dados.interfaces.IRepositorioReproducaoConteudo;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
-import dominio.negocios.beans.ReprodutoraConteudo;
+import dominio.negocios.beans.ReproducaoConteudo;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioReproducaoConteudoList implements IRepositorioReprodutoraConteudo {
+public class RepositorioReproducaoConteudoList implements IRepositorioReproducaoConteudo {
 
-    private final ArrayList<ReprodutoraConteudo> repositorio;
+    private final ArrayList<ReproducaoConteudo> repositorio;
 
     private static RepositorioReproducaoConteudoList instance;
 
@@ -19,23 +19,23 @@ public class RepositorioReproducaoConteudoList implements IRepositorioReprodutor
         this.repositorio = new ArrayList<>();
     }
 
-    public static IRepositorioReprodutoraConteudo getInstance() {
+    public static RepositorioReproducaoConteudoList getInstance() {
         if (instance == null) {
             instance = new RepositorioReproducaoConteudoList();
         }
         return instance;
     }
 
-    public void cadastrar(ReprodutoraConteudo reprodutoraConteudo) {
-        this.repositorio.add(reprodutoraConteudo);
+    public void cadastrar(ReproducaoConteudo reproducaoConteudo) {
+        this.repositorio.add(reproducaoConteudo);
     }
 
 
     @Override
-    public ReprodutoraConteudo procurar(UUID id) throws ElementoNaoExisteException {
-        for (ReprodutoraConteudo reprodutoraConteudoconteudo : repositorio) {
-            if (reprodutoraConteudoconteudo.getReprodutoraConteudoID().equals(id)) {
-                return reprodutoraConteudoconteudo;
+    public ReproducaoConteudo procurar(UUID id) throws ElementoNaoExisteException {
+        for (ReproducaoConteudo reproducaoConteudoconteudo : repositorio) {
+            if (reproducaoConteudoconteudo.getReprodutoraConteudoID().equals(id)) {
+                return reproducaoConteudoconteudo;
             }
         }
         throw new ElementoNaoExisteException();
@@ -51,7 +51,7 @@ public class RepositorioReproducaoConteudoList implements IRepositorioReprodutor
     }
 
     @Override
-    public void atualizar(UUID antigoid, ReprodutoraConteudo novo) throws ElementoNullException, ElementoNaoExisteException {
+    public void atualizar(UUID antigoid, ReproducaoConteudo novo) throws ElementoNullException, ElementoNaoExisteException {
         if (novo == null) {
             throw new ElementoNullException();
         }
@@ -66,7 +66,7 @@ public class RepositorioReproducaoConteudoList implements IRepositorioReprodutor
 
     @Override
     public void remover(UUID id) throws ElementoNaoExisteException {
-        ReprodutoraConteudo removido = procurar(id);
+        ReproducaoConteudo removido = procurar(id);
         if (removido == null) {
             throw new ElementoNaoExisteException();
         }
@@ -76,8 +76,8 @@ public class RepositorioReproducaoConteudoList implements IRepositorioReprodutor
     @Override
     public boolean existe(UUID id) {
         boolean existe = false;
-        for (ReprodutoraConteudo reprodutoraConteudo : repositorio) {
-            if (reprodutoraConteudo.getReprodutoraConteudoID().equals(id)) {
+        for (ReproducaoConteudo reproducaoConteudo : repositorio) {
+            if (reproducaoConteudo.getReprodutoraConteudoID().equals(id)) {
                 existe = true;
                 break;
             }

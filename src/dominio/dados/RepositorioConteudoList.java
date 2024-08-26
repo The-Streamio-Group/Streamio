@@ -26,7 +26,7 @@ public class RepositorioConteudoList implements IRepositorioConteudo{
     }
 
     //Instância do repositório
-    public static IRepositorioConteudo getInstance() {
+    public static RepositorioConteudoList getInstance() {
         if (instance == null) {
             instance = new RepositorioConteudoList();
         }

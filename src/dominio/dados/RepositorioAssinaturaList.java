@@ -25,7 +25,7 @@ public class RepositorioAssinaturaList implements IRepositorioAssinatura {
         this.assinaturasList = new ArrayList<>();
     }
 
-    public static IRepositorioAssinatura getInstance() {
+    public static RepositorioAssinaturaList getInstance() {
         if (instance == null) {
             instance = new RepositorioAssinaturaList();
         }

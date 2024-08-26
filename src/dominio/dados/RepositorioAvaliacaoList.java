@@ -26,7 +26,7 @@ public class RepositorioAvaliacaoList implements IRepositorioAvaliacao {
         this.avaliacoesList = new ArrayList<>();
     }
 
-    public static IRepositorioAvaliacao getInstance() {
+    public static RepositorioAvaliacaoList getInstance() {
         if (instance == null) {
             instance = new RepositorioAvaliacaoList();
         }

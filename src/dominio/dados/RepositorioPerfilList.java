@@ -19,7 +19,7 @@ public class RepositorioPerfilList implements IRepositorioPerfil {
     }
 
     //Instância do repositório
-    public static IRepositorioPerfil getInstance() {
+    public static RepositorioPerfilList getInstance() {
         if (instance == null) {
             instance = new RepositorioPerfilList();
         }

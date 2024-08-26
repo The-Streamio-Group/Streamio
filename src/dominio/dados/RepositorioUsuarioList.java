@@ -26,7 +26,7 @@ public class RepositorioUsuarioList implements IRepositorioUsuario {
     }
 
     //Instância do repositório
-    public static IRepositorioUsuario getInstance() {
+    public static RepositorioUsuarioList getInstance() {
         if (instance == null) {
             instance = new RepositorioUsuarioList();
         }
