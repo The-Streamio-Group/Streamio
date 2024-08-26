@@ -8,8 +8,8 @@ public class Perfil {
     private final UUID perfilID;
     private String nick;
     private int idade;
-    private List<ReprodutoraConteudo> conteudosFavoritos;
-    private List<ReprodutoraConteudo> historico;
+    private List<ReproducaoConteudo> conteudosFavoritos;
+    private List<ReproducaoConteudo> historico;
 
     public Perfil(String nick, int idade) {
         this.perfilID = UUID.randomUUID();
@@ -39,43 +39,43 @@ public class Perfil {
         this.idade = idade;
     }
 
-    public List<ReprodutoraConteudo> getConteudosFavoritos() {
+    public List<ReproducaoConteudo> getConteudosFavoritos() {
         return conteudosFavoritos;
     }
 
-    public void setConteudosFavoritos(List<ReprodutoraConteudo> conteudosFavoritos) {
+    public void setConteudosFavoritos(List<ReproducaoConteudo> conteudosFavoritos) {
         this.conteudosFavoritos = conteudosFavoritos;
     }
 
-    public List<ReprodutoraConteudo> getHistorico() {
+    public List<ReproducaoConteudo> getHistorico() {
         return historico;
     }
 
-    public void setHistorico(List<ReprodutoraConteudo> historico) {
+    public void setHistorico(List<ReproducaoConteudo> historico) {
         this.historico = historico;
     }
 
-    public void adicionarHistorico(ReprodutoraConteudo nova){
+    public void adicionarHistorico(ReproducaoConteudo nova){
         this.historico.add(nova);
     }
 
-    public boolean possuiHistorico(ReprodutoraConteudo r){
+    public boolean possuiHistorico(ReproducaoConteudo r){
         return this.historico.contains(r);
     }
 
-    public void removerHistorico(ReprodutoraConteudo r){
+    public void removerHistorico(ReproducaoConteudo r){
         this.historico.remove(r);
     }
 
-    public void adicionarFavoritos(ReprodutoraConteudo nova) {
+    public void adicionarFavoritos(ReproducaoConteudo nova) {
         this.conteudosFavoritos.add(nova);
     }
 
-    public void removerFavoritos(ReprodutoraConteudo r){
+    public void removerFavoritos(ReproducaoConteudo r){
         this.conteudosFavoritos.remove(r);
     }
 
-    public boolean possuiFavoritos(ReprodutoraConteudo r){
+    public boolean possuiFavoritos(ReproducaoConteudo r){
         return this.historico.contains(r);
     }
 

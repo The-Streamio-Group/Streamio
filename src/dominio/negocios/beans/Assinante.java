@@ -58,4 +58,6 @@ public class Assinante extends Usuario {
                 ", perfis=" + perfis +
                 '}';
     }
+
+
 }

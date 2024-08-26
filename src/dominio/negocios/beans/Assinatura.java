@@ -2,6 +2,7 @@ package dominio.negocios.beans;
 
 import java.time.LocalDate;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Assinatura {
@@ -73,8 +74,12 @@ public class Assinatura {
                 ", dataAssinatura=" + dataAssinatura;
     }
 
-    // * statusPagamento torna-se false após 30 dias (LocalDate), sem que seja feita a renovação
-    // * revisar LocalDate para que, quando a assinatura for feita, avançar no tempo para instanciar
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Assinatura that)) return false;
+        return Objects.equals(getAssinaturaID(), that.getAssinaturaID());
+    }
 
 
     //Métodos específicos
