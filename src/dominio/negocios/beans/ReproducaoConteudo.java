@@ -2,19 +2,22 @@ package dominio.negocios.beans;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
-public class ReprodutoraConteudo {
+public class ReproducaoConteudo {
     private final UUID reprodutoraConteudoID;
     private LocalDate dataAssistido;
     private Duration tempoAssistido;
     private final Conteudo conteudo;
+    private Perfil perfil;
 
-    public ReprodutoraConteudo(Conteudo conteudo, long minutosAssistidos) {
+    public ReproducaoConteudo(Conteudo conteudo, long minutosAssistidos, Perfil p) {
         this.reprodutoraConteudoID = UUID.randomUUID();
         this.conteudo = conteudo;
         this.tempoAssistido = Duration.ofMinutes(minutosAssistidos);
         this.dataAssistido = LocalDate.now();
+        this.perfil = p;
     }
 
     public LocalDate getDataAssistido() {
@@ -41,6 +44,13 @@ public class ReprodutoraConteudo {
         return reprodutoraConteudoID;
     }
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
 
     @Override
     public String toString() {
@@ -50,4 +60,12 @@ public class ReprodutoraConteudo {
                 ", conteudo=" + conteudo +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReproducaoConteudo that)) return false;
+        return Objects.equals(getReprodutoraConteudoID(), that.getReprodutoraConteudoID());
+    }
+
 }
