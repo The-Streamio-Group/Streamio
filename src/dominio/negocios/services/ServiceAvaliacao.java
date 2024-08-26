@@ -6,26 +6,24 @@ import dominio.negocios.beans.*;
 
 import java.util.UUID;
 
-public class GerenciarAvaliacao {
-    private static GerenciarAvaliacao instance;
+public class ServiceAvaliacao {
+    private static ServiceAvaliacao instance;
 
-    private final ControllerReprodutoraConteudo controleReprodutora;
     private final ControllerUsuario controleUsuario;
     private final ControllerPerfil controlePerfil;
     private final ControllerAvaliacao controleAvaliacao;
     private final ControllerConteudo controleConteudo;
 
-    private GerenciarAvaliacao() {
-        this.controleReprodutora = ControllerReprodutoraConteudo.getInstance();
+    private ServiceAvaliacao() {
         this.controleUsuario = ControllerUsuario.getInstance();
         this.controlePerfil = ControllerPerfil.getInstance();
         this.controleAvaliacao = ControllerAvaliacao.getInstance();
         this.controleConteudo = ControllerConteudo.getInstance();
     }
 
-    public static GerenciarAvaliacao getInstance() {
+    public static ServiceAvaliacao getInstance() {
         if (instance == null) {
-            instance = new GerenciarAvaliacao();
+            instance = new ServiceAvaliacao();
         }
         return instance;
     }
@@ -44,10 +42,10 @@ public class GerenciarAvaliacao {
         }
     }
 
-    public void realizarAvaliacao(Avaliacao a, Perfil p, ReprodutoraConteudo reprodutoraConteudo) throws ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException, TempoInsuficienteException {
-        if (p.possuiHistorico(reprodutoraConteudo)) {
-            Conteudo c = reprodutoraConteudo.getConteudo();
-            if (reprodutoraConteudo.getTempoAssistido().compareTo(c.getDuracao().dividedBy(5)) >= 0) {
+    public void realizarAvaliacao(Avaliacao a, Perfil p, ReproducaoConteudo reproducaoConteudo) throws ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException, TempoInsuficienteException {
+        if (p.possuiHistorico(reproducaoConteudo)) {
+            Conteudo c = reproducaoConteudo.getConteudo();
+            if (reproducaoConteudo.getTempoAssistido().compareTo(c.getDuracao().dividedBy(5)) >= 0) {
                 this.controleAvaliacao.cadastrarAvaliacao(a);
                 Conteudo temp = this.controleConteudo.procurarConteudo(c.getConteudoID());
                 temp.adicionarAvalicao(a);

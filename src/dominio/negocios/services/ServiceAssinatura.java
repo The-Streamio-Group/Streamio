@@ -10,23 +10,22 @@ import dominio.negocios.beans.Assinante;
 import dominio.negocios.beans.Assinatura;
 import dominio.negocios.beans.Usuario;
 
-import javax.print.attribute.HashPrintServiceAttributeSet;
 import java.util.UUID;
 
-public class GerenciarAssinatura {
-    private static GerenciarAssinatura instance;
+public class ServiceAssinatura {
+    private static ServiceAssinatura instance;
 
     private final ControllerAssinatura controleAssinatura;
     private final ControllerUsuario controleUsuario;
 
-    private GerenciarAssinatura() {
+    private ServiceAssinatura() {
         this.controleAssinatura = ControllerAssinatura.getInstance();
         this.controleUsuario = ControllerUsuario.getInstance();
     }
 
-    public static GerenciarAssinatura getInstance() {
+    public static ServiceAssinatura getInstance() {
         if (instance == null) {
-            instance = new GerenciarAssinatura();
+            instance = new ServiceAssinatura();
         }
         return instance;
     }

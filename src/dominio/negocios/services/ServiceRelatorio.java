@@ -2,7 +2,6 @@ package dominio.negocios.services;
 
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.NaoProdutoraException;
-import dominio.negocios.ControllerAssinatura;
 import dominio.negocios.ControllerConteudo;
 import dominio.negocios.ControllerPerfil;
 import dominio.negocios.ControllerUsuario;
@@ -11,22 +10,18 @@ import dominio.negocios.beans.Conteudo;
 import dominio.negocios.beans.Produtora;
 import dominio.negocios.beans.Usuario;
 
-public class GerenciarRelatorio {
-    private static GerenciarRelatorio instance;
+public class ServiceRelatorio {
+    private static ServiceRelatorio instance;
 
     private final ControllerUsuario controleUsuario;
-    private final ControllerPerfil controlePerfil;
-    private final ControllerConteudo controleConteudo;
 
-    private GerenciarRelatorio() {
+    private ServiceRelatorio() {
         this.controleUsuario = ControllerUsuario.getInstance();
-        this.controlePerfil = ControllerPerfil.getInstance();
-        this.controleConteudo = ControllerConteudo.getInstance();
     }
 
-    public static GerenciarRelatorio getInstance(){
+    public static ServiceRelatorio getInstance(){
         if(instance == null){
-            instance = new GerenciarRelatorio();
+            instance = new ServiceRelatorio();
         }
         return instance;
     }
