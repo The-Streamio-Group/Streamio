@@ -15,6 +15,7 @@ public interface ISistemaFachada {
     void cadastrarPerfil(Perfil p) throws ElementoNullException;
 
     void removerPerfil(UUID idPerfil) throws ElementoNaoExisteException;
+
     void trocarPerfil(String nickname) throws NaoAssinanteException, ElementoNaoExisteException;
 
     void mudarNomePerfil(UUID idPerfil, String novoNome) throws MesmoNomeException, ElementoNaoExisteException;
@@ -42,6 +43,7 @@ public interface ISistemaFachada {
     void removerConteudo(UUID id) throws ElementoNaoExisteException, NaoProdutoraException;
 
     void atualizarConteudo(UUID antigoid, Conteudo novo) throws ElementoJaExisteException, ElementoNullException, MesmoElementoException, NaoProdutoraException, ElementoNaoExisteException;
+
     String gerarRelatorioProdutora() throws NaoProdutoraException, ElementoNaoExisteException;
 
 
