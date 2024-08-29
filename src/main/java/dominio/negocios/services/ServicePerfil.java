@@ -85,14 +85,27 @@ public class ServicePerfil {
     }
 
 
-    public void adicionarFavoritoPerfil(UUID idPerfil, ReproducaoConteudo reproducaoConteudo) throws NaoViuException, ElementoNaoExisteException {
+    public void adicionarFavoritoPerfil(UUID idPerfil, ReproducaoConteudo reproducaoConteudo) throws NaoViuException, ElementoNaoExisteException, NaoAssinanteException {
         Perfil favorito = this.controlePerfil.procurarPerfil(idPerfil);
-        if (favorito.possuiHistorico(reproducaoConteudo)) {
-            favorito.adicionarFavoritos(reproducaoConteudo);
-        } else {
-            throw new NaoViuException();
+        if(favorito != null) {
+            if (favorito.possuiHistorico(reproducaoConteudo)) {
+                favorito.adicionarFavoritos(reproducaoConteudo);
+            } else {
+                throw new NaoViuException();
+            }
+        }
+        else{
+            throw new NaoAssinanteException();
         }
 
+    }
+
+    public void trocarPerfil(String nickname, Usuario usuarioLogado, Perfil perfilLogado) throws NaoAssinanteException, ElementoNaoExisteException {
+        if (usuarioLogado instanceof Assinante) {
+            if (this.existePerfilAssinante((Assinante) usuarioLogado, nickname)) {
+                perfilLogado = this.controlePerfil.procurarPerfilPorNick(nickname);
+            }
+        }
     }
 
     public void removerFavoritoPerfil(UUID idPerfil, ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException {
@@ -115,4 +128,5 @@ public class ServicePerfil {
         }
         return resultado;
     }
+
 }

@@ -42,17 +42,21 @@ public class ServiceAvaliacao {
         }
     }
 
-    public void realizarAvaliacao(Avaliacao a, Perfil p, ReproducaoConteudo reproducaoConteudo) throws ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException, TempoInsuficienteException {
-        if (p.possuiHistorico(reproducaoConteudo)) {
-            Conteudo c = reproducaoConteudo.getConteudo();
-            if (reproducaoConteudo.getTempoAssistido().compareTo(c.getDuracao().dividedBy(5)) >= 0) {
-                this.controleAvaliacao.cadastrarAvaliacao(a);
-                Conteudo temp = this.controleConteudo.procurarConteudo(c.getConteudoID());
-                temp.adicionarAvalicao(a);
+    public void realizarAvaliacao(Avaliacao a, ReproducaoConteudo reproducaoConteudo, Perfil p) throws ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException, TempoInsuficienteException, NaoAssinanteException {
+        if (p != null) {
+            if (p.possuiHistorico(reproducaoConteudo)) {
+                Conteudo c = reproducaoConteudo.getConteudo();
+                if (reproducaoConteudo.getTempoAssistido().compareTo(c.getDuracao().dividedBy(5)) >= 0) {
+                    this.controleAvaliacao.cadastrarAvaliacao(a);
+                    Conteudo temp = this.controleConteudo.procurarConteudo(c.getConteudoID());
+                    temp.adicionarAvalicao(a);
 
-            } else {
-                throw new TempoInsuficienteException();
+                } else {
+                    throw new TempoInsuficienteException();
+                }
             }
+        } else {
+            throw new NaoAssinanteException();
         }
 
     }
@@ -67,4 +71,6 @@ public class ServiceAvaliacao {
             throw new NaoAssinanteException();
         }
     }
+
+
 }

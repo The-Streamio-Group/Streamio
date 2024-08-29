@@ -2,10 +2,7 @@ package dominio.negocios;
 
 import dominio.exceptions.*;
 import dominio.negocios.beans.*;
-import dominio.negocios.services.ServiceAssinatura;
-import dominio.negocios.services.ServiceAvaliacao;
-import dominio.negocios.services.ServicePerfil;
-import dominio.negocios.services.ServiceRelatorio;
+import dominio.negocios.services.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -22,6 +19,7 @@ public class SistemaFachada implements ISistemaFachada {
     private final ServiceAvaliacao serviceAvaliacao;
     private final ServicePerfil servicePerfil;
     private final ServiceRelatorio serviceRelatorio;
+    private final ServiceLogin serviceLogin;
 
     private static SistemaFachada instancia;
     private Usuario usuariologado; //Instância do usuário logado
@@ -38,6 +36,7 @@ public class SistemaFachada implements ISistemaFachada {
         this.servicePerfil = ServicePerfil.getInstance();
         this.controllerUsuario = ControllerUsuario.getInstance();
         this.serviceRelatorio = ServiceRelatorio.getInstance();
+        this.serviceLogin = ServiceLogin.getInstance();
     }
 
     public static SistemaFachada getInstance() {
@@ -49,35 +48,11 @@ public class SistemaFachada implements ISistemaFachada {
 
 
     public void realizarLogin(String email, String senha) throws ElementoNaoExisteException, UsuarioJaLogadoException, AssinaturaExpiradaException, SenhaErradaException {
-
-        //Verificar se o usuário já está logado
-        if (usuariologado != null) {
-            throw new UsuarioJaLogadoException();
-        }
-
-        Usuario userLog = this.controllerUsuario.procurarUsuarioPorEmail(email);
-
-
-        //Verificar se a senha bate
-
-
-        if (userLog instanceof Assinante) {
-            //Caso a assinatura expire
-            if (((Assinante) userLog).getAssinatura().estaExpirada()) {
-                throw new AssinaturaExpiradaException();
-            }
-
-        }
-        if (userLog.getSenha().equals(senha)) {
-            this.usuariologado = userLog;
-        } else {
-            throw new SenhaErradaException(email);
-        }
+        this.serviceLogin.realizarLogin(email, senha);
     }
 
     public void logoff() {
-        this.usuariologado = null;
-        this.perfilLogado = null;
+        this.serviceLogin.logoff();
     }
 
 
@@ -91,11 +66,7 @@ public class SistemaFachada implements ISistemaFachada {
     }
 
     public void trocarPerfil(String nickname) throws NaoAssinanteException, ElementoNaoExisteException {
-        if (usuariologado instanceof Assinante) {
-            if (this.servicePerfil.existePerfilAssinante((Assinante) usuariologado, nickname)) {
-                perfilLogado = this.controllerPerfil.procurarPerfilPorNick(nickname);
-            }
-        }
+        this.servicePerfil.trocarPerfil(nickname, usuariologado, perfilLogado);
     }
 
     public void mudarNomePerfil(UUID idPerfil, String novoNome) throws MesmoNomeException, ElementoNaoExisteException {
@@ -192,23 +163,13 @@ public class SistemaFachada implements ISistemaFachada {
     }
 
     public void adicionarFavorito(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException {
-        if (perfilLogado != null) {
             this.servicePerfil.adicionarFavoritoPerfil(perfilLogado.getPerfilID(), reproducaoConteudo);
-        } else {
-            throw new NaoAssinanteException();
-        }
-
     }
 
 
     //Avaliacao
     public void realizarAvaliacao(Avaliacao a, ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException {
-        if (perfilLogado != null) {
-            this.serviceAvaliacao.realizarAvaliacao(a, perfilLogado, reproducaoConteudo);
-
-        } else {
-            throw new NaoAssinanteException();
-        }
+        this.serviceAvaliacao.realizarAvaliacao(a,reproducaoConteudo, perfilLogado);
     }
 
     public void atualizarAvaliacao(UUID idAvaliacao, Avaliacao avaliacao) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
