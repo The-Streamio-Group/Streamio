@@ -2,8 +2,10 @@ package dominio.dados.interfaces;
 
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
+import dominio.negocios.beans.Perfil;
 import dominio.negocios.beans.ReproducaoConteudo;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface IRepositorioReproducaoConteudo {
@@ -25,6 +27,16 @@ public interface IRepositorioReproducaoConteudo {
      */
 
     ReproducaoConteudo procurar(UUID id) throws ElementoNaoExisteException;
+
+    /*  Procura os objetos na lista do seu respectivo repositório baseado no perfil, ou seja, seu dono
+     *
+     *  @param dono -> o id que define o objeto
+     *
+     *  @return uma lista com os objetos que contém esse perfil em comum
+     *
+     */
+
+    List<ReproducaoConteudo> procurarDono(Perfil dono);
 
     /*  Atualiza as informações do objeto
      *

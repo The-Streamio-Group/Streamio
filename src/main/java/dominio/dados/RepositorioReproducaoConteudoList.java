@@ -4,9 +4,11 @@ import dominio.dados.interfaces.IRepositorioReproducaoConteudo;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
+import dominio.negocios.beans.Perfil;
 import dominio.negocios.beans.ReproducaoConteudo;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RepositorioReproducaoConteudoList implements IRepositorioReproducaoConteudo {
@@ -19,6 +21,7 @@ public class RepositorioReproducaoConteudoList implements IRepositorioReproducao
         this.repositorio = new ArrayList<>();
     }
 
+    //Instância do repositório
     public static RepositorioReproducaoConteudoList getInstance() {
         if (instance == null) {
             instance = new RepositorioReproducaoConteudoList();
@@ -33,12 +36,23 @@ public class RepositorioReproducaoConteudoList implements IRepositorioReproducao
 
     @Override
     public ReproducaoConteudo procurar(UUID id) throws ElementoNaoExisteException {
-        for (ReproducaoConteudo reproducaoConteudoconteudo : repositorio) {
-            if (reproducaoConteudoconteudo.getReprodutoraConteudoID().equals(id)) {
-                return reproducaoConteudoconteudo;
+        for (ReproducaoConteudo reproducaoConteudo : repositorio) {
+            if (reproducaoConteudo.getReprodutoraConteudoID().equals(id)) {
+                return reproducaoConteudo;
             }
         }
         throw new ElementoNaoExisteException();
+    }
+
+    public List<ReproducaoConteudo> procurarDono(Perfil dono) {
+        List<ReproducaoConteudo> resultado = new ArrayList<>();
+        for (ReproducaoConteudo reproducaoConteudo : repositorio) {
+            if (reproducaoConteudo.getPerfil().equals(dono)) {
+                resultado.add(reproducaoConteudo);
+            }
+        }
+
+        return resultado;
     }
 
     private int procurarIndice(UUID id) throws ElementoNaoExisteException {

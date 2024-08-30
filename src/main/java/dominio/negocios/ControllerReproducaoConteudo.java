@@ -9,6 +9,7 @@ import dominio.negocios.beans.ReproducaoConteudo;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class ControllerReproducaoConteudo {
@@ -55,6 +56,10 @@ public class ControllerReproducaoConteudo {
 
     public ReproducaoConteudo procurarReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
         return this.repositorio.procurar(id);
+    }
+
+    public List<ReproducaoConteudo> filtrarDono(Perfil dono){
+        return this.repositorio.procurarDono(dono);
     }
 
     public void removerReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
