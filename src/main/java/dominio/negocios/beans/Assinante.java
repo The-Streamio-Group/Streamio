@@ -16,8 +16,6 @@ public class Assinante extends Usuario {
     }
 
     //Getters e setters
-
-
     public Assinatura getAssinatura() {
         return assinatura;
     }
@@ -34,6 +32,7 @@ public class Assinante extends Usuario {
         this.perfis = perfis;
     }
 
+    //Métodos específicos
     public void adicionarPerfil(Perfil novo){
         this.perfis.add(novo);
     }

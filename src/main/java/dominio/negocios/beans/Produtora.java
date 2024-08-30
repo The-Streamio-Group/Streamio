@@ -21,7 +21,6 @@ public class Produtora extends Usuario {
     }
 
     //Getters e setters
-
     public List<Conteudo> getProduto() {
         return produto;
     }

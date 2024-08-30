@@ -15,7 +15,6 @@ public class RepositorioAssinaturaList implements IRepositorioAssinatura {
      * Classe que contém o repositório de todas as Assinaturas
      * e seus respectivos CRUDs.
      */
-    // não usa mais numeroCartao, usa UUID
 
     private final ArrayList<Assinatura> assinaturasList;
 
@@ -25,6 +24,7 @@ public class RepositorioAssinaturaList implements IRepositorioAssinatura {
         this.assinaturasList = new ArrayList<>();
     }
 
+    //Instância do repositório
     public static RepositorioAssinaturaList getInstance() {
         if (instance == null) {
             instance = new RepositorioAssinaturaList();

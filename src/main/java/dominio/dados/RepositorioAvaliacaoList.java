@@ -17,7 +17,6 @@ public class RepositorioAvaliacaoList implements IRepositorioAvaliacao {
      * Classe que contém o repositório de todas as Avaliações
      * e seus respectivos CRUDs.
      */
-    // permanece usando UUID
 
     private final ArrayList<Avaliacao> avaliacoesList;
     private static RepositorioAvaliacaoList instance;
@@ -26,6 +25,7 @@ public class RepositorioAvaliacaoList implements IRepositorioAvaliacao {
         this.avaliacoesList = new ArrayList<>();
     }
 
+    //Instância do repositório
     public static RepositorioAvaliacaoList getInstance() {
         if (instance == null) {
             instance = new RepositorioAvaliacaoList();

@@ -14,6 +14,7 @@ public class Avaliacao {
         this.nota = nota;
     }
 
+    //Métodos específicos
     public int getNota() {
         return nota;
     }

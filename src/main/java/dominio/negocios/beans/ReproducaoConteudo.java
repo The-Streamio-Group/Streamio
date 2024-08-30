@@ -20,6 +20,7 @@ public class ReproducaoConteudo {
         this.perfil = p;
     }
 
+    //Getters e Setters
     public LocalDate getDataAssistido() {
         return dataAssistido;
     }

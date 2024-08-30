@@ -49,6 +49,7 @@ public class Conteudo {
         this.duracao = duracao;
     }
 
+    //Getters e Setters
     public UUID getConteudoID() {
         return conteudoID;
     }
@@ -102,6 +103,7 @@ public class Conteudo {
     }
 
 
+    //Métodos específicos
     public void adicionarAvalicao(Avaliacao nova) {
         this.avaliacoes.add(nova);
     }

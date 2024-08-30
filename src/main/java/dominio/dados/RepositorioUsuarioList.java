@@ -15,7 +15,6 @@ public class RepositorioUsuarioList implements IRepositorioUsuario {
      * Classe que contém o repositório de todos os usuários
      * e seus respectivos CRUDs.
      */
-    // não usa mais nickname, usa UUID
 
     private final ArrayList<Usuario> usuariosList;
 
@@ -38,7 +37,6 @@ public class RepositorioUsuarioList implements IRepositorioUsuario {
     public void cadastrar(Usuario u) {
         usuariosList.add(u);
     }
-    // checar se o usuário já existe e lançar exceção [?]
 
     //READ
     @Override

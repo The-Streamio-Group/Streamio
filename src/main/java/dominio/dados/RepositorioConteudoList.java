@@ -15,7 +15,6 @@ public class RepositorioConteudoList implements IRepositorioConteudo{
      * Classe que contém o repositório de todos os Conteúdos
      * e seus respectivos CRUDs.
      */
-    // não usa mais titulo, usa UUID
 
     private final ArrayList<Conteudo> conteudosList;
 

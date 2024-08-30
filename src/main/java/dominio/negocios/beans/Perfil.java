@@ -8,17 +8,16 @@ public class Perfil {
     private final UUID perfilID;
     private String nick;
     private int idade;
-    private List<ReproducaoConteudo> conteudosFavoritos;
-    private List<ReproducaoConteudo> historico;
+    private List<Conteudo> conteudosFavoritos; //Essa lista só armazena quais são os conteúdos favoritos
 
     public Perfil(String nick, int idade) {
         this.perfilID = UUID.randomUUID();
         this.nick = nick;
         this.idade = idade;
         this.conteudosFavoritos = new ArrayList<>();
-        this.historico = new ArrayList<>();
     }
 
+    //Getters e setters
     public UUID getPerfilID() {
         return perfilID;
     }
@@ -39,44 +38,25 @@ public class Perfil {
         this.idade = idade;
     }
 
-    public List<ReproducaoConteudo> getConteudosFavoritos() {
+    public List<Conteudo> getConteudosFavoritos() {
         return conteudosFavoritos;
     }
 
-    public void setConteudosFavoritos(List<ReproducaoConteudo> conteudosFavoritos) {
+    public void setConteudosFavoritos(List<Conteudo> conteudosFavoritos) {
         this.conteudosFavoritos = conteudosFavoritos;
     }
 
-    public List<ReproducaoConteudo> getHistorico() {
-        return historico;
-    }
-
-    public void setHistorico(List<ReproducaoConteudo> historico) {
-        this.historico = historico;
-    }
-
-    public void adicionarHistorico(ReproducaoConteudo nova){
-        this.historico.add(nova);
-    }
-
-    public boolean possuiHistorico(ReproducaoConteudo r){
-        return this.historico.contains(r);
-    }
-
-    public void removerHistorico(ReproducaoConteudo r){
-        this.historico.remove(r);
-    }
-
-    public void adicionarFavoritos(ReproducaoConteudo nova) {
+    //Métodos específicos
+    public void adicionarFavoritos(Conteudo nova) {
         this.conteudosFavoritos.add(nova);
     }
 
-    public void removerFavoritos(ReproducaoConteudo r){
+    public void removerFavoritos(Conteudo r){
         this.conteudosFavoritos.remove(r);
     }
 
-    public boolean possuiFavoritos(ReproducaoConteudo r){
-        return this.historico.contains(r);
+    public boolean possuiFavoritos(Conteudo r){
+        return this.conteudosFavoritos.contains(r);
     }
 
     @Override
