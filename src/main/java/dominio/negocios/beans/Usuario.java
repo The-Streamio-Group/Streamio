@@ -9,7 +9,7 @@ public abstract class Usuario {
     private String email;
     private String senha;
 
-    public Usuario(){
+    public Usuario() {
         usuarioID = UUID.randomUUID();
     }
 
@@ -45,6 +45,7 @@ public abstract class Usuario {
     public String getNickname() {
         return nickname;
     }
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -52,6 +53,7 @@ public abstract class Usuario {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -59,6 +61,7 @@ public abstract class Usuario {
     public String getSenha() {
         return senha;
     }
+
     public void setSenha(String senha) {
         this.senha = senha;
     }
