@@ -12,9 +12,9 @@ public interface ISistemaFachada {
 
     void logoff();
 
-    void cadastrarPerfil(Perfil p) throws ElementoNullException;
+    void cadastrarPerfil(Perfil p) throws ElementoNullException, MaxPerfilException, NaoAssinanteException, ElementoNaoExisteException;
 
-    void removerPerfil(UUID idPerfil) throws ElementoNaoExisteException;
+    void removerPerfil(UUID idPerfil) throws ElementoNaoExisteException, NaoAssinanteException;
 
     void trocarPerfil(String nickname) throws NaoAssinanteException, ElementoNaoExisteException;
 
@@ -47,18 +47,18 @@ public interface ISistemaFachada {
     String gerarRelatorioProdutora() throws NaoProdutoraException, ElementoNaoExisteException;
 
 
-    void assistirConteudo(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException;
+    void assistirConteudo(Conteudo Conteudo, long minutosAssistidos) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException;
 
-    void adicionarFavorito(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException;
+    void adicionarFavorito(Conteudo Conteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException;
 
-    void realizarAvaliacao(Avaliacao a, ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException;
+    void realizarAvaliacao(Avaliacao a, UUID reproducaoConteudoID) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException;
 
     void atualizarAvaliacao(UUID idAvaliacao, Avaliacao avaliacao) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException;
 
 
     void realizarAssinatura(UUID idConta, String numCartao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException;
 
-    void atualizarAssinatura(UUID idAssinatura, Assinatura assinatura) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException;
+    void renovarAssinatura(UUID idConta) throws ElementoNaoExisteException, AssinaturaNaoExpiradaException, NaoAssinanteException;
 
     void atualizarDataReprodutora(UUID idReprodutora, LocalDate data) throws ElementoNaoExisteException, MesmoElementoException;
 

@@ -4,7 +4,9 @@ import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Assinatura;
 import dominio.negocios.beans.Avaliacao;
+import dominio.negocios.beans.Perfil;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface IRepositorioAvaliacao {
@@ -34,6 +36,8 @@ public interface IRepositorioAvaliacao {
      *
      *  @throws ElementoNaoExisteException -> Exceção caso o elemento não existe
      */
+
+    List<Avaliacao> procurarDono(Perfil dono);
 
     void atualizar(UUID idAntigo, Avaliacao novo) throws ElementoNullException, ElementoNaoExisteException;
 

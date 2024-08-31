@@ -8,7 +8,9 @@ import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 import dominio.exceptions.MesmoElementoException;
 import dominio.negocios.beans.Avaliacao;
+import dominio.negocios.beans.Perfil;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ControllerAvaliacao {
@@ -45,12 +47,8 @@ public class ControllerAvaliacao {
         }
     }
 
-    public Avaliacao procurarAvaliacao(UUID id) throws ElementoNaoExisteException {
-        return this.repositorio.procurar(id);
-    }
-
-    public boolean existeAvaliacao(UUID id) {
-        return this.repositorio.existe(id);
+    public List<Avaliacao> procurarDono(Perfil dono) {
+        return this.repositorio.procurarDono(dono);
     }
 
     public void atualizarAvaliacao(UUID antigoid, Avaliacao novo) throws ElementoNullException, ElementoJaExisteException, MesmoElementoException, ElementoNaoExisteException {
@@ -67,6 +65,15 @@ public class ControllerAvaliacao {
         }
 
 
+    }
+
+    //Classes private
+    private boolean existeAvaliacao(UUID id) {
+        return this.repositorio.existe(id);
+    }
+
+    private Avaliacao procurarAvaliacao(UUID id) throws ElementoNaoExisteException {
+        return this.repositorio.procurar(id);
     }
 
 

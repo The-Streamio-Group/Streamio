@@ -41,15 +41,16 @@ public class ControllerReproducaoConteudo {
         }
     }
 
-    public void cadastrarReprodutoraConteudo(Conteudo c, long minutos, Perfil p) throws ElementoJaExisteException, ElementoNullException {
+    public ReproducaoConteudo cadastrarReprodutoraConteudo(Conteudo c, long minutos, Perfil p) throws ElementoJaExisteException, ElementoNullException {
         ReproducaoConteudo r = new ReproducaoConteudo(c, minutos, p);
 
         if (!existeReprodutoraConteudo(r.getReprodutoraConteudoID())) {
 
-            this.repositorio.cadastrar(r);
+            this.cadastrarReprodutoraConteudo(r);
         } else {
             throw new ElementoJaExisteException();
         }
+        return r;
 
     }
 

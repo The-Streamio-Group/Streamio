@@ -48,13 +48,13 @@ public class TelaTexual {
 
             //Teste de instanciar um Assinante
             novo.cadastrarUsuario(charlie);
-            novo.cadastrarPerfil(perfilTeste);
             novo.realizarLogin("charlie@gmail.com", "234");
+            novo.cadastrarPerfil(perfilTeste);
             novo.trocarPerfil("DuasBala");
             System.out.println("Usuário " + novo.getUsuariologado().getNickname() + " logado com sucesso!!");
-            novo.assistirConteudo(testefilme3);
-            novo.adicionarFavorito(testefilme3);
-            novo.realizarAvaliacao(new Avaliacao(9, perfilTeste), testefilme3);
+            novo.assistirConteudo(teste5,20);
+            novo.adicionarFavorito(teste3);
+            novo.realizarAvaliacao(new Avaliacao(9, perfilTeste),teste3.getConteudoID());
             novo.logoff();
             System.out.println("Usuário deslogado com sucesso!");
 
@@ -68,14 +68,14 @@ public class TelaTexual {
             //Teste de instanciar um Assinante
             novo.cadastrarUsuario(roberto);
             novo.realizarAssinatura(roberto.getUsuarioID(),"22222-432");
-            novo.cadastrarPerfil(perfilTeste2);
             novo.realizarLogin("emaildoroberto@gmail.com", "brega");
+            novo.cadastrarPerfil(perfilTeste2);
             novo.trocarPerfil("amante");
             System.out.println("Usuário " + novo.getUsuariologado().getNickname() + " logado com sucesso!!");
-            novo.assistirConteudo(testefilme6);
-            novo.assistirConteudo(testefilme32);
-            novo.realizarAvaliacao(new Avaliacao(2, perfilTeste2), testefilme6);
-            novo.realizarAvaliacao(new Avaliacao(9, perfilTeste2), testefilme32);
+            novo.assistirConteudo(teste6,42);
+            novo.assistirConteudo(teste5,32);
+            novo.realizarAvaliacao(new Avaliacao(2, perfilTeste2), teste6.getConteudoID());
+            novo.realizarAvaliacao(new Avaliacao(9, perfilTeste2), teste5.getConteudoID());
             novo.logoff();
             System.out.println("Usuário deslogado com sucesso!");
 
@@ -87,7 +87,9 @@ public class TelaTexual {
 
 
 
-        } catch (Exception ex){}
+        } catch (Exception ex){
+            System.out.println("erro!");
+        }
 
 
 
