@@ -9,6 +9,7 @@ import dominio.negocios.beans.Avaliacao;
 // removido o import de Conteudo
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RepositorioAvaliacaoList implements IRepositorioAvaliacao {
@@ -54,6 +55,17 @@ public class RepositorioAvaliacaoList implements IRepositorioAvaliacao {
             }
         }
         throw new ElementoNaoExisteException();
+    }
+
+    public List<Avaliacao> procurarDono(Perfil dono) {
+        List<Avaliacao> resultado = new ArrayList<>();
+        for (Avaliacao avaliacao : avaliacoesList) {
+            if (avaliacao.getPerfil().equals(dono)) {
+                resultado.add(avaliacao);
+            }
+        }
+
+        return resultado;
     }
 
     //Método que pergunta para o repositório se existe a avaliação

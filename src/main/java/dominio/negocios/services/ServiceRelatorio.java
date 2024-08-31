@@ -19,16 +19,16 @@ public class ServiceRelatorio {
         this.controleUsuario = ControllerUsuario.getInstance();
     }
 
-    public static ServiceRelatorio getInstance(){
-        if(instance == null){
+    public static ServiceRelatorio getInstance() {
+        if (instance == null) {
             instance = new ServiceRelatorio();
         }
         return instance;
     }
 
-    private float retornarFaixaEtaria(Conteudo conteudo){
+    private float retornarFaixaEtaria(Conteudo conteudo) {
         int soma = 0;
-        if(conteudo.tamanhoAvaliacoes() > 0) {
+        if (conteudo.tamanhoAvaliacoes() > 0) {
             for (Avaliacao avaliacao : conteudo.getAvaliacoes()) {
                 soma += avaliacao.getPerfil().getIdade();
             }
@@ -38,7 +38,7 @@ public class ServiceRelatorio {
     }
 
     public String GerarRelatorio(Usuario usuario) throws ElementoNaoExisteException, NaoProdutoraException {
-        if(usuario instanceof Produtora) {
+        if (usuario instanceof Produtora) {
             Produtora produtoraRelatorio = (Produtora) this.controleUsuario.procurarUsuario(usuario.getUsuarioID());
             String resultado = "\n     ** Relatório da Produtora ** \n";
             for (Conteudo conteudo : produtoraRelatorio.getProduto()) {
@@ -50,13 +50,10 @@ public class ServiceRelatorio {
                 resultado += "************************************\n";
             }
             return resultado;
-        }
-        else{
+        } else {
             throw new NaoProdutoraException();
         }
     }
-
-
 
 
 }

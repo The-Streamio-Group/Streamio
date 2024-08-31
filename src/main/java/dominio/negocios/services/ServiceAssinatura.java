@@ -18,6 +18,7 @@ public class ServiceAssinatura {
     private final ControllerAssinatura controleAssinatura;
     private final ControllerUsuario controleUsuario;
 
+
     private ServiceAssinatura() {
         this.controleAssinatura = ControllerAssinatura.getInstance();
         this.controleUsuario = ControllerUsuario.getInstance();
@@ -32,17 +33,17 @@ public class ServiceAssinatura {
 
     public Assinatura buscarAssinatura(UUID idConta) throws ElementoNaoExisteException, NaoAssinanteException {
         Usuario assinado = this.controleUsuario.procurarUsuario(idConta);
-        if(assinado instanceof Assinante){
+        if (assinado instanceof Assinante) {
             return ((Assinante) assinado).getAssinatura();
-        }
-        else{
+        } else {
             throw new NaoAssinanteException();
         }
 
     }
+
     public void renovarAssinaturaUsuario(UUID idConta) throws ElementoNaoExisteException, AssinaturaNaoExpiradaException, NaoAssinanteException {
         Assinatura renovar = this.buscarAssinatura(idConta);
-            this.controleAssinatura.renovarAssinatura(renovar.getAssinaturaID());
+        this.controleAssinatura.renovarAssinatura(renovar.getAssinaturaID());
     }
 
     public void cancelarAssinaturaUsuario(UUID idConta) throws ElementoNaoExisteException, NaoAssinanteException {
@@ -53,10 +54,8 @@ public class ServiceAssinatura {
     public void atualizarCartaoAssinaturaUsuario(UUID idConta, String numCartao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException {
         Assinatura atualizarCartao = this.buscarAssinatura(idConta);
         this.controleAssinatura.cadastrarAssinatura(atualizarCartao);
-        this.controleAssinatura.atualizarCartaoAssinatura(atualizarCartao.getAssinaturaID(),numCartao);
+        this.controleAssinatura.atualizarCartaoAssinatura(atualizarCartao.getAssinaturaID(), numCartao);
     }
-
-
 
 
 }

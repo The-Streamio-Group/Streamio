@@ -4,6 +4,7 @@ import dominio.exceptions.*;
 import dominio.negocios.*;
 import dominio.negocios.beans.*;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ServiceAvaliacao {
@@ -13,12 +14,14 @@ public class ServiceAvaliacao {
     private final ControllerPerfil controlePerfil;
     private final ControllerAvaliacao controleAvaliacao;
     private final ControllerConteudo controleConteudo;
+    private final ControllerReproducaoConteudo controleReproducaoConteudo;
 
     private ServiceAvaliacao() {
         this.controleUsuario = ControllerUsuario.getInstance();
         this.controlePerfil = ControllerPerfil.getInstance();
         this.controleAvaliacao = ControllerAvaliacao.getInstance();
         this.controleConteudo = ControllerConteudo.getInstance();
+        this.controleReproducaoConteudo = ControllerReproducaoConteudo.getInstance();
     }
 
     public static ServiceAvaliacao getInstance() {
@@ -27,6 +30,7 @@ public class ServiceAvaliacao {
         }
         return instance;
     }
+
 
     public Perfil buscaPerfil(UUID idPerfil, UUID idUsuario) throws ElementoNaoExisteException, NaoAssinanteException, PerfilNaoPertencenteException {
         Usuario busca = this.controleUsuario.procurarUsuario(idUsuario);
@@ -42,19 +46,29 @@ public class ServiceAvaliacao {
         }
     }
 
-    public void realizarAvaliacao(Avaliacao a, ReproducaoConteudo reproducaoConteudo, Perfil p) throws ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException, TempoInsuficienteException, NaoAssinanteException {
+    public void realizarAvaliacao(Avaliacao a, UUID cId, Perfil p) throws ElementoNullException, ElementoJaExisteException, ElementoNaoExisteException, TempoInsuficienteException, NaoAssinanteException {
+
         if (p != null) {
-            if (p.possuiHistorico(reproducaoConteudo)) {
-                Conteudo c = reproducaoConteudo.getConteudo();
-                if (reproducaoConteudo.getTempoAssistido().compareTo(c.getDuracao().dividedBy(5)) >= 0) {
+            Conteudo avaliado = this.controleConteudo.procurarConteudo(cId);
+            List<ReproducaoConteudo> lista = this.controleReproducaoConteudo.filtrarDono(p);
+            ReproducaoConteudo achado = null;
+            for (ReproducaoConteudo conteudo : lista) {
+                if (conteudo.getConteudo().equals(avaliado)) {
+                    achado = conteudo;
+                }
+
+            }
+            if (achado != null) {
+                if (achado.getTempoAssistido().compareTo(avaliado.getDuracao().dividedBy(5)) >= 0) {
                     this.controleAvaliacao.cadastrarAvaliacao(a);
-                    Conteudo temp = this.controleConteudo.procurarConteudo(c.getConteudoID());
+                    Conteudo temp = this.controleConteudo.procurarConteudo(avaliado.getConteudoID());
                     temp.adicionarAvalicao(a);
 
                 } else {
                     throw new TempoInsuficienteException();
                 }
             }
+
         } else {
             throw new NaoAssinanteException();
         }
@@ -72,5 +86,12 @@ public class ServiceAvaliacao {
         }
     }
 
+    public List<Avaliacao> procurarDono(Perfil dono) {
+        return this.controleAvaliacao.procurarDono(dono);
+    }
+
+    public void atualizarAvaliacao(UUID antigoID, Avaliacao novo) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
+        this.controleAvaliacao.atualizarAvaliacao(antigoID, novo);
+    }
 
 }

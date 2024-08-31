@@ -1,7 +1,6 @@
 package dominio.negocios.services;
 
 import dominio.exceptions.*;
-import dominio.negocios.ControllerConteudo;
 import dominio.negocios.ControllerPerfil;
 import dominio.negocios.ControllerReproducaoConteudo;
 import dominio.negocios.ControllerUsuario;
@@ -15,13 +14,11 @@ public class ServicePerfil {
     private final ControllerUsuario controleUsuario;
     private final ControllerPerfil controlePerfil;
     private final ControllerReproducaoConteudo controllerReproducaoConteudo;
-    private final ControllerConteudo controleConteudo;
 
     private ServicePerfil() {
         this.controleUsuario = ControllerUsuario.getInstance();
         this.controlePerfil = ControllerPerfil.getInstance();
         this.controllerReproducaoConteudo = ControllerReproducaoConteudo.getInstance();
-        this.controleConteudo = ControllerConteudo.getInstance();
     }
 
     public static ServicePerfil getInstance() {
@@ -42,7 +39,7 @@ public class ServicePerfil {
 
     public void adicionarPerfilAssinante(Perfil p, UUID idConta) throws ElementoNullException, NaoAssinanteException, ElementoNaoExisteException, MaxPerfilException {
         Assinante adicionar = this.buscarAssinante(idConta);
-        if (adicionar.tamanhoPerfis() <= 5) {
+        if (adicionar.tamanhoPerfis() <= 3) {
             adicionar.adicionarPerfil(p);
             this.controlePerfil.cadastrarPerfil(p);
         } else {
@@ -63,60 +60,20 @@ public class ServicePerfil {
 
     }
 
-    public void assistirConteudoPerfil(UUID idPerfil, ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException {
-        Perfil assistir = this.controlePerfil.procurarPerfil(idPerfil);
-        assistir.adicionarHistorico(reproducaoConteudo);
-        this.controllerReproducaoConteudo.cadastrarReprodutoraConteudo(reproducaoConteudo);
-        this.controleConteudo.assistirConteudo(reproducaoConteudo.getConteudo().getConteudoID());
-    }
-
-
-    public void removerReproducaoConteudo(Usuario usuarioLogado, UUID idReproducaoConteudo) throws ElementoNaoExisteException {
-        ReproducaoConteudo r = this.controllerReproducaoConteudo.procurarReprodutoraConteudo(idReproducaoConteudo);
-        Perfil remover = r.getPerfil();
-        remover.removerHistorico(r);
-        if (remover.getConteudosFavoritos().contains(r)) {
-            remover.removerFavoritos(r);
-        }
-        //Após remover no Perfil, remove do repositório
+    public void removerReproducaoConteudo(UUID idReproducaoConteudo) throws ElementoNaoExisteException {
         this.controllerReproducaoConteudo.removerReprodutoraConteudo(idReproducaoConteudo);
-
-
     }
 
 
-    public void adicionarFavoritoPerfil(UUID idPerfil, ReproducaoConteudo reproducaoConteudo) throws NaoViuException, ElementoNaoExisteException, NaoAssinanteException {
-        Perfil favorito = this.controlePerfil.procurarPerfil(idPerfil);
-        if(favorito != null) {
-            if (favorito.possuiHistorico(reproducaoConteudo)) {
-                favorito.adicionarFavoritos(reproducaoConteudo);
-            } else {
-                throw new NaoViuException();
-            }
-        }
-        else{
-            throw new NaoAssinanteException();
-        }
-
-    }
-
-    public void trocarPerfil(String nickname, Usuario usuarioLogado, Perfil perfilLogado) throws NaoAssinanteException, ElementoNaoExisteException {
+    public Perfil trocarPerfil(String nickname, Usuario usuarioLogado, Perfil perfilLogado) throws NaoAssinanteException, ElementoNaoExisteException {
         if (usuarioLogado instanceof Assinante) {
             if (this.existePerfilAssinante((Assinante) usuarioLogado, nickname)) {
-                perfilLogado = this.controlePerfil.procurarPerfilPorNick(nickname);
+                return this.controlePerfil.procurarPerfilPorNick(nickname);
             }
         }
+        throw new NaoAssinanteException();
     }
 
-    public void removerFavoritoPerfil(UUID idPerfil, ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException {
-        Perfil favorito = this.controlePerfil.procurarPerfil(idPerfil);
-        if (favorito.possuiFavoritos(reproducaoConteudo)) {
-            favorito.removerFavoritos(reproducaoConteudo);
-        } else {
-            throw new ElementoNaoExisteException();
-        }
-
-    }
 
     public boolean existePerfilAssinante(Assinante assinante, String nickname) throws ElementoNaoExisteException, NaoAssinanteException {
         boolean resultado = false;

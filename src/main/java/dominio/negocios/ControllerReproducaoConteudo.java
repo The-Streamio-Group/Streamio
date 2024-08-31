@@ -59,7 +59,7 @@ public class ControllerReproducaoConteudo {
         return this.repositorio.procurar(id);
     }
 
-    public List<ReproducaoConteudo> filtrarDono(Perfil dono){
+    public List<ReproducaoConteudo> filtrarDono(Perfil dono) {
         return this.repositorio.procurarDono(dono);
     }
 

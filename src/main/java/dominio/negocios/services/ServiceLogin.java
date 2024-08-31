@@ -12,9 +12,8 @@ import dominio.negocios.beans.Usuario;
 public class ServiceLogin {
     private static ServiceLogin instance;
 
-    private ControllerUsuario controllerUsuario;
-    private Usuario usuariologado; //Instância do usuário logado
-    private Perfil perfilLogado;  //Instância do Perfil logado
+    private final ControllerUsuario controllerUsuario;
+
 
     private ServiceLogin() {
         this.controllerUsuario = ControllerUsuario.getInstance();
@@ -27,7 +26,7 @@ public class ServiceLogin {
         return instance;
     }
 
-    public void realizarLogin(String email, String senha) throws ElementoNaoExisteException, UsuarioJaLogadoException, AssinaturaExpiradaException, SenhaErradaException {
+    public Usuario realizarLogin(String email, String senha, Usuario usuariologado) throws ElementoNaoExisteException, UsuarioJaLogadoException, AssinaturaExpiradaException, SenhaErradaException {
 
         //Verificar se o usuário já está logado
         if (usuariologado != null) {
@@ -48,17 +47,16 @@ public class ServiceLogin {
 
         }
         if (userLog.getSenha().equals(senha)) {
-            this.usuariologado = userLog;
+            return userLog;
         } else {
             throw new SenhaErradaException(email);
         }
     }
 
-    public void logoff() {
-        this.usuariologado = null;
-        this.perfilLogado = null;
+    public void logoff(Usuario usuariologado, Perfil perfilLogado) {
+        usuariologado = null;
+        perfilLogado = null;
     }
-
 
 
 }
