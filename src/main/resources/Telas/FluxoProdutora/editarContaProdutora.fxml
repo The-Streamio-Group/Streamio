@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="197.0" layoutY="68.0" prefHeight="66.0" prefWidth="206.0" text="Editar Conta">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
+      <TextField layoutX="98.0" layoutY="154.0" prefHeight="36.0" prefWidth="286.0" promptText="Novo Nome" />
+      <PasswordField layoutX="98.0" layoutY="206.0" prefHeight="36.0" prefWidth="286.0" promptText="Senha" />
+      <Button layoutX="409.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="409.0" layoutY="206.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="98.0" layoutY="266.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Sair">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

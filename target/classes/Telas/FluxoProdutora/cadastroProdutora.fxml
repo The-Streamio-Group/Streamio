@@ -9,27 +9,28 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="205.0" layoutY="55.0" text="Streamio">
+      <Label layoutX="205.0" layoutY="60.0" text="Streamio">
          <font>
             <Font name="System Bold" size="45.0" />
          </font>
       </Label>
-      <PasswordField layoutX="157.0" layoutY="250.0" prefHeight="36.0" prefWidth="273.0" promptText="Senha" />
-      <TextField layoutX="157.0" layoutY="194.0" prefHeight="36.0" prefWidth="273.0" promptText="E-mail" />
-      <Label layoutX="157.0" layoutY="141.0" prefHeight="32.0" prefWidth="219.0" text="Login">
+      <Label layoutX="189.0" layoutY="126.0" prefHeight="32.0" prefWidth="223.0" text="Cadastro - Produtora">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Button layoutX="157.0" layoutY="309.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="58.0" text="Entrar">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button layoutX="280.0" layoutY="309.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="148.0" text="Não possui cadastro?">
+      <TextField layoutX="164.0" layoutY="171.0" prefHeight="36.0" prefWidth="273.0" promptText="Nome" />
+      <TextField layoutX="164.0" layoutY="220.0" prefHeight="36.0" prefWidth="273.0" promptText="E-mail" />
+      <Button layoutX="164.0" layoutY="326.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Cadastrar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
+      <Button layoutX="346.0" layoutY="326.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="91.0" text="Cancelar">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <PasswordField layoutX="164.0" layoutY="268.0" prefHeight="36.0" prefWidth="273.0" promptText="Senha" />
    </children>
 </AnchorPane>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="213.0" layoutY="74.0" prefHeight="66.0" prefWidth="175.0" text="Assinatura">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
+      <Button layoutX="119.0" layoutY="311.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="154.0" text="Cancelar Assinatura">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="117.0" layoutY="162.0" prefHeight="16.0" prefWidth="64.0" text="Cartão:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="117.0" layoutY="187.0" prefHeight="27.0" prefWidth="141.0" text="Data de Assinatura:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="117.0" layoutY="220.0" prefHeight="21.0" prefWidth="141.0" text="Data de Expiração:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="395.0" layoutY="311.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="74.0" text="Sair">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="182.0" layoutY="164.0" text="LabelCartao" />
+      <Button layoutX="119.0" layoutY="264.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="154.0" text="Renovar Assinatura">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="261.0" layoutY="192.0" text="LabelAssinatura" />
+      <Label layoutX="261.0" layoutY="222.0" text="LabelExpiracao" />
+   </children>
+</AnchorPane>
