@@ -14,6 +14,7 @@ public class ControllerCadastroAssinante {
     private Scene scene;
     private Parent root;
 
+    // implementar "Cadastrar"
 
     public void voltar(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/cadastroDecisao.fxml"));

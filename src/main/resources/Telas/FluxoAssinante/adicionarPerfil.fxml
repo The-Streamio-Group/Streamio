@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dominio.GUI.Controllers.ControllerAdicionarPerfil">
    <children>
       <TextField layoutX="164.0" layoutY="164.0" prefHeight="36.0" prefWidth="273.0" promptText="Nickname" />
       <TextField layoutX="164.0" layoutY="213.0" prefHeight="36.0" prefWidth="273.0" promptText="Idade" />
@@ -22,7 +22,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="350.0" layoutY="304.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="91.0" text="Cancelar">
+      <Button layoutX="350.0" layoutY="304.0" mnemonicParsing="false" onAction="#irMenuPerfis" prefHeight="32.0" prefWidth="91.0" text="Cancelar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

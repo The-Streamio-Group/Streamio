@@ -14,6 +14,7 @@ public class ControllerCadastro {
     private Scene scene;
     private Parent root;
 
+    // completo
 
     public void irLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/login.fxml"));

@@ -28,6 +28,7 @@ public class ControllerLogin {
     @FXML
     private Button logarBT;
 
+    // implementar "Entrar" analisando os fields e o tipo de usuário
 
     public void irCadastro(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/cadastroDecisao.fxml"));
@@ -36,7 +37,4 @@ public class ControllerLogin {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
 }
