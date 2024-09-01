@@ -31,4 +31,20 @@ public class ControllerProdutoraHomeScreen {
         stage.show();
     }
 
+    public void irRelatorio(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoProdutora/relatorioProdutora.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void irPerfil(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoProdutora/editarContaProdutora.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

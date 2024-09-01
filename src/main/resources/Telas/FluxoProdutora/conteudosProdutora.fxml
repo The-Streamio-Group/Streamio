@@ -41,7 +41,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="-5.0" layoutY="169.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Relatório">
+            <Button layoutX="-5.0" layoutY="169.0" mnemonicParsing="false" onAction="#irRelatorio" prefHeight="43.0" prefWidth="132.0" text="Relatório">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -56,7 +56,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="-5.0" layoutY="286.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Perfil">
+            <Button layoutX="-5.0" layoutY="286.0" mnemonicParsing="false" onAction="#irPerfil" prefHeight="43.0" prefWidth="132.0" text="Editar Perfil">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
