@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dominio.GUI.Controllers.PerfilHomeScreen">
    <children>
       <AnchorPane prefHeight="480.0" prefWidth="640.0">
          <children>
@@ -33,7 +33,7 @@
                 <TableColumn prefWidth="259.0" text="Conteúdos Favoritos" />
               </columns>
             </TableView>
-            <Button layoutX="14.0" layoutY="110.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Ver perfil">
+            <Button layoutX="14.0" layoutY="110.0" mnemonicParsing="false" onAction="#editarConta" prefHeight="25.0" prefWidth="88.0" text="Editar conta">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -68,9 +68,14 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="424.0" layoutY="97.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="146.0" text="Pesquisa de Conteúdo">
+            <Button layoutX="424.0" layoutY="97.0" mnemonicParsing="false" onAction="#pesquisarConteudo" prefHeight="52.0" prefWidth="146.0" text="Pesquisa de Conteúdo">
                <font>
                   <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="554.0" layoutY="431.0" mnemonicParsing="false" onAction="#deslogar" prefHeight="25.0" prefWidth="68.0" text="SAIR">
+               <font>
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Button>
          </children>

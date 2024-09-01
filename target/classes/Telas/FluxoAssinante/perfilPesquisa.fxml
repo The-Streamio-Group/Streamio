@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dominio.GUI.Controllers.ControllerPesquisa">
    <children>
       <AnchorPane prefHeight="505.0" prefWidth="640.0">
          <children>
-            <Button layoutX="512.0" layoutY="405.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="114.0" text="PROCURAR">
+            <Button layoutX="512.0" layoutY="405.0" mnemonicParsing="false" onAction="#voltar" prefHeight="45.0" prefWidth="114.0" text="SAIR">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -29,6 +29,11 @@
                </font>
             </Label>
             <ListView layoutX="156.0" layoutY="133.0" prefHeight="207.0" prefWidth="375.0" />
+            <Button layoutX="14.0" layoutY="405.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="114.0" text="PROCURAR">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

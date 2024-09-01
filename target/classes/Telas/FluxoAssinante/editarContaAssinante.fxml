@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dominio.GUI.Controllers.ControllerEditarAssinante">
    <children>
       <TextField layoutX="101.0" layoutY="145.0" prefHeight="36.0" prefWidth="286.0" promptText="Novo Nome" />
       <TextField layoutX="101.0" layoutY="252.0" prefHeight="36.0" prefWidth="286.0" promptText="Novo Cartão" />
@@ -33,7 +32,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="101.0" layoutY="307.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Sair">
+      <Button layoutX="101.0" layoutY="307.0" mnemonicParsing="false" onAction="#voltar" prefHeight="36.0" prefWidth="91.0" text="Sair">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
