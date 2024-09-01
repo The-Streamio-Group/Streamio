@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="216.0" layoutY="59.0" prefHeight="66.0" prefWidth="189.0" text="Editar Perfil">
+      <TextField layoutX="101.0" layoutY="145.0" prefHeight="36.0" prefWidth="286.0" promptText="Novo Nome" />
+      <TextField layoutX="101.0" layoutY="252.0" prefHeight="36.0" prefWidth="286.0" promptText="Novo Cartão" />
+      <PasswordField layoutX="101.0" layoutY="200.0" prefHeight="36.0" prefWidth="286.0" promptText="Senha" />
+      <Label layoutX="197.0" layoutY="68.0" prefHeight="66.0" prefWidth="206.0" text="Editar Conta">
          <font>
             <Font name="System Bold" size="33.0" />
          </font>
       </Label>
-      <TextField layoutX="117.0" layoutY="156.0" prefHeight="36.0" prefWidth="273.0" promptText="Novo Nickname" />
-      <TextField layoutX="117.0" layoutY="212.0" prefHeight="36.0" prefWidth="273.0" promptText="Nova Idade" />
-      <Button layoutX="405.0" layoutY="156.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
+      <Button layoutX="403.0" layoutY="145.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="405.0" layoutY="212.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
+      <Button layoutX="403.0" layoutY="200.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="405.0" layoutY="303.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Sair">
+      <Button layoutX="403.0" layoutY="252.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <CheckBox layoutX="117.0" layoutY="264.0" mnemonicParsing="false" text="Assistir apenas conteúdos infantis?" />
-      <Button layoutX="117.0" layoutY="303.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="128.0" text="Deletar Perfil">
+      <Button layoutX="101.0" layoutY="307.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Sair">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
