@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -30,6 +31,9 @@ public class ControllerReproducaoConteudo implements Initializable {
     @FXML
     private Button playButton, pauseButton, resetButton;
 
+    @FXML
+    private Label tituloConteudo;
+
     private File file;
     private Media media;
     private MediaPlayer mediaPlayer;
@@ -45,34 +49,22 @@ public class ControllerReproducaoConteudo implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-
-        try {
-            File file = new File(getClass().getResource("/toma_gap.mp4").toURI()); // or use a more specific path if needed
-            Media media = new Media(file.toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-            mediaView.setMediaPlayer(mediaPlayer);
-
-            // Optional: play the video immediately
-            mediaPlayer.play();
-        } catch (Exception e) {
-            e.printStackTrace(); // print any exceptions to the console
-        }
+        file = new File("C:/Users/Kabum/IdeaProjects/Streamio/src/main/resources/teamplay.mp4");
+        media = new Media(file.toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaView.setMediaPlayer(mediaPlayer);
 
     }
 
     public void playMedia() {
-
         mediaPlayer.play();
     }
 
     public void pauseMedia() {
-
         mediaPlayer.pause();
     }
 
     public void resetMedia() {
-
         if(mediaPlayer.getStatus() != MediaPlayer.Status.READY) {
             mediaPlayer.seek(Duration.seconds(0.0));
         }

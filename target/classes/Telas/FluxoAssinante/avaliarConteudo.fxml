@@ -6,15 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dominio.GUI.Controllers.ControllerAvaliacao">
    <children>
       <Label layoutX="165.0" layoutY="51.0" prefHeight="66.0" prefWidth="271.0" text="Avaliar Conteúdo">
          <font>
             <Font name="System Bold" size="33.0" />
          </font>
       </Label>
-      <Button layoutX="353.0" layoutY="267.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="87.0" text="Sair">
+      <Button layoutX="353.0" layoutY="267.0" mnemonicParsing="false" onAction="#sair" prefHeight="42.0" prefWidth="87.0" text="Sair">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

@@ -16,14 +16,7 @@ public class ControllerPerfilHomeScreen {
 
     // implemetar o logout
 
-    // não precisa disso?
-    public void editarConta(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/editarContaAssinante.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     public void pesquisarConteudo(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/perfilPesquisa.fxml"));

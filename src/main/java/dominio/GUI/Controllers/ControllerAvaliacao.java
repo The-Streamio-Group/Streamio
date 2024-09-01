@@ -16,7 +16,7 @@ public class ControllerAvaliacao {
 
 
     public void sair(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/perfilHomeScreen.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
