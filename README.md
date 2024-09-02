@@ -1,5 +1,3 @@
-![image](https://github.com/user-attachments/assets/a81f2d9b-c723-43ef-83c9-9c764bfd52f2)# Streamio
-
 The Streamio Group
 
 Gabriel Henrique do Rego Barros - gabriel25960@gmail.com
