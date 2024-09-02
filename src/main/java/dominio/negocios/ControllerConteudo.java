@@ -66,6 +66,10 @@ public class ControllerConteudo {
         return this.repositorio.procurar(id);
     }
 
+    public Conteudo procurarPorTitulo(String titulo) throws ElementoNaoExisteException {
+        return this.repositorio.procurarPorTitulo(titulo);
+    }
+
 
     public boolean existeConteudo(UUID id) {
         return this.repositorio.existe(id);

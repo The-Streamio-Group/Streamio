@@ -14,19 +14,17 @@ public class TelaTexual {
         Assinatura assinatura = new Assinatura("234567");
         Assinante charlie = new Assinante("charlie", "charlie@gmail.com", "234", assinatura);
         Perfil perfilTeste = new Perfil("DuasBala", 20);
-        charlie.adicionarPerfil(perfilTeste);
 
         Assinante roberto = new Assinante("Roberto do Brega", "emaildoroberto@gmail.com", "brega", new Assinatura());
         Perfil perfilTeste2 = new Perfil("amante", 12);
-        roberto.adicionarPerfil(perfilTeste2);
 
         Produtora teste1 = new Produtora("nome", "emailteste", "123");
 
-        Conteudo teste2 = new Conteudo("Titanic", "Muito bom", TipoGenero.TERROR, 2, 69);
-        Conteudo teste3 = new Conteudo("BalacoBaco", "2", TipoGenero.ANIMACAO, 2, 68);
-        Conteudo teste4 = new Conteudo("Rambo", "2", TipoGenero.ANIMACAO, 2, 69);
-        Conteudo teste5 = new Conteudo("Jujutsu Kaisen", "2", TipoGenero.ANIMACAO, 2, 66);
-        Conteudo teste6 = new Conteudo("Deadpool", "2", TipoGenero.ANIMACAO, 2, 120);
+        Conteudo teste2 = new Conteudo("Titanic", "Muito bom", TipoGenero.TERROR, "2", 69);
+        Conteudo teste3 = new Conteudo("BalacoBaco", "2", TipoGenero.ANIMACAO, "2", 68);
+        Conteudo teste4 = new Conteudo("Rambo", "2", TipoGenero.ANIMACAO, "2", 69);
+        Conteudo teste5 = new Conteudo("Jujutsu Kaisen", "2", TipoGenero.ANIMACAO, "2", 66);
+        Conteudo teste6 = new Conteudo("Deadpool", "2", TipoGenero.ANIMACAO, "2", 120);
         ReproducaoConteudo testefilme3 = new ReproducaoConteudo(teste3, 60,perfilTeste);
         ReproducaoConteudo testefilme32 = new ReproducaoConteudo(teste3, 32,perfilTeste);
         ReproducaoConteudo testefilme6 = new ReproducaoConteudo(teste6, 33, perfilTeste2);
@@ -50,14 +48,23 @@ public class TelaTexual {
             novo.cadastrarUsuario(charlie);
             novo.realizarLogin("charlie@gmail.com", "234");
             novo.cadastrarPerfil(perfilTeste);
+            System.out.println(novo.getUsuariologado());
             novo.trocarPerfil("DuasBala");
+            novo.mudarNomePerfil(novo.getPerfilLogado().getPerfilID(), "NovasBalas");
+            System.out.println(novo.getUsuariologado());
             System.out.println("Usuário " + novo.getUsuariologado().getNickname() + " logado com sucesso!!");
-            novo.assistirConteudo(teste5,20);
+            novo.assistirConteudo(teste3,20);
             novo.adicionarFavorito(teste3);
             novo.realizarAvaliacao(new Avaliacao(9, perfilTeste),teste3.getConteudoID());
             novo.logoff();
             System.out.println("Usuário deslogado com sucesso!");
 
+
+            novo.realizarLogin("charlie@gmail.com", "234");
+            novo.trocarPerfil("NovasBalas");
+            System.out.println(novo.getUsuariologado());
+            System.out.println("Usuário " + novo.getUsuariologado().getNickname() + " logado com sucesso!!");
+            novo.logoff();
 
             //Teste de notas computadas
             novo.realizarLogin("emailteste", "123");

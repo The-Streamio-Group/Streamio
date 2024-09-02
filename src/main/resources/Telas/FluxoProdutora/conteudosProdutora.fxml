@@ -28,15 +28,15 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <TableView layoutX="127.0" layoutY="111.0" prefHeight="369.0" prefWidth="513.0">
+            <TableView fx:id="tabelaProdutora" layoutX="127.0" layoutY="111.0" prefHeight="369.0" prefWidth="513.0">
               <columns>
-                <TableColumn prefWidth="102.0" text="Título" />
-                <TableColumn prefWidth="93.0" text="Gênero" />
-                  <TableColumn prefWidth="148.0" text="Classificação de Idade" />
-                  <TableColumn prefWidth="168.0" text="Duração" />
+                <TableColumn fx:id="tituloTable" prefWidth="102.0" text="Título" />
+                <TableColumn fx:id="generoTable" prefWidth="93.0" text="Gênero" />
+                  <TableColumn fx:id="idadeTable" prefWidth="148.0" text="Classificação de Idade" />
+                  <TableColumn fx:id="duracaoTable" prefWidth="168.0" text="Duração" />
               </columns>
             </TableView>
-            <Button layoutX="-5.0" layoutY="228.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Remover" textFill="RED">
+            <Button layoutX="-5.0" layoutY="228.0" mnemonicParsing="false" onAction="#removerConteudo" prefHeight="43.0" prefWidth="132.0" text="Remover" textFill="RED">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -61,7 +61,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label layoutX="97.0" layoutY="16.0" prefHeight="0.0" prefWidth="303.0" text="Nome" textAlignment="CENTER">
+            <Label fx:id="nomeProdutora" layoutX="97.0" layoutY="16.0" prefHeight="0.0" prefWidth="303.0" text="Nome" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>

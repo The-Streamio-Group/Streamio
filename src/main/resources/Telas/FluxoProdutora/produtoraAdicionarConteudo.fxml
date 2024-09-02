@@ -13,14 +13,14 @@
    <children>
       <AnchorPane prefHeight="486.0" prefWidth="640.0">
          <children>
-            <Button layoutX="77.0" layoutY="331.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="95.0" text="Adicionar">
+            <Button layoutX="77.0" layoutY="365.0" mnemonicParsing="false" onAction="#adicionarConteudo" prefHeight="35.0" prefWidth="95.0" text="Adicionar">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <TextArea layoutX="155.0" layoutY="119.0" prefHeight="114.0" prefWidth="375.0" />
-            <TextField layoutX="155.0" layoutY="86.0" prefHeight="25.0" prefWidth="375.0" />
-            <TextField layoutX="155.0" layoutY="283.0" prefHeight="25.0" prefWidth="375.0" />
+            <TextArea fx:id="descricaoFT" layoutX="155.0" layoutY="119.0" prefHeight="114.0" prefWidth="375.0" />
+            <TextField fx:id="tituloFT" layoutX="155.0" layoutY="86.0" prefHeight="25.0" prefWidth="375.0" />
+            <TextField fx:id="duracaoFT" layoutX="155.0" layoutY="317.0" onKeyTyped="#checarInput" prefHeight="25.0" prefWidth="375.0" />
             <Label alignment="CENTER_RIGHT" layoutX="103.0" layoutY="90.0" prefHeight="17.0" prefWidth="42.0" text="Título:">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -31,22 +31,28 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="73.0" layoutY="250.0" prefHeight="17.0" prefWidth="77.0" text="Classificação">
+            <Label alignment="CENTER_RIGHT" layoutX="73.0" layoutY="284.0" prefHeight="17.0" prefWidth="77.0" text="Classificação:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label alignment="CENTER_RIGHT" layoutX="81.0" layoutY="287.0" prefHeight="17.0" prefWidth="65.0" text="Duração:">
+            <Label alignment="CENTER_RIGHT" layoutX="81.0" layoutY="321.0" prefHeight="17.0" prefWidth="65.0" text="Duração:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <ComboBox fx:id="comboBox" layoutX="155.0" layoutY="246.0" prefWidth="150.0" promptText="Faixa etária" />
-            <Button layoutX="435.0" layoutY="331.0" mnemonicParsing="false" onAction="#voltar" prefHeight="35.0" prefWidth="95.0" text="Cancelar">
+            <ComboBox fx:id="comboBox" layoutX="155.0" layoutY="280.0" prefWidth="150.0" promptText="Faixa etária" />
+            <Button layoutX="435.0" layoutY="365.0" mnemonicParsing="false" onAction="#voltar" prefHeight="35.0" prefWidth="95.0" text="Cancelar">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
+            <Label alignment="CENTER_RIGHT" layoutX="73.0" layoutY="244.0" prefHeight="17.0" prefWidth="77.0" text="Gênero: ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxG" layoutX="155.0" layoutY="240.0" prefWidth="150.0" promptText="Gênero" />
          </children>
       </AnchorPane>
    </children>

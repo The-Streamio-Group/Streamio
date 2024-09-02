@@ -61,9 +61,6 @@ public class Perfil {
 
     @Override
     public String toString() {
-        return "Perfil{" +
-                "nick='" + nick + '\'' +
-                ", idade=" + idade +
-                '}';
+        return "Nome: " + nick  + " | Idade: " + idade;
     }
 }

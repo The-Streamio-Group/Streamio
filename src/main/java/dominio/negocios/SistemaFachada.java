@@ -6,6 +6,7 @@ import dominio.negocios.services.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class SistemaFachada implements ISistemaFachada {
@@ -22,6 +23,8 @@ public class SistemaFachada implements ISistemaFachada {
     private static SistemaFachada instancia;
     private Usuario usuariologado; //Instância do usuário logado
     private Perfil perfilLogado;  //Instância do Perfil logado
+    private Conteudo conteudoSelecionado;
+    private ReproducaoConteudo reproducao;
 
     public SistemaFachada() {
         this.controllerPerfil = ControllerPerfil.getInstance();
@@ -52,6 +55,10 @@ public class SistemaFachada implements ISistemaFachada {
         perfilLogado = null;
     }
 
+    public void logoffPerfil(){
+        perfilLogado = null;
+    }
+
 
     //Perfil
     public void cadastrarPerfil(Perfil p) throws ElementoNullException, MaxPerfilException, NaoAssinanteException, ElementoNaoExisteException {
@@ -63,7 +70,7 @@ public class SistemaFachada implements ISistemaFachada {
     }
 
     public void trocarPerfil(String nickname) throws NaoAssinanteException, ElementoNaoExisteException {
-        perfilLogado = this.servicePerfil.trocarPerfil(nickname, usuariologado, perfilLogado);
+        this.perfilLogado = this.servicePerfil.trocarPerfil(nickname, usuariologado, perfilLogado);
     }
 
     public void mudarNomePerfil(UUID idPerfil, String novoNome) throws MesmoNomeException, ElementoNaoExisteException {
@@ -124,6 +131,14 @@ public class SistemaFachada implements ISistemaFachada {
         this.serviceConteudo.atualizarConteudo(antigoid, novo, usuariologado);
     }
 
+    public Conteudo procurarConteudoPorTitulo(String titulo) throws ElementoNaoExisteException {
+        return this.serviceConteudo.procurarConteudo(titulo);
+    }
+
+    public void conteudoSelecionado(UUID idConteudo) throws ElementoNaoExisteException {
+        this.conteudoSelecionado = this.serviceConteudo.conteudoSelecionado(idConteudo);
+    }
+
     public String gerarRelatorioProdutora() throws NaoProdutoraException, ElementoNaoExisteException {
         return this.serviceRelatorio.GerarRelatorio(usuariologado);
     }
@@ -134,8 +149,16 @@ public class SistemaFachada implements ISistemaFachada {
         this.serviceConteudo.assistirConteudoPerfil(perfilLogado.getPerfilID(), conteudo, minutosAssistidos, usuariologado);
     }
 
+    public void assistirConteudo(ReproducaoConteudo reproducao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException {
+        this.serviceConteudo.assistirConteudoPerfil(perfilLogado.getPerfilID(), reproducao.getConteudo(), reproducao.getTempoAssistido().toMinutes(), usuariologado);
+    }
+
     public void adicionarFavorito(Conteudo conteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException {
         this.serviceConteudo.adicionarFavoritoPerfil(perfilLogado.getPerfilID(), conteudo);
+    }
+
+    public void removerFavorito(Conteudo conteudo) throws ElementoNaoExisteException {
+        this.serviceConteudo.removerFavoritoPerfil(perfilLogado.getPerfilID(), conteudo);
     }
 
 
@@ -150,13 +173,19 @@ public class SistemaFachada implements ISistemaFachada {
 
 
     //Assinatura
+
     public void realizarAssinatura(UUID idConta, String numCartao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException {
         this.serviceAssinatura.atualizarCartaoAssinaturaUsuario(idConta, numCartao);
     }
 
 
+
     public void renovarAssinatura(UUID idConta) throws ElementoNaoExisteException, AssinaturaNaoExpiradaException, NaoAssinanteException {
         this.serviceAssinatura.renovarAssinaturaUsuario(idConta);
+    }
+
+    public void cancelarAssinatura(UUID idConta) throws NaoAssinanteException, ElementoNaoExisteException {
+        this.serviceAssinatura.cancelarAssinaturaUsuario(idConta);
     }
 
 
@@ -169,6 +198,23 @@ public class SistemaFachada implements ISistemaFachada {
         this.controllerReproducaoConteudo.atualizarTempoAssistido(idReprodutora, duracao);
     }
 
+    public ReproducaoConteudo procurarReproducaoConteudo(UUID idReprodutora) throws ElementoNaoExisteException {
+        return this.controllerReproducaoConteudo.procurarReprodutoraConteudo(idReprodutora);
+    }
+
+    public void reproducaoMomento(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException {
+        this.reproducao = this.controllerReproducaoConteudo.reproducaoMomento(reproducaoConteudo);
+    }
+
+    public List<ReproducaoConteudo> filtrarHistorico(Perfil dono){
+        return this.controllerReproducaoConteudo.filtrarDono(dono);
+    }
+
+    public void removerReproducaoConteudo(UUID idReproducaoConteudo) throws ElementoNaoExisteException {
+        this.controllerReproducaoConteudo.removerReprodutoraConteudo(idReproducaoConteudo);
+    }
+
+
 
     public Usuario getUsuariologado() {
         return usuariologado;
@@ -176,6 +222,14 @@ public class SistemaFachada implements ISistemaFachada {
 
     public Perfil getPerfilLogado() {
         return perfilLogado;
+    }
+
+    public Conteudo getConteudoSelecionado() {
+        return conteudoSelecionado;
+    }
+
+    public ReproducaoConteudo getReproducao(){
+        return reproducao;
     }
 }
 

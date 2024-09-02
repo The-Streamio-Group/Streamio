@@ -70,6 +70,15 @@ public class RepositorioAssinaturaList implements IRepositorioAssinatura {
         }
     }
 
+    public void cancelar(UUID assinaturaID) throws ElementoNaoExisteException{
+        Assinatura cancelado = procurar(assinaturaID);
+        if(cancelado == null){
+            throw new ElementoNaoExisteException();
+        } else{
+            cancelado.setStatusPagamento(false);
+        }
+    }
+
     //UPDATE
     @Override
     public void atualizar(UUID antigoid, Assinatura novo) throws ElementoNullException, ElementoNaoExisteException {

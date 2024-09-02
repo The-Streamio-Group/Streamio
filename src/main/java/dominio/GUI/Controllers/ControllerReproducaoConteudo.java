@@ -1,5 +1,9 @@
 package dominio.GUI.Controllers;
 
+import dominio.negocios.ISistemaFachada;
+import dominio.negocios.SistemaFachada;
+import dominio.negocios.beans.Conteudo;
+import dominio.negocios.beans.ReproducaoConteudo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -21,6 +27,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerReproducaoConteudo implements Initializable {
+    ISistemaFachada sistema = SistemaFachada.getInstance();
+    private ReproducaoConteudo rep;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -38,6 +46,8 @@ public class ControllerReproducaoConteudo implements Initializable {
     private Media media;
     private MediaPlayer mediaPlayer;
 
+
+
     // ir para o conteudo detalhado atual
     public void irConteudoDetalhado(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/conteudoDetalhado.fxml"));
@@ -49,15 +59,24 @@ public class ControllerReproducaoConteudo implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        file = new File("C:/Users/Kabum/IdeaProjects/Streamio/src/main/resources/teamplay.mp4");
+        file = new File("C:/Users/Kabum/IdeaProjects/Streamio/src/main/resources/quaaase.mp4");
         media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
+        tituloConteudo.setText(sistema.getConteudoSelecionado().getTitulo());
 
     }
 
     public void playMedia() {
         mediaPlayer.play();
+        try {
+            rep = new ReproducaoConteudo(sistema.getConteudoSelecionado(), sistema.getConteudoSelecionado().getDuracao().toMinutes(),sistema.getPerfilLogado());
+            sistema.assistirConteudo(rep);
+            sistema.reproducaoMomento(rep);
+        } catch(Exception e){
+
+        }
+
     }
 
     public void pauseMedia() {

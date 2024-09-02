@@ -14,14 +14,14 @@
             <Font name="System Bold" size="33.0" />
          </font>
       </Label>
-      <TextField layoutX="98.0" layoutY="154.0" prefHeight="36.0" prefWidth="286.0" promptText="Novo Nome" />
-      <PasswordField layoutX="98.0" layoutY="206.0" prefHeight="36.0" prefWidth="286.0" promptText="Senha" />
-      <Button layoutX="409.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
+      <TextField fx:id="nomeTF" layoutX="98.0" layoutY="154.0" prefHeight="36.0" prefWidth="286.0" promptText="Novo Nome" />
+      <PasswordField fx:id="senhaTF" layoutX="98.0" layoutY="206.0" prefHeight="36.0" prefWidth="286.0" promptText="Senha" />
+      <Button layoutX="409.0" layoutY="154.0" mnemonicParsing="false" onAction="#alterarNome" prefHeight="36.0" prefWidth="91.0" text="Alterar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="409.0" layoutY="206.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="91.0" text="Alterar">
+      <Button layoutX="409.0" layoutY="206.0" mnemonicParsing="false" onAction="#alterarSenha" prefHeight="36.0" prefWidth="91.0" text="Alterar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

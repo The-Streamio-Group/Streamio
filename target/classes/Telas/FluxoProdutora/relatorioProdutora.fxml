@@ -14,12 +14,12 @@
             <Font name="System Bold" size="33.0" />
          </font>
       </Label>
-      <TableView layoutX="143.0" layoutY="77.0" prefHeight="400.0" prefWidth="497.0">
+      <TableView fx:id="tabelaRelatorio" layoutX="143.0" layoutY="77.0" prefHeight="400.0" prefWidth="497.0">
          <columns>
-            <TableColumn prefWidth="140.0" text="Título" />
-            <TableColumn prefWidth="125.0" text="Qtd. de Avaliações" />
-            <TableColumn prefWidth="134.0" text="Qtd. de Visualizações" />
-            <TableColumn prefWidth="112.0" text="Nota Geral" />
+            <TableColumn fx:id="tituloTable" prefWidth="140.0" text="Título" />
+            <TableColumn fx:id="avaliacaoTable" prefWidth="125.0" text="Qtd. de Avaliações" />
+            <TableColumn fx:id="visuTable" prefWidth="134.0" text="Qtd. de Visualizações" />
+            <TableColumn fx:id="notaTable" prefWidth="112.0" text="Nota Geral" />
          </columns>
       </TableView>
       <Button layoutY="77.0" mnemonicParsing="false" onAction="#voltarMenu" prefHeight="46.0" prefWidth="143.0" text="Sair">

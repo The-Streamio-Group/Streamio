@@ -12,13 +12,13 @@ public class Conteudo {
     private String titulo;
     private String descricao;
     private TipoGenero genero;
-    private int classificacaoIdade;
+    private String classificacaoIdade;
     private List<Avaliacao> avaliacoes;
     private int numeroViews;
     private float notaGeral;
     private Duration duracao; //50% do conteúdo - Avaliação
 
-    public Conteudo(String titulo, String descricao, TipoGenero genero, int classificacaoIdade, long minutos) {
+    public Conteudo(String titulo, String descricao, TipoGenero genero, String  classificacaoIdade, long minutos) {
         this.conteudoID = UUID.randomUUID();
         this.titulo = titulo;
         this.descricao = descricao;
@@ -78,11 +78,11 @@ public class Conteudo {
         this.genero = genero;
     }
 
-    public int getClassificacaoIdade() {
+    public String getClassificacaoIdade() {
         return classificacaoIdade;
     }
 
-    public void setClassificacaoIdade(int classificacaoIdade) {
+    public void setClassificacaoIdade(String classificacaoIdade) {
         this.classificacaoIdade = classificacaoIdade;
     }
 

@@ -63,6 +63,7 @@ public class ServiceAvaliacao {
                     this.controleAvaliacao.cadastrarAvaliacao(a);
                     Conteudo temp = this.controleConteudo.procurarConteudo(avaliado.getConteudoID());
                     temp.adicionarAvalicao(a);
+                    temp.atualizarNota();
 
                 } else {
                     throw new TempoInsuficienteException();

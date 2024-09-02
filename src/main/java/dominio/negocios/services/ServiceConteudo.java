@@ -50,6 +50,16 @@ public class ServiceConteudo {
         }
     }
 
+    public void assistirConteudoPerfil(ReproducaoConteudo reproducaoConteudo, Usuario usuariologado) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException {
+        if (usuariologado instanceof Assinante) {
+            Perfil assistir = this.controlePerfil.procurarPerfil(reproducaoConteudo.getPerfil().getPerfilID());
+            this.controllerReproducaoConteudo.cadastrarReprodutoraConteudo(reproducaoConteudo);
+            this.controleConteudo.assistirConteudo(reproducaoConteudo.getConteudo().getConteudoID());
+        } else {
+            throw new NaoAssinanteException();
+        }
+    }
+
     public void removerConteudo(UUID id, Usuario usuariologado) throws ElementoNaoExisteException, NaoProdutoraException {
         if (usuariologado instanceof Produtora) {
             Conteudo r = this.controleConteudo.procurarConteudo(id);
@@ -88,5 +98,13 @@ public class ServiceConteudo {
         } else {
             throw new NaoProdutoraException();
         }
+    }
+
+    public Conteudo procurarConteudo(String titulo) throws ElementoNaoExisteException {
+        return this.controleConteudo.procurarPorTitulo(titulo);
+    }
+
+    public Conteudo conteudoSelecionado(UUID idConteudo) throws ElementoNaoExisteException {
+        return this.controleConteudo.procurarConteudo(idConteudo);
     }
 }

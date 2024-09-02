@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dominio.GUI.Controllers.ControllerMenuPerfis">
    <children>
-      <Button layoutX="173.0" layoutY="269.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="Editar">
+      <Button layoutX="173.0" layoutY="269.0" mnemonicParsing="false" onAction="#editarPerfil" prefHeight="32.0" prefWidth="72.0" text="Editar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -18,8 +18,8 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <ListView layoutX="83.0" layoutY="90.0" prefHeight="163.0" prefWidth="429.0" />
-      <Button layoutX="83.0" layoutY="269.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" text="Entrar">
+      <ListView fx:id="listaPerfil" layoutX="83.0" layoutY="90.0" prefHeight="163.0" prefWidth="429.0" />
+      <Button layoutX="83.0" layoutY="269.0" mnemonicParsing="false" onAction="#entrarPerfil" prefHeight="32.0" prefWidth="72.0" text="Entrar">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

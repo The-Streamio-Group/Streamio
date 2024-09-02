@@ -54,6 +54,13 @@ public class ControllerAssinatura {
         }
     }
 
+    public void cancelarAssinatura(UUID id) throws ElementoNaoExisteException{
+            Assinatura removido = procurarAssinatura(id);
+            if(removido != null){
+                this.repositorio.cancelar(id);
+            }
+    }
+
     //READ
     public Assinatura procurarAssinatura(UUID id) throws ElementoNaoExisteException {
         return this.repositorio.procurar(id);

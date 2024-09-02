@@ -41,6 +41,7 @@ public class ServiceAssinatura {
 
     }
 
+
     public void renovarAssinaturaUsuario(UUID idConta) throws ElementoNaoExisteException, AssinaturaNaoExpiradaException, NaoAssinanteException {
         Assinatura renovar = this.buscarAssinatura(idConta);
         this.controleAssinatura.renovarAssinatura(renovar.getAssinaturaID());
@@ -48,7 +49,7 @@ public class ServiceAssinatura {
 
     public void cancelarAssinaturaUsuario(UUID idConta) throws ElementoNaoExisteException, NaoAssinanteException {
         Assinatura cancelar = this.buscarAssinatura(idConta);
-        this.controleAssinatura.removerAssinatura(cancelar.getAssinaturaID());
+        this.controleAssinatura.cancelarAssinatura(cancelar.getAssinaturaID());
     }
 
     public void atualizarCartaoAssinaturaUsuario(UUID idConta, String numCartao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException {

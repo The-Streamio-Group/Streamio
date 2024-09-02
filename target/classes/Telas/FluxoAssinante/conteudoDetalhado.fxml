@@ -6,51 +6,61 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dominio.GUI.Controllers.ControllerConteudoDetalhado">
    <children>
       <AnchorPane prefHeight="480.0" prefWidth="640.0">
          <children>
-            <Label alignment="CENTER" layoutX="79.0" layoutY="37.0" prefHeight="58.0" prefWidth="483.0" text="NOME DO CONTEÚDO" textAlignment="CENTER">
+            <Label fx:id="nomeConteudo" alignment="CENTER" layoutX="79.0" layoutY="37.0" prefHeight="58.0" prefWidth="483.0" text="NOME DO CONTEÚDO" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Button layoutX="384.0" layoutY="386.0" mnemonicParsing="false" text="ASSISTIR" textFill="#2d8c00">
+            <Button layoutX="288.0" layoutY="386.0" mnemonicParsing="false" onAction="#irReproducao" text="ASSISTIR" textFill="#2d8c00">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="79.0" layoutY="341.0" text="Duração: ">
+            <Label layoutX="28.0" layoutY="341.0" text="Duração: ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="79.0" layoutY="388.0" text="Faixa Etária:">
+            <Label layoutX="28.0" layoutY="388.0" text="Faixa Etária:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="79.0" layoutY="164.0" text="Sinopse:">
+            <Label layoutX="28.0" layoutY="164.0" text="Sinopse:">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="186.0" layoutY="159.0" prefHeight="170.0" prefWidth="405.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat nibh sed sapien dapibus vulputate. Donec auctor erat in augue tempor vestibulum at in mauris. Fusce tempus leo dui, ac pulvinar erat luctus vel. Duis suscipit et enim non dignissim. Aliquam erat volutpat. Sed fringilla a turpis in tempor. Praesent dictum risus vel augue blandit ullamcorper.Mauris ac diam dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus fermentum elit ac nibh posuere varius. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam eu neque eu ex sodales efficitur. Nulla lacinia nisl at arcu luctus, vitae accumsan justo laoreet. Nullam in ultricies nunc. Nam porta nec massa eget rutrum. Duis aliquet lectus a massa posuere ornare. Suspendisse maximus rhoncus ante, non vestibulum arcu sodales a. Sed sit amet massa non urna sollicitudin rhoncus. Integer ultrices est est, vel egestas lorem elementum non. Sed et pellentesque ex. Etiam lobortis diam libero, quis elementum ligula rhoncus vel. Vestibulum quis commodo sapien, eget vestibulum quam.Maecenas turpis nibh, pulvinar vitae hendrerit et, vehicula a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed tristique feugiat nulla id porta. Morbi eleifend viverra ligula ut viverra. Vestibulum velit magna, ultrices id ultrices nec, suscipit sed orci. Mauris euismod facilisis elit sed tempor. Maecenas fringilla massa vitae dapibus euismod. Morbi non auctor ligula, vitae commodo nisl. Mauris finibus sit amet neque in laoreet. Aliquam sed facilisis tellus. Phasellus vulputate porttitor felis eu malesuada. Maecenas at hendrerit ligula.Quisque nunc sapien, bibendum id sollicitudin at, pharetra sed turpis. Praesent convallis justo at viverra malesuada. Morbi auctor nibh ac mauris sollicitudin, sed placerat ex pellentesque. Cras id mi vel lorem ultricies rhoncus sed at felis. Nam eleifend scelerisque ante eu scelerisque. Donec tortor odio, ornare nec dui tempor, cursus varius tellus. Donec sit amet scelerisque sem. Nullam et enim eu nunc viverra ultricies. Pellentesque molestie ante ut eros tincidunt, non sollicitudin ex aliquam. In euismod malesuada est vitae facilisis. Nulla eros nunc, mollis tincidunt nibh sit amet, porta congue mi. Maecenas efficitur scelerisque purus et porttitor.Integer nec turpis ac lacus vulputate posuere in sed sapien. Vivamus cursus blandit nisl sed commodo. Nam efficitur, orci at tristique eleifend, metus est sollicitudin nisi, et cursus est est sed turpis. Nam massa ipsum, dictum sed justo interdum, consequat tincidunt libero. Nulla dignissim ullamcorper purus imperdiet sagittis. Proin consectetur, libero in venenatis aliquet, mi velit commodo elit, et aliquam diam libero sed nibh. Mauris ut cursus libero. Sed a gravida sapien. Sed non ante dapibus, rhoncus augue sodales, luctus massa. Proin vel fermentum erat. Morbi faucibus interdum orci, sed blandit nisi tempus a. Ut iaculis felis et cursus malesuada. Nullam vehicula faucibus augue, vitae euismod ante condimentum quis." textAlignment="JUSTIFY" wrapText="true">
+            <Label fx:id="sinopse" layoutX="135.0" layoutY="159.0" prefHeight="170.0" prefWidth="405.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat nibh sed sapien dapibus vulputate. Donec auctor erat in augue tempor vestibulum at in mauris. Fusce tempus leo dui, ac pulvinar erat luctus vel. Duis suscipit et enim non dignissim. Aliquam erat volutpat. Sed fringilla a turpis in tempor. Praesent dictum risus vel augue blandit ullamcorper.Mauris ac diam dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vivamus fermentum elit ac nibh posuere varius. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam eu neque eu ex sodales efficitur. Nulla lacinia nisl at arcu luctus, vitae accumsan justo laoreet. Nullam in ultricies nunc. Nam porta nec massa eget rutrum. Duis aliquet lectus a massa posuere ornare. Suspendisse maximus rhoncus ante, non vestibulum arcu sodales a. Sed sit amet massa non urna sollicitudin rhoncus. Integer ultrices est est, vel egestas lorem elementum non. Sed et pellentesque ex. Etiam lobortis diam libero, quis elementum ligula rhoncus vel. Vestibulum quis commodo sapien, eget vestibulum quam.Maecenas turpis nibh, pulvinar vitae hendrerit et, vehicula a eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed tristique feugiat nulla id porta. Morbi eleifend viverra ligula ut viverra. Vestibulum velit magna, ultrices id ultrices nec, suscipit sed orci. Mauris euismod facilisis elit sed tempor. Maecenas fringilla massa vitae dapibus euismod. Morbi non auctor ligula, vitae commodo nisl. Mauris finibus sit amet neque in laoreet. Aliquam sed facilisis tellus. Phasellus vulputate porttitor felis eu malesuada. Maecenas at hendrerit ligula.Quisque nunc sapien, bibendum id sollicitudin at, pharetra sed turpis. Praesent convallis justo at viverra malesuada. Morbi auctor nibh ac mauris sollicitudin, sed placerat ex pellentesque. Cras id mi vel lorem ultricies rhoncus sed at felis. Nam eleifend scelerisque ante eu scelerisque. Donec tortor odio, ornare nec dui tempor, cursus varius tellus. Donec sit amet scelerisque sem. Nullam et enim eu nunc viverra ultricies. Pellentesque molestie ante ut eros tincidunt, non sollicitudin ex aliquam. In euismod malesuada est vitae facilisis. Nulla eros nunc, mollis tincidunt nibh sit amet, porta congue mi. Maecenas efficitur scelerisque purus et porttitor.Integer nec turpis ac lacus vulputate posuere in sed sapien. Vivamus cursus blandit nisl sed commodo. Nam efficitur, orci at tristique eleifend, metus est sollicitudin nisi, et cursus est est sed turpis. Nam massa ipsum, dictum sed justo interdum, consequat tincidunt libero. Nulla dignissim ullamcorper purus imperdiet sagittis. Proin consectetur, libero in venenatis aliquet, mi velit commodo elit, et aliquam diam libero sed nibh. Mauris ut cursus libero. Sed a gravida sapien. Sed non ante dapibus, rhoncus augue sodales, luctus massa. Proin vel fermentum erat. Morbi faucibus interdum orci, sed blandit nisi tempus a. Ut iaculis felis et cursus malesuada. Nullam vehicula faucibus augue, vitae euismod ante condimentum quis." textAlignment="JUSTIFY" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="186.0" layoutY="343.0" prefHeight="35.0" prefWidth="136.0" text="60 minutos">
+            <Label fx:id="duracao" layoutX="135.0" layoutY="343.0" prefHeight="35.0" prefWidth="136.0" text="60 minutos">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="222.0" layoutY="390.0" prefHeight="35.0" prefWidth="136.0" text="10-12 anos">
+            <Label fx:id="idade" layoutX="171.0" layoutY="390.0" prefHeight="35.0" prefWidth="101.0" text="10-12 anos">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button layoutX="509.0" layoutY="386.0" mnemonicParsing="false" text="RETORNAR">
+            <Button layoutX="398.0" layoutY="386.0" mnemonicParsing="false" onAction="#irPerfilHomescreen" text="RETORNAR">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="527.0" layoutY="386.0" mnemonicParsing="false" onAction="#irAvaliacao" text="AVALIAR" textFill="#2d8c00">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="396.0" layoutY="433.0" mnemonicParsing="false" onAction="#favoritar" text="FAVORITAR" textFill="#2d8c00">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

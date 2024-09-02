@@ -55,11 +55,7 @@ public class ReproducaoConteudo {
 
     @Override
     public String toString() {
-        return "ReprodutoraConteudo{" +
-                "dataAssistido=" + dataAssistido +
-                ", tempoAssistido=" + tempoAssistido +
-                ", conteudo=" + conteudo +
-                '}';
+        return conteudo.getTitulo();
     }
 
     @Override

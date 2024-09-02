@@ -57,6 +57,15 @@ public interface IRepositorioAssinatura {
      */
     void remover(UUID id) throws ElementoNaoExisteException;
 
+    /*  Cancela a assinatura do objeto da Lista de acordo com o id do objeto dado
+     *
+     *  @param id -> ID do objeto
+     *
+     *  @throws ElementoNullException -> Exceção caso o elemento seja nulo
+     *
+     */
+    void cancelar(UUID id) throws ElementoNaoExisteException;
+
     /*  Método que informa se o objeto existe
      *
      *  @param id -> ID do objeto
