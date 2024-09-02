@@ -70,9 +70,14 @@ public class ControllerEditarPerfil {
         stage.show();
     }
 
-    public void deletarPerfil() {
+    public void deletarPerfil(ActionEvent event) throws IOException  {
         try {
             sistema.removerPerfil(sistema.getPerfilLogado().getPerfilID());
+            root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/menuPerfis.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } catch (Exception e) {
         }
     }
