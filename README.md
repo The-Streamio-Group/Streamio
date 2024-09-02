@@ -38,7 +38,7 @@ No aplicativo, os usuários deverão assinar o plano de pagamento disponível e 
 
 # UML:
 
-![Entrega 02 - UML (atualizada)]([https://github.com/user-attachments/assets/11481eff-63c0-44f2-a072-82c115a169f3](https://github.com/The-Streamio-Group/Streamio/blob/master/Documentos/Entrega%2002%20-%20UML%20(atualizada%20para%20Entrega%2004).png)) 
+![Entrega 02 - UML (atualizada)](https://github.com/The-Streamio-Group/Streamio/blob/master/Documentos/Entrega%2002%20-%20UML%20(atualizada%20para%20Entrega%2004).png)
 	
 
 
