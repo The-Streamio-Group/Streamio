@@ -37,6 +37,7 @@ public class ServiceRelatorio {
         return (float) soma;
     }
 
+    //Código Visual
     public String GerarRelatorio(Usuario usuario) throws ElementoNaoExisteException, NaoProdutoraException {
         if (usuario instanceof Produtora) {
             Produtora produtoraRelatorio = (Produtora) this.controleUsuario.procurarUsuario(usuario.getUsuarioID());

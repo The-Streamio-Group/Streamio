@@ -59,16 +59,13 @@ public class ControllerReproducaoConteudo implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        file = new File("C:/Users/Kabum/IdeaProjects/Streamio/src/main/resources/quaaase.mp4");
+        file = sistema.getConteudoSelecionado().getPath();
         media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaView.setMediaPlayer(mediaPlayer);
         tituloConteudo.setText(sistema.getConteudoSelecionado().getTitulo());
 
-    }
-
-    public void playMedia() {
-        mediaPlayer.play();
+        //Adicionar no histórico
         try {
             rep = new ReproducaoConteudo(sistema.getConteudoSelecionado(), sistema.getConteudoSelecionado().getDuracao().toMinutes(),sistema.getPerfilLogado());
             sistema.assistirConteudo(rep);
@@ -76,6 +73,11 @@ public class ControllerReproducaoConteudo implements Initializable {
         } catch(Exception e){
 
         }
+
+    }
+
+    public void playMedia() {
+        mediaPlayer.play();
 
     }
 

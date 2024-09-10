@@ -31,6 +31,8 @@ public interface ISistemaFachada {
 
     Perfil procurarPerfilPorNome(String nome) throws ElementoNaoExisteException;
 
+    Usuario procurarPorEmail(String email) throws ElementoNaoExisteException;
+
     void cadastrarUsuario(Usuario u) throws ElementoNullException;
 
     void removerUsuario(UUID id) throws ElementoNaoExisteException;
@@ -47,7 +49,7 @@ public interface ISistemaFachada {
 
     void atualizarConteudo(UUID antigoid, Conteudo novo) throws ElementoJaExisteException, ElementoNullException, MesmoElementoException, NaoProdutoraException, ElementoNaoExisteException;
 
-    Conteudo procurarConteudoPorTitulo(String titulo) throws ElementoNaoExisteException;
+    List<Conteudo> procurarConteudoPorTitulo(String titulo);
 
     void conteudoSelecionado(UUID idConteudo) throws ElementoNaoExisteException;
 

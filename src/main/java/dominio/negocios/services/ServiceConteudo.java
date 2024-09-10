@@ -6,6 +6,7 @@ import dominio.negocios.ControllerPerfil;
 import dominio.negocios.ControllerReproducaoConteudo;
 import dominio.negocios.beans.*;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ServiceConteudo {
@@ -100,7 +101,7 @@ public class ServiceConteudo {
         }
     }
 
-    public Conteudo procurarConteudo(String titulo) throws ElementoNaoExisteException {
+    public List<Conteudo> procurarConteudo(String titulo){
         return this.controleConteudo.procurarPorTitulo(titulo);
     }
 

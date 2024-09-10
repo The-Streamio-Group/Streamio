@@ -18,7 +18,7 @@ public class ControllerCadastro {
 
     public void irLogin(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/login.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -26,7 +26,7 @@ public class ControllerCadastro {
 
     public void irCadastroAssinante(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/cadastroAssinante.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -34,7 +34,7 @@ public class ControllerCadastro {
 
     public void irCadastroProdutora(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoProdutora/cadastroProdutora.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

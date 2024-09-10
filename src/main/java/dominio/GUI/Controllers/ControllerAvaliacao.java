@@ -28,9 +28,14 @@ public class ControllerAvaliacao {
 
         try {
             sistema.realizarAvaliacao(new Avaliacao(valor, sistema.getPerfilLogado()), sistema.getReproducao().getReprodutoraConteudoID());
-            this.sair(event);
+            root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/conteudoDetalhado.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

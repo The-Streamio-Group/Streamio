@@ -97,6 +97,9 @@ public class SistemaFachada implements ISistemaFachada {
 
 
     //Usuário
+    public Usuario procurarPorEmail(String email) throws ElementoNaoExisteException {
+        return this.controllerUsuario.procurarUsuarioPorEmail(email);
+    }
     public void cadastrarUsuario(Usuario u) throws ElementoNullException {
         this.controllerUsuario.cadastrarUsuario(u);
     }
@@ -131,7 +134,7 @@ public class SistemaFachada implements ISistemaFachada {
         this.serviceConteudo.atualizarConteudo(antigoid, novo, usuariologado);
     }
 
-    public Conteudo procurarConteudoPorTitulo(String titulo) throws ElementoNaoExisteException {
+    public List<Conteudo> procurarConteudoPorTitulo(String titulo) {
         return this.serviceConteudo.procurarConteudo(titulo);
     }
 
@@ -150,7 +153,7 @@ public class SistemaFachada implements ISistemaFachada {
     }
 
     public void assistirConteudo(ReproducaoConteudo reproducao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException {
-        this.serviceConteudo.assistirConteudoPerfil(perfilLogado.getPerfilID(), reproducao.getConteudo(), reproducao.getTempoAssistido().toMinutes(), usuariologado);
+        this.serviceConteudo.assistirConteudoPerfil(reproducao, usuariologado);
     }
 
     public void adicionarFavorito(Conteudo conteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException {
@@ -204,6 +207,10 @@ public class SistemaFachada implements ISistemaFachada {
 
     public void reproducaoMomento(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException {
         this.reproducao = this.controllerReproducaoConteudo.reproducaoMomento(reproducaoConteudo);
+    }
+
+    public void cadastrarReproducaoConteudo(ReproducaoConteudo rep) throws ElementoNullException, ElementoJaExisteException {
+        this.controllerReproducaoConteudo.cadastrarReprodutoraConteudo(rep);
     }
 
     public List<ReproducaoConteudo> filtrarHistorico(Perfil dono){

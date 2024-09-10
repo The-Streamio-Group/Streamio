@@ -12,16 +12,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class TelaInterface extends Application {
     ISistemaFachada sistemaFachada = SistemaFachada.getInstance();
+    Assinatura assinaturaTeste2 = new Assinatura("cartãofoda");
     Usuario teste = new Produtora("teste","email@teste","123");
-    Usuario teste2 = new Assinante("teste","email@assinante","123",new Assinatura("cartãofoda"));
+    Usuario teste2 = new Assinante("teste","email@assinante","123", assinaturaTeste2);
     @Override
     public void start(Stage stage) throws IOException {
         try {
             sistemaFachada.cadastrarUsuario(teste);
             sistemaFachada.cadastrarUsuario(teste2);
+            sistemaFachada.realizarAssinatura(teste2.getUsuarioID(),"cartãofoda");
+            assinaturaTeste2.setDataExpiracao(LocalDate.of(2024,9,8));
             FXMLLoader fxmlLoader = new FXMLLoader(TelaInterface.class.getResource("/Telas/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 640, 480);
             stage.setTitle("Streamio Project");

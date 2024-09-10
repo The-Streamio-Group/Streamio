@@ -7,6 +7,7 @@ import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Conteudo;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RepositorioConteudoList implements IRepositorioConteudo{
@@ -50,13 +51,16 @@ public class RepositorioConteudoList implements IRepositorioConteudo{
     }
 
     @Override
-    public Conteudo procurarPorTitulo(String titulo) throws ElementoNaoExisteException {
+    public List<Conteudo> procurarPorTitulo(String titulo){
+        List<Conteudo> encontrados = new ArrayList<>();
+
         for (Conteudo conteudo : conteudosList) {
-            if (conteudo.getTitulo().equals(titulo)) {
-                return conteudo;
+            if (conteudo.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
+                encontrados.add(conteudo);
             }
         }
-        throw new ElementoNaoExisteException();
+        return encontrados;
+
     }
 
     //DELETE

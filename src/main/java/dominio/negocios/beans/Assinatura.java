@@ -83,6 +83,8 @@ public class Assinatura {
 
 
     //Métodos específicos
+    //Verdadeiro - Está expirada e torna o status falso
+    //Falso - Não está e não modifica nada
     public boolean estaExpirada(){
         boolean TF = LocalDate.now().isAfter(dataExpiracao);
         if(TF) {

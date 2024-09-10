@@ -32,11 +32,10 @@ public class ControllerCadastroProdutora {
         String email = this.emailTF.getText();
         String senha = this.senhaTF.getText();
 
-        Usuario cadastrado = new Produtora(nome,email,senha);
+        Usuario cadastrado = new Produtora(nome, email, senha);
         try {
             sistema.cadastrarUsuario(cadastrado);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Erro!");
         }
 
@@ -48,9 +47,10 @@ public class ControllerCadastroProdutora {
         stage.show();
 
     }
+
     public void voltar(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/cadastroDecisao.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

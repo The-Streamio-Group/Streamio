@@ -4,8 +4,17 @@ import dominio.negocios.ISistemaFachada;
 import dominio.negocios.SistemaFachada;
 import dominio.negocios.beans.*;
 
+import java.io.File;
+
 public class TelaTexual {
     public static void main(String[] args) {
+        File file = new File("C:/Users/Kabum/Downloads/Faculdade/Cálculo");
+        Perfil perfilTeste = new Perfil("DuasBala", 20);
+        Conteudo teste2 = new Conteudo("Titanic", "Muito bom", TipoGenero.TERROR, "2", 69, file);
+        Conteudo teste3 = new Conteudo("BalacoBaco", "2", TipoGenero.ANIMACAO, "2", 68, file);
+        ReproducaoConteudo testefilme6 = new ReproducaoConteudo(teste3, 60,perfilTeste);
+        ReproducaoConteudo testefilme5 = new ReproducaoConteudo(teste3, 32,perfilTeste);
+
 
         //Tela de Teste para aplicações dos Controllers e seus atributos
 
@@ -13,21 +22,13 @@ public class TelaTexual {
 
         Assinatura assinatura = new Assinatura("234567");
         Assinante charlie = new Assinante("charlie", "charlie@gmail.com", "234", assinatura);
-        Perfil perfilTeste = new Perfil("DuasBala", 20);
 
         Assinante roberto = new Assinante("Roberto do Brega", "emaildoroberto@gmail.com", "brega", new Assinatura());
         Perfil perfilTeste2 = new Perfil("amante", 12);
 
         Produtora teste1 = new Produtora("nome", "emailteste", "123");
 
-        Conteudo teste2 = new Conteudo("Titanic", "Muito bom", TipoGenero.TERROR, "2", 69);
-        Conteudo teste3 = new Conteudo("BalacoBaco", "2", TipoGenero.ANIMACAO, "2", 68);
-        Conteudo teste4 = new Conteudo("Rambo", "2", TipoGenero.ANIMACAO, "2", 69);
-        Conteudo teste5 = new Conteudo("Jujutsu Kaisen", "2", TipoGenero.ANIMACAO, "2", 66);
-        Conteudo teste6 = new Conteudo("Deadpool", "2", TipoGenero.ANIMACAO, "2", 120);
-        ReproducaoConteudo testefilme3 = new ReproducaoConteudo(teste3, 60,perfilTeste);
-        ReproducaoConteudo testefilme32 = new ReproducaoConteudo(teste3, 32,perfilTeste);
-        ReproducaoConteudo testefilme6 = new ReproducaoConteudo(teste6, 33, perfilTeste2);
+
         try {
             //Teste de instanciar uma produtora
             novo.cadastrarUsuario(teste1);
@@ -37,8 +38,8 @@ public class TelaTexual {
             novo.adicionarConteudo(teste3);
 
             novo.removerConteudo(teste2.getConteudoID());
-            novo.adicionarConteudo(teste5);
-            novo.adicionarConteudo(teste6);
+            novo.adicionarConteudo(teste3);
+            novo.adicionarConteudo(teste2);
             System.out.println("\n" + novo.gerarRelatorioProdutora());
             novo.logoff();
             System.out.println("Usuário deslogado com sucesso!");
@@ -79,10 +80,8 @@ public class TelaTexual {
             novo.cadastrarPerfil(perfilTeste2);
             novo.trocarPerfil("amante");
             System.out.println("Usuário " + novo.getUsuariologado().getNickname() + " logado com sucesso!!");
-            novo.assistirConteudo(teste6,42);
-            novo.assistirConteudo(teste5,32);
-            novo.realizarAvaliacao(new Avaliacao(2, perfilTeste2), teste6.getConteudoID());
-            novo.realizarAvaliacao(new Avaliacao(9, perfilTeste2), teste5.getConteudoID());
+            novo.assistirConteudo(testefilme6);
+            novo.reproducaoMomento(testefilme6);
             novo.logoff();
             System.out.println("Usuário deslogado com sucesso!");
 

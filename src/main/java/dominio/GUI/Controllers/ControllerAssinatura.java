@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
@@ -37,7 +39,6 @@ public class ControllerAssinatura implements Initializable {
     private Label dataExpiracao;
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cartaoAtual.setText(logado.getAssinatura().getNumeroCartao());
@@ -48,29 +49,31 @@ public class ControllerAssinatura implements Initializable {
     // botões "Renovar Assinatura" e "Cancelar Assinatura"
 
 
-
-    public void renovarAssinatura(ActionEvent event){
+    public void renovarAssinatura(ActionEvent event) {
         try {
             sistema.renovarAssinatura(logado.getUsuarioID());
-        }
-        catch(Exception e){
-
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Assinatura em andamento!");
+            alert.setContentText("Sua assinatura ainda está em andamento, aproveite!");
+            alert.setHeaderText("Erro");
+            alert.showAndWait();
         }
 
     }
 
-    public void cancelarAssinatura(ActionEvent event){
+    public void cancelarAssinatura(ActionEvent event) {
         try {
             sistema.cancelarAssinatura(logado.getUsuarioID());
-        }
-        catch (Exception e){
+            this.sairParaMenu(event);
+        } catch (Exception e) {
 
         }
     }
 
     public void sairParaMenu(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/menuPerfis.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

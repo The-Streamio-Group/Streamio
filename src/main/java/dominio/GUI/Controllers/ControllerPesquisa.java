@@ -47,7 +47,7 @@ public class ControllerPesquisa implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabelaConteudo.setOpacity(0);
+        tabelaConteudo.setOpacity(1);
         resultados.setOpacity(0);
         assistirBT.setOpacity(0);
 
@@ -79,10 +79,13 @@ public class ControllerPesquisa implements Initializable {
     public void procurar(ActionEvent event) {
         String resultadoPesquisa = pesquisaTF.getText();
         try {
+            tabelaConteudo.getItems().clear();
             tabelaConteudo.getItems().addAll(sistema.procurarConteudoPorTitulo(resultadoPesquisa));
             tabelaConteudo.setOpacity(1);
             if (!tabelaConteudo.getItems().isEmpty()) {
                 resultados.setOpacity(1);
+                resultados.setText("RESULTADOS ENCONTRADOS");
+                resultados.setStyle("-fx-text-fill: white green");
                 assistirBT.setOpacity(1);
             }
 

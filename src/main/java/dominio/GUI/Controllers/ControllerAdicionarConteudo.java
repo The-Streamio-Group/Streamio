@@ -1,5 +1,6 @@
 package dominio.GUI.Controllers;
 
+import dominio.GUI.TelaInterface;
 import dominio.negocios.ISistemaFachada;
 import dominio.negocios.SistemaFachada;
 import dominio.negocios.beans.Conteudo;
@@ -16,8 +17,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,10 +38,11 @@ public class ControllerAdicionarConteudo implements Initializable {
     private ComboBox<TipoGenero> comboBoxG;
 
     @FXML
-    private TextField tituloFT, duracaoFT;
+    private TextField tituloFT, duracaoFT, localFT;
 
     @FXML
     private TextArea descricaoFT;
+
 
     public void checarInput(KeyEvent event) {
         if (event.getCharacter().matches("[^\\e\t\r\\d+$]")) {
@@ -57,14 +61,26 @@ public class ControllerAdicionarConteudo implements Initializable {
         long duracao = Long.parseLong(duracaoFT.getText());
         String cB = comboBox.getSelectionModel().getSelectedItem();
         TipoGenero genero = comboBoxG.getSelectionModel().getSelectedItem();
+
         try {
-            Conteudo novo = new Conteudo(titulo, descricao, genero, cB, duracao);
+            File path = new File(localFT.getText());
+            Conteudo novo = new Conteudo(titulo, descricao, genero, cB, duracao, path);
             sistema.adicionarConteudo(novo);
             voltar(event);
         } catch (Exception e) {
         }
 
 
+    }
+
+    public void buscar(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Video", "*.mp4"));
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            localFT.setText(file.getPath());
+        }
     }
 
     @FXML

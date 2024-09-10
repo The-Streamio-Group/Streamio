@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ResourceBundle;
 
 // esse é o home screen da produtora
@@ -50,7 +52,7 @@ public class ControllerProdutoraConteudos implements Initializable {
     private TableColumn<Conteudo, String> idadeTable;
 
     @FXML
-    private TableColumn<Conteudo, Long> duracaoTable;
+    private TableColumn<Conteudo, Duration> duracaoTable;
 
 
     private Stage stage;
@@ -111,6 +113,25 @@ public class ControllerProdutoraConteudos implements Initializable {
         generoTable.setCellValueFactory(new PropertyValueFactory<>("genero"));
         idadeTable.setCellValueFactory(new PropertyValueFactory<>("classificacaoIdade"));
         duracaoTable.setCellValueFactory(new PropertyValueFactory<>("duracao"));
+
+        duracaoTable.setCellFactory(column -> new TableCell<Conteudo, Duration>() {
+            @Override
+            protected void updateItem(Duration duration, boolean empty) {
+                super.updateItem(duration, empty);
+
+                if (empty || duration == null) {
+                    setText(null);
+                } else {
+                    long seconds = (long) duration.toSeconds();
+                    long minutes = seconds / 60;
+                    long hours = minutes / 60;
+                    minutes = minutes % 60;
+                    seconds = seconds % 60;
+
+                    setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                }
+            }
+        });
 
         ObservableList<Conteudo> list = FXCollections.observableArrayList(selecionado.getProduto());
         tabelaProdutora.setItems(list);

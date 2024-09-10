@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ResourceBundle;
 
 public class ControllerConteudoDetalhado implements Initializable {
@@ -68,7 +69,21 @@ public class ControllerConteudoDetalhado implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nomeConteudo.setText(conteudoEspecifico.getTitulo());
         sinopse.setText(conteudoEspecifico.getDescricao());
-        duracao.setText(conteudoEspecifico.getDuracao().toString());
+
+        //Formatar a duração
+        Duration duration = conteudoEspecifico.getDuracao();
+        if (duration != null) {
+            long seconds = (long) duration.toSeconds();
+            long minutes = seconds / 60;
+            long hours = minutes / 60;
+            minutes = minutes % 60;
+            seconds = seconds % 60;
+
+            //Horas:Minutos:Segundos
+            duracao.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+        } else {
+            duracao.setText("Duração não disponível");
+        }
         idade.setText(conteudoEspecifico.getClassificacaoIdade());
 
     }

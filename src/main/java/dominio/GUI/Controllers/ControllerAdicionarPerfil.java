@@ -17,7 +17,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,45 +28,42 @@ public class ControllerAdicionarPerfil {
     private Parent root;
 
 
-
     @FXML
-    private TextField nicknameTF,idadeTF;
+    private TextField nicknameTF, idadeTF;
 
 
-
-    public void checarInput(KeyEvent event){
-        if(event.getCharacter().matches("[^\\e\t\r\\d+$]")){
+    public void checarInput(KeyEvent event) {
+        if (event.getCharacter().matches("[^\\e\t\r\\d+$]")) {
             event.consume();
 
             idadeTF.setStyle("-fx-border-color: red");
-        }
-        else{
+        } else {
             idadeTF.setStyle("-fx-border-color: blue");
         }
 
     }
 
-    public void adicionarPerfil(ActionEvent event) throws IOException{
-            String nickname = this.nicknameTF.getText();
-            int idade = Integer.parseInt(this.idadeTF.getText());
+    public void adicionarPerfil(ActionEvent event) throws IOException {
+        String nickname = this.nicknameTF.getText();
+        int idade = Integer.parseInt(this.idadeTF.getText());
 
-            Perfil adicionado = new Perfil(nickname,idade);
-            try {
-                sistema.cadastrarPerfil(adicionado);
-            }
-            catch(Exception e){
-                System.out.println("Erro!");
-            }
+        Perfil adicionado = new Perfil(nickname, idade);
+        try {
+            sistema.cadastrarPerfil(adicionado);
+        } catch (Exception e) {
+            System.out.println("Erro!");
+        }
 
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/menuPerfis.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
     public void irMenuPerfis(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/menuPerfis.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

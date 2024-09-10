@@ -33,12 +33,11 @@ public class ControllerCadastroAssinante {
         String cartao = this.ncTF.getText();
 
 
-        Usuario cadastrado = new Assinante(nome,email,senha, new Assinatura());
+        Usuario cadastrado = new Assinante(nome, email, senha, new Assinatura());
         try {
             sistema.cadastrarUsuario(cadastrado);
-            sistema.realizarAssinatura(cadastrado.getUsuarioID(),cartao);
-        }
-        catch(Exception e){
+            sistema.realizarAssinatura(cadastrado.getUsuarioID(), cartao);
+        } catch (Exception e) {
             System.out.println("Erro!");
             e.printStackTrace();
         }

@@ -53,10 +53,7 @@ public class ServiceLogin {
         }
     }
 
-    public void logoff(Usuario usuariologado, Perfil perfilLogado) {
-        usuariologado = null;
-        perfilLogado = null;
-    }
+
 
 
 }

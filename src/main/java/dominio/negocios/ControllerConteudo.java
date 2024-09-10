@@ -8,6 +8,7 @@ import dominio.exceptions.ElementoNullException;
 import dominio.exceptions.MesmoElementoException;
 import dominio.negocios.beans.Conteudo;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ControllerConteudo {
@@ -66,7 +67,7 @@ public class ControllerConteudo {
         return this.repositorio.procurar(id);
     }
 
-    public Conteudo procurarPorTitulo(String titulo) throws ElementoNaoExisteException {
+    public List<Conteudo> procurarPorTitulo(String titulo){
         return this.repositorio.procurarPorTitulo(titulo);
     }
 

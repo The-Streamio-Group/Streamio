@@ -35,16 +35,6 @@ public class ControllerAssinatura {
         }
     }
 
-    public void cadastrarAssinatura(UUID id, String numeroCartao) throws ElementoNullException, ElementoNaoExisteException {
-        if (numeroCartao != null) {
-            if (existeAssinatura(procurarAssinatura(id).getAssinaturaID())) {
-                Assinatura assinatura = procurarAssinatura(id);
-                assinatura.setNumeroCartao(numeroCartao);
-            } else {
-                throw new ElementoNullException();
-            }
-        }
-    }
 
     //DELETE
     public void removerAssinatura(UUID id) throws ElementoNaoExisteException {
@@ -96,9 +86,11 @@ public class ControllerAssinatura {
 
 
     public void renovarAssinatura(UUID id) throws ElementoNaoExisteException, AssinaturaNaoExpiradaException {
-        if (!verificarAssinatura(id)) {
-            Assinatura renovar = procurarAssinatura(id);
+        Assinatura renovar = procurarAssinatura(id);
+        if (!renovar.isStatusPagamento()) {
             renovar.setStatusPagamento(true);
+            renovar.setDataAssinatura(LocalDate.now());
+            renovar.setDataExpiracao(LocalDate.now().plusDays(30));
         } else {
             throw new AssinaturaNaoExpiradaException();
         }
@@ -107,7 +99,8 @@ public class ControllerAssinatura {
 
     public boolean verificarAssinatura(UUID id) throws ElementoNaoExisteException {
         Assinatura v = procurarAssinatura(id);
-        return !v.estaExpirada();
+        return v.estaExpirada();
+        //Se sim, ele retorna true
 
     }
 

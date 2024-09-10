@@ -5,6 +5,7 @@ import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Assinatura;
 import dominio.negocios.beans.Conteudo;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface IRepositorioConteudo {
@@ -35,7 +36,7 @@ public interface IRepositorioConteudo {
      *
      */
 
-    Conteudo procurarPorTitulo(String titulo) throws ElementoNaoExisteException;
+    List<Conteudo> procurarPorTitulo(String titulo);
 
     /*  Atualiza as informações do objeto.
      *

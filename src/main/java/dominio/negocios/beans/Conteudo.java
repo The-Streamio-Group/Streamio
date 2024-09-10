@@ -1,5 +1,6 @@
 package dominio.negocios.beans;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -17,8 +18,9 @@ public class Conteudo {
     private int numeroViews;
     private float notaGeral;
     private Duration duracao; //50% do conteúdo - Avaliação
+    private File path;
 
-    public Conteudo(String titulo, String descricao, TipoGenero genero, String  classificacaoIdade, long minutos) {
+    public Conteudo(String titulo, String descricao, TipoGenero genero, String  classificacaoIdade, long minutos, File path) {
         this.conteudoID = UUID.randomUUID();
         this.titulo = titulo;
         this.descricao = descricao;
@@ -28,6 +30,7 @@ public class Conteudo {
         this.notaGeral = 0;
         this.avaliacoes = new ArrayList<>();
         this.duracao = Duration.ofMinutes(minutos);
+        this.path = path;
 
     }
 
@@ -102,6 +105,13 @@ public class Conteudo {
         return notaGeral;
     }
 
+    public File getPath() {
+        return path;
+    }
+
+    public void setPath(File path) {
+        this.path = path;
+    }
 
     //Métodos específicos
     public void adicionarAvalicao(Avaliacao nova) {
