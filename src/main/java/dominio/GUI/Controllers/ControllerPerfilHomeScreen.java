@@ -90,7 +90,9 @@ public class ControllerPerfilHomeScreen implements Initializable {
             ObservableList<Conteudo> list = FXCollections.observableArrayList(sistema.getPerfilLogado().getConteudosFavoritos());
             favoritos.setItems(list);
         }
-        catch (Exception e){}
+        catch (Exception e){
+            this.erroRemover();
+        }
     }
 
     public void removerH(ActionEvent event){
@@ -100,7 +102,9 @@ public class ControllerPerfilHomeScreen implements Initializable {
             historico.setItems(listHistorico);
 
         }
-        catch (Exception e){}
+        catch (Exception e){
+            this.erroRemover();
+        }
     }
 
     public void assistir(ActionEvent event) throws IOException {
@@ -108,7 +112,7 @@ public class ControllerPerfilHomeScreen implements Initializable {
             sistema.conteudoSelecionado(conteudoSelecionado.getConteudoID());
 
         } catch (Exception e) {
-
+            this.erroAssistir();
         }
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/conteudoDetalhado.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -139,5 +143,21 @@ public class ControllerPerfilHomeScreen implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void erroRemover(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Selecione algo para remover!");
+        alert.setContentText("Selecione algum conteúdo para remover!");
+        alert.setHeaderText("AVISO!!!");
+        alert.showAndWait();
+    }
+
+    public void erroAssistir(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Selecione algo para assistir!");
+        alert.setContentText("Selecione algum conteúdo para assistir!");
+        alert.setHeaderText("AVISO!!!");
+        alert.showAndWait();
     }
 }
