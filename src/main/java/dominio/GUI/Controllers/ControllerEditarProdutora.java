@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -27,31 +28,42 @@ public class ControllerEditarProdutora {
 
     public void alterarNome(ActionEvent event) throws IOException {
         try {
-            System.out.println(nomeTF.getText());
-            sistema.alterarNomeUsuario(sistema.getUsuariologado().getUsuarioID(), nomeTF.getText());
+            if(!nomeTF.getText().equals("")) {
+                sistema.alterarNomeUsuario(sistema.getUsuariologado().getUsuarioID(), nomeTF.getText());
+
+                this.voltar(event);
+            }
+            else{
+                throw new Exception();
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Campo Inválido!");
+            alert.setContentText("Campo Inválido, tente novamente!");
+            alert.setHeaderText("AVISO!!!");
+            alert.showAndWait();
         }
 
-
-        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoProdutora/conteudosProdutora.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     public void alterarSenha(ActionEvent event) throws IOException {
         try {
-            sistema.alterarSenhaUsuario(sistema.getUsuariologado().getUsuarioID(), senhaTF.getText());
+            if(!senhaTF.getText().equals("")) {
+                sistema.alterarSenhaUsuario(sistema.getUsuariologado().getUsuarioID(), senhaTF.getText());
+
+                this.voltar(event);
+            }
+            else{
+                throw new Exception();
+            }
         } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Campo Inválido!");
+            alert.setContentText("Campo Inválido, tente novamente!");
+            alert.setHeaderText("AVISO!!!");
+            alert.showAndWait();
         }
 
-        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoProdutora/conteudosProdutora.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
 

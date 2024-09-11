@@ -3,8 +3,6 @@ package dominio.GUI.Controllers;
 import dominio.negocios.ISistemaFachada;
 import dominio.negocios.SistemaFachada;
 import dominio.negocios.beans.Assinante;
-import dominio.negocios.beans.Assinatura;
-import dominio.negocios.beans.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ControllerAssinatura implements Initializable {
@@ -41,9 +39,15 @@ public class ControllerAssinatura implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DateTimeFormatter formatacaoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         cartaoAtual.setText(logado.getAssinatura().getNumeroCartao());
-        dataAssinatura.setText(logado.getAssinatura().getDataAssinatura().toString());
-        dataExpiracao.setText(logado.getAssinatura().getDataExpiracao().toString());
+
+        String dataAs = logado.getAssinatura().getDataAssinatura().format(formatacaoData);
+        dataAssinatura.setText(dataAs);
+
+        String dataEx = logado.getAssinatura().getDataExpiracao().format(formatacaoData);
+        dataExpiracao.setText(dataEx);
     }
 
     // botões "Renovar Assinatura" e "Cancelar Assinatura"

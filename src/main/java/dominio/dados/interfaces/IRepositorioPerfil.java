@@ -2,6 +2,7 @@ package dominio.dados.interfaces;
 
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
+import dominio.negocios.beans.Conteudo;
 import dominio.negocios.beans.Perfil;
 
 import java.util.UUID;
@@ -62,4 +63,6 @@ public interface IRepositorioPerfil {
      *  @return true para se existe na lista, ou false para o contrário
      */
     boolean existe(UUID id);
+
+    void removerConteudoDeTodosPerfis(Conteudo conteudo);
 }

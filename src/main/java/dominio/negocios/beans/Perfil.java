@@ -52,8 +52,8 @@ public class Perfil implements Serializable {
         this.conteudosFavoritos.add(nova);
     }
 
-    public void removerFavoritos(Conteudo r){
-        this.conteudosFavoritos.remove(r);
+    public void removerFavoritos(Conteudo conteudo){
+        this.conteudosFavoritos.remove(conteudo);
     }
 
     public boolean possuiFavoritos(Conteudo r){

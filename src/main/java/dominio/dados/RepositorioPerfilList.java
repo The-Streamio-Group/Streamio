@@ -3,6 +3,7 @@ package dominio.dados;
 import dominio.dados.interfaces.IRepositorioPerfil;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
+import dominio.negocios.beans.Conteudo;
 import dominio.negocios.beans.Perfil;
 
 import java.io.*;
@@ -89,5 +90,11 @@ public class RepositorioPerfilList extends RepositorioGenericoList<Perfil> imple
         }
         //Caso ele não exista, exceção
         throw new ElementoNaoExisteException();
+    }
+
+    public void removerConteudoDeTodosPerfis(Conteudo conteudo) {
+        for (Perfil perfil : objectList) {
+            perfil.removerFavoritos(conteudo);
+        }
     }
 }

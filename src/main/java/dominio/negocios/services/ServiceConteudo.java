@@ -65,6 +65,7 @@ public class ServiceConteudo {
         if (usuariologado instanceof Produtora) {
             Conteudo r = this.controleConteudo.procurarConteudo(id);
             this.controllerReproducaoConteudo.removerConteudoRelacionado(r);
+            this.controlePerfil.removerConteudosPerfil(r);
             this.controleConteudo.removerConteudo(id);
             ((Produtora) usuariologado).removerProduto(r);
         } else {

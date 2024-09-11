@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -43,10 +44,19 @@ public class ControllerEditarPerfil {
 
     public void alterarNickname(ActionEvent event) throws IOException {
         try {
-            System.out.println(nicknameTF.getText());
-            sistema.mudarNomePerfil(sistema.getPerfilLogado().getPerfilID(), nicknameTF.getText());
+            if(!nicknameTF.getText().equals("")) {
+                sistema.mudarNomePerfil(sistema.getPerfilLogado().getPerfilID(), nicknameTF.getText());
+                this.sair(event);
+            }
+            else{
+                throw new Exception();
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Campo Inválido!");
+            alert.setContentText("Campo Inválido, tente novamente!");
+            alert.setHeaderText("AVISO!!!");
+            alert.showAndWait();
         }
 
 
@@ -59,15 +69,21 @@ public class ControllerEditarPerfil {
 
     public void alterarIdade(ActionEvent event) throws IOException {
         try {
-            sistema.mudarFaixaEtaria(sistema.getPerfilLogado().getPerfilID(), Integer.parseInt(idadeTF.getText()));
+            if(!idadeTF.getText().equals("")){
+                sistema.mudarFaixaEtaria(sistema.getPerfilLogado().getPerfilID(), Integer.parseInt(idadeTF.getText()));
+                this.sair(event);
+            }
+            else{
+                throw new Exception();
+            }
         } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Campo Inválido!");
+            alert.setContentText("Campo Inválido, tente novamente!");
+            alert.setHeaderText("AVISO!!!");
+            alert.showAndWait();
         }
 
-        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/menuPerfis.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     public void deletarPerfil(ActionEvent event) throws IOException  {

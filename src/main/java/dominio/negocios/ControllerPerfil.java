@@ -3,6 +3,7 @@ package dominio.negocios;
 import dominio.dados.RepositorioPerfilList;
 import dominio.dados.interfaces.IRepositorioPerfil;
 import dominio.exceptions.*;
+import dominio.negocios.beans.Conteudo;
 import dominio.negocios.beans.Perfil;
 
 import java.util.UUID;
@@ -42,6 +43,10 @@ public class ControllerPerfil {
         if (removido != null) {
             this.repositorio.remover(id);
         }
+    }
+
+    public void removerConteudosPerfil(Conteudo conteudo){
+        this.repositorio.removerConteudoDeTodosPerfis(conteudo);
     }
 
     //UPDATE
