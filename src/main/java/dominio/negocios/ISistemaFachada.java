@@ -64,7 +64,7 @@ public interface ISistemaFachada {
 
     void removerFavorito(Conteudo conteudo) throws ElementoNaoExisteException;
 
-    void realizarAvaliacao(Avaliacao a, UUID reproducaoConteudoID) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException;
+    void realizarAvaliacao(Avaliacao a, UUID conteudoID) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException;
 
     void atualizarAvaliacao(UUID idAvaliacao, Avaliacao avaliacao) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException;
 

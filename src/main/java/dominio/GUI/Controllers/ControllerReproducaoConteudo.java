@@ -70,6 +70,7 @@ public class ControllerReproducaoConteudo implements Initializable {
             rep = new ReproducaoConteudo(sistema.getConteudoSelecionado(), sistema.getConteudoSelecionado().getDuracao().toMinutes(),sistema.getPerfilLogado());
             sistema.assistirConteudo(rep);
             sistema.reproducaoMomento(rep);
+            System.out.println(sistema.getReproducao());
         } catch(Exception e){
 
         }

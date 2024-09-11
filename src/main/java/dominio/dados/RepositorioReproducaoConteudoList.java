@@ -7,11 +7,12 @@ import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Perfil;
 import dominio.negocios.beans.ReproducaoConteudo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class RepositorioReproducaoConteudoList implements IRepositorioReproducaoConteudo {
+public class RepositorioReproducaoConteudoList implements IRepositorioReproducaoConteudo, Serializable {
 
     private final ArrayList<ReproducaoConteudo> repositorio;
 

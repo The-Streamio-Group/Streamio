@@ -166,8 +166,8 @@ public class SistemaFachada implements ISistemaFachada {
 
 
     //Avaliacao
-    public void realizarAvaliacao(Avaliacao a, UUID reproducaoConteudoID) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException {
-        this.serviceAvaliacao.realizarAvaliacao(a, reproducaoConteudoID, perfilLogado);
+    public void realizarAvaliacao(Avaliacao a, UUID conteudoID) throws ElementoNaoExisteException, ElementoNullException, ElementoJaExisteException, NaoAssinanteException, TempoInsuficienteException {
+        this.serviceAvaliacao.realizarAvaliacao(a, conteudoID, perfilLogado);
     }
 
     public void atualizarAvaliacao(UUID idAvaliacao, Avaliacao avaliacao) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
@@ -206,7 +206,7 @@ public class SistemaFachada implements ISistemaFachada {
     }
 
     public void reproducaoMomento(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException {
-        this.reproducao = this.controllerReproducaoConteudo.reproducaoMomento(reproducaoConteudo);
+        this.reproducao = this.controllerReproducaoConteudo.procurarReprodutoraConteudo(reproducaoConteudo.getReprodutoraConteudoID());
     }
 
     public void cadastrarReproducaoConteudo(ReproducaoConteudo rep) throws ElementoNullException, ElementoJaExisteException {

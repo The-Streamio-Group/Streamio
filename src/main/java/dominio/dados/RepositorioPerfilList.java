@@ -5,10 +5,11 @@ import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Perfil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioPerfilList implements IRepositorioPerfil {
+public class RepositorioPerfilList implements IRepositorioPerfil, Serializable {
 
     private final ArrayList<Perfil> perfilList;
 

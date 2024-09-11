@@ -1,13 +1,14 @@
 package dominio.negocios.beans;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.List;
 
-public class Conteudo {
+public class Conteudo implements Serializable {
 
     private final UUID conteudoID;
     private String titulo;
@@ -114,11 +115,11 @@ public class Conteudo {
     }
 
     //Métodos específicos
-    public void adicionarAvalicao(Avaliacao nova) {
+    public void adicionarAvaliacao(Avaliacao nova) {
         this.avaliacoes.add(nova);
     }
 
-    public void removerAvalicao(Avaliacao a) {
+    public void removerAvaliacao(Avaliacao a) {
         this.avaliacoes.remove(a);
     }
 

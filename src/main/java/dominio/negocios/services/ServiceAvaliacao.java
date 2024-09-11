@@ -62,7 +62,7 @@ public class ServiceAvaliacao {
                 if (achado.getTempoAssistido().compareTo(avaliado.getDuracao().dividedBy(5)) >= 0) {
                     this.controleAvaliacao.cadastrarAvaliacao(a);
                     Conteudo temp = this.controleConteudo.procurarConteudo(avaliado.getConteudoID());
-                    temp.adicionarAvalicao(a);
+                    temp.adicionarAvaliacao(a);
                     temp.atualizarNota();
 
                 } else {
@@ -80,7 +80,7 @@ public class ServiceAvaliacao {
         if (u instanceof Assinante) {
             if (c.possuiAvaliacao(a)) {
                 this.controleAvaliacao.remover(a.getAvaliacaoID());
-                c.removerAvalicao(a);
+                c.removerAvaliacao(a);
             }
         } else {
             throw new NaoAssinanteException();

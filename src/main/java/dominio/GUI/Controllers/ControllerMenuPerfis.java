@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -44,32 +45,54 @@ public class ControllerMenuPerfis implements Initializable {
 
     public void entrarPerfil(ActionEvent event) throws IOException {
         try {
-            sistema.trocarPerfil(selecionado.getNick());
-        } catch (Exception e) {
-            System.out.println("trocado");
-        }
+            if(selecionado != null) {
+                sistema.trocarPerfil(selecionado.getNick());
 
-        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/PerfilHomeScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+                root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/PerfilHomeScreen.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            else{
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Selecione um perfil!");
+            alert.setContentText("Selecione um perfil para fazer essa etapa!");
+            alert.setHeaderText("AVISO!!!");
+            alert.showAndWait();
+        }
 
 
     }
 
     public void editarPerfil(ActionEvent event) throws IOException {
         try {
-            sistema.trocarPerfil(selecionado.getNick());
+            if(selecionado != null) {
+                sistema.trocarPerfil(selecionado.getNick());
+
+                root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/editarPerfil.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            else{
+                throw new Exception();
+            }
         } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Selecione um perfil!");
+            alert.setContentText("Selecione um perfil para fazer essa etapa!");
+            alert.setHeaderText("AVISO!!!");
+            alert.showAndWait();
+
         }
 
 
-        root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/editarPerfil.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
 
     }
 

@@ -6,10 +6,11 @@ import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.Assinatura;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioAssinaturaList implements IRepositorioAssinatura {
+public class RepositorioAssinaturaList implements IRepositorioAssinatura, Serializable {
 
     /*
      * Classe que contém o repositório de todas as Assinaturas
@@ -31,6 +32,8 @@ public class RepositorioAssinaturaList implements IRepositorioAssinatura {
         }
         return instance;
     }
+
+
 
     //CREATE
     @Override

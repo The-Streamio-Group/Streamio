@@ -1,11 +1,12 @@
 package dominio.negocios.beans;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class Assinatura {
+public class Assinatura implements Serializable {
     private final UUID assinaturaID;
     private boolean statusPagamento;
     private String numeroCartao;

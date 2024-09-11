@@ -1,11 +1,12 @@
 package dominio.negocios.beans;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ReproducaoConteudo {
+public class ReproducaoConteudo implements Serializable {
     private final UUID reprodutoraConteudoID;
     private LocalDate dataAssistido;
     private Duration tempoAssistido;

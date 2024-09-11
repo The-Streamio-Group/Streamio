@@ -27,7 +27,7 @@ public class ControllerAvaliacao {
         int valor = (int) sliderAvaliacao.getValue();
 
         try {
-            sistema.realizarAvaliacao(new Avaliacao(valor, sistema.getPerfilLogado()), sistema.getReproducao().getReprodutoraConteudoID());
+            sistema.realizarAvaliacao(new Avaliacao(valor, sistema.getPerfilLogado()), sistema.getConteudoSelecionado().getConteudoID());
             root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/conteudoDetalhado.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);

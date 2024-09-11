@@ -6,11 +6,12 @@ import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.Conteudo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class RepositorioConteudoList implements IRepositorioConteudo{
+public class RepositorioConteudoList implements IRepositorioConteudo, Serializable {
 
     /*
      * Classe que contém o repositório de todos os Conteúdos

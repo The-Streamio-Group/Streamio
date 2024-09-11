@@ -6,10 +6,11 @@ import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.Usuario;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioUsuarioList implements IRepositorioUsuario {
+public class RepositorioUsuarioList implements IRepositorioUsuario, Serializable {
 
     /*
      * Classe que contém o repositório de todos os usuários
@@ -27,10 +28,61 @@ public class RepositorioUsuarioList implements IRepositorioUsuario {
     //Instância do repositório
     public static RepositorioUsuarioList getInstance() {
         if (instance == null) {
-            instance = new RepositorioUsuarioList();
+            instance = RepositorioUsuarioList.lerArquivo();
         }
         return instance;
     }
+
+    private static RepositorioUsuarioList lerArquivo() {
+        RepositorioUsuarioList instanciaLocal;
+
+        File in = new File("usuarios.dat");
+        FileInputStream fis;
+        ObjectInputStream ois = null;
+        try {
+            fis = new FileInputStream(in);
+            ois = new ObjectInputStream(fis);
+            Object o = ois.readObject();
+            instanciaLocal = (RepositorioUsuarioList) o;
+        } catch (Exception e) {
+            instanciaLocal = new RepositorioUsuarioList();
+        } finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {/* Silent exception */
+                }
+            }
+        }
+
+        return instanciaLocal;
+    }
+
+    public void salvarArquivo() {
+        if (instance == null) {
+            return;
+        }
+        File out = new File("cadernos.dat");
+        FileOutputStream fos;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(out);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(instance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    /* Silent */
+                }
+            }
+        }
+    }
+
 
     //CREATE
     @Override

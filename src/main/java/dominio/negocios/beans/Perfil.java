@@ -1,10 +1,11 @@
 package dominio.negocios.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Perfil {
+public class Perfil implements Serializable {
     private final UUID perfilID;
     private String nick;
     private int idade;

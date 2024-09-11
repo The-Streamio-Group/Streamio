@@ -1,9 +1,10 @@
 package dominio.negocios.beans;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Usuario {
+public abstract class Usuario implements Serializable {
     private final UUID usuarioID;
     private String nickname;
     private String email;

@@ -8,11 +8,12 @@ import dominio.negocios.beans.Perfil;
 import dominio.negocios.beans.Avaliacao;
 // removido o import de Conteudo
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class RepositorioAvaliacaoList implements IRepositorioAvaliacao {
+public class RepositorioAvaliacaoList implements IRepositorioAvaliacao, Serializable {
 
     /*
      * Classe que contém o repositório de todas as Avaliações

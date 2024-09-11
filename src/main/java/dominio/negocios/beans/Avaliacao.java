@@ -1,9 +1,10 @@
 package dominio.negocios.beans;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Avaliacao {
+public class Avaliacao implements Serializable {
     private final UUID avaliacaoID;
     private int nota;
     private final Perfil perfil;
