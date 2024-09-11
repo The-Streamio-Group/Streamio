@@ -1,5 +1,6 @@
 package dominio.GUI;
 
+import dominio.dados.RepositorioPerfilList;
 import dominio.negocios.ISistemaFachada;
 import dominio.negocios.SistemaFachada;
 import dominio.negocios.beans.*;
@@ -96,9 +97,6 @@ public class TelaTexual {
         } catch (Exception ex){
             System.out.println("erro!");
         }
-
-
-
     }
 }
 

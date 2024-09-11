@@ -103,10 +103,6 @@ public class ControllerReproducaoConteudo {
         }
     }
 
-    public ReproducaoConteudo reproducaoMomento(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException {
-        return this.repositorio.procurar(reproducaoConteudo.getReprodutoraConteudoID());
-    }
-
     //READ
     public boolean existeReprodutoraConteudo(UUID id) {
         return this.repositorio.existe(id);

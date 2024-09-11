@@ -9,14 +9,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioPerfilList implements IRepositorioPerfil, Serializable {
-
-    private final ArrayList<Perfil> perfilList;
+public class RepositorioPerfilList extends RepositorioGenericoList<Perfil> implements IRepositorioPerfil, Serializable {
 
     private static RepositorioPerfilList instance;
 
+    //Implementação do getId específico do repositório
+    @Override
+    protected UUID getId(Perfil perfil) {
+        return perfil.getPerfilID();
+    }
+
     private RepositorioPerfilList() {
-        this.perfilList = new ArrayList<>();
+        super();
     }
 
     //Instância do repositório
@@ -26,80 +30,14 @@ public class RepositorioPerfilList implements IRepositorioPerfil, Serializable {
         }
         return instance;
     }
-
-    //CREATE
-    @Override
-    public void cadastrar(Perfil p) {
-        perfilList.add(p);
-    }
-
-
-    //READ
-    @Override
-    public Perfil procurar(UUID perfilID) throws ElementoNaoExisteException {
-        for (Perfil perfil : this.perfilList) {
-            if (perfil.getPerfilID().equals(perfilID)) {
-                return perfil;
-            }
-        }
-        //Caso ele não exista, exceção
-        throw new ElementoNaoExisteException();
-    }
-
     @Override
     public Perfil procurarPorNick(String nickname) throws ElementoNaoExisteException {
-        for (Perfil perfil : this.perfilList) {
+        for (Perfil perfil : this.objectList) {
             if (perfil.getNick().equals(nickname)) {
                 return perfil;
             }
         }
         //Caso ele não exista, exceção
         throw new ElementoNaoExisteException();
-    }
-
-    //Método que procura o índice a partir do email
-    private int procurarIndice(UUID perfilID) throws ElementoNaoExisteException {
-        for (int i = 0; i < this.perfilList.size(); i++) {
-            if (perfilList.get(i).getPerfilID().equals(perfilID)) {
-                return i;
-            }
-        }
-        throw new ElementoNaoExisteException();
-    }
-
-    //DELETE
-    @Override
-    public void remover(UUID perfilID) throws ElementoNaoExisteException {
-        Perfil removido = procurar(perfilID);
-        if (removido == null) {
-            throw new ElementoNaoExisteException();
-        }
-        this.perfilList.remove(removido);
-    }
-
-    //UPDATE
-    @Override
-    public void atualizar(UUID antigoid, Perfil novo) throws ElementoNullException, ElementoNaoExisteException {
-        if (novo == null) {
-            throw new ElementoNullException();
-        }
-        boolean antigoE = existe(antigoid);
-        if (antigoE) {
-            int indice = procurarIndice(antigoid);
-            this.perfilList.set(indice, novo);
-        } else {
-            throw new ElementoNaoExisteException();
-        }
-    }
-
-    //Método que pergunta se existe o usuário para o Repositório
-    @Override
-    public boolean existe(UUID id) {
-        for (Perfil perfil : this.perfilList) {
-            if (perfil.getPerfilID().equals(id)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
