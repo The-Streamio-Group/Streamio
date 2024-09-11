@@ -6,7 +6,7 @@ import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
 import dominio.negocios.beans.*;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +32,58 @@ public class RepositorioAssinaturaList extends RepositorioGenericoList<Assinatur
     //Instância do repositório
     public static RepositorioAssinaturaList getInstance() {
         if (instance == null) {
-            instance = new RepositorioAssinaturaList();
+            instance = RepositorioAssinaturaList.lerArquivo();
         }
         return instance;
+    }
+
+    private static RepositorioAssinaturaList lerArquivo() {
+        RepositorioAssinaturaList instanciaLocal;
+
+        File in = new File("assinatura.dat");
+        FileInputStream fileInputStream;
+        ObjectInputStream objectInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(in);
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            Object o = objectInputStream.readObject();
+            instanciaLocal = (RepositorioAssinaturaList) o;
+        } catch (Exception e) {
+            instanciaLocal = new RepositorioAssinaturaList();
+        } finally {
+            if (objectInputStream != null) {
+                try {
+                    objectInputStream.close();
+                } catch (IOException e) {/* Silent exception */
+                }
+            }
+        }
+        return instanciaLocal;
+    }
+
+    public void salvarArquivos() {
+        if (instance == null) {
+            return;
+        }
+        File out = new File("assinatura.dat");
+        FileOutputStream fileOutputStream;
+        ObjectOutputStream objectOutputStream = null;
+
+        try {
+            fileOutputStream = new FileOutputStream(out);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(instance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (objectOutputStream != null) {
+                try {
+                    objectOutputStream.close();
+                } catch (IOException e) {
+                    /* Silent */
+                }
+            }
+        }
     }
 
     @Override

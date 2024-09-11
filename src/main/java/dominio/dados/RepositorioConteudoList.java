@@ -7,7 +7,7 @@ import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Conteudo;
 import dominio.negocios.beans.Perfil;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,11 +32,59 @@ public class RepositorioConteudoList extends RepositorioGenericoList<Conteudo> i
     //Instância do repositório
     public static RepositorioConteudoList getInstance() {
         if (instance == null) {
-            instance = new RepositorioConteudoList();
+            instance = RepositorioConteudoList.lerArquivo();
         }
         return instance;
     }
 
+    private static RepositorioConteudoList lerArquivo() {
+        RepositorioConteudoList instanciaLocal;
+
+        File in = new File("conteudo.dat");
+        FileInputStream fileInputStream;
+        ObjectInputStream objectInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(in);
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            Object o = objectInputStream.readObject();
+            instanciaLocal = (RepositorioConteudoList) o;
+        } catch (Exception e) {
+            instanciaLocal = new RepositorioConteudoList();
+        } finally {
+            if (objectInputStream != null) {
+                try {
+                    objectInputStream.close();
+                } catch (IOException e) {/* Silent exception */
+                }
+            }
+        }
+        return instanciaLocal;
+    }
+
+    public void salvarArquivos() {
+        if (instance == null) {
+            return;
+        }
+        File out = new File("conteudo.dat");
+        FileOutputStream fileOutputStream;
+        ObjectOutputStream objectOutputStream = null;
+
+        try {
+            fileOutputStream = new FileOutputStream(out);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(instance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (objectOutputStream != null) {
+                try {
+                    objectOutputStream.close();
+                } catch (IOException e) {
+                    /* Silent */
+                }
+            }
+        }
+    }
 
     @Override
     public List<Conteudo> procurarPorTitulo(String titulo){
