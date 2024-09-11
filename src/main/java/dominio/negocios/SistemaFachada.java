@@ -156,7 +156,7 @@ public class SistemaFachada implements ISistemaFachada {
         this.serviceConteudo.assistirConteudoPerfil(reproducao, usuariologado);
     }
 
-    public void adicionarFavorito(Conteudo conteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException {
+    public void adicionarFavorito(Conteudo conteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException, JaFavoritoException {
         this.serviceConteudo.adicionarFavoritoPerfil(perfilLogado.getPerfilID(), conteudo);
     }
 

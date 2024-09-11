@@ -3,6 +3,7 @@ package dominio.negocios;
 import dominio.dados.RepositorioAssinaturaList;
 import dominio.dados.interfaces.IRepositorioAssinatura;
 import dominio.exceptions.*;
+import dominio.negocios.beans.Assinante;
 import dominio.negocios.beans.Assinatura;
 
 import java.time.LocalDate;

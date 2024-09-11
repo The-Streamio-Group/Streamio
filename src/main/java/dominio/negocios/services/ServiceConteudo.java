@@ -64,6 +64,7 @@ public class ServiceConteudo {
     public void removerConteudo(UUID id, Usuario usuariologado) throws ElementoNaoExisteException, NaoProdutoraException {
         if (usuariologado instanceof Produtora) {
             Conteudo r = this.controleConteudo.procurarConteudo(id);
+            this.controllerReproducaoConteudo.removerConteudoRelacionado(r);
             this.controleConteudo.removerConteudo(id);
             ((Produtora) usuariologado).removerProduto(r);
         } else {
@@ -72,10 +73,14 @@ public class ServiceConteudo {
 
     }
 
-    public void adicionarFavoritoPerfil(UUID idPerfil, Conteudo conteudo) throws ElementoNaoExisteException, NaoAssinanteException {
+    public void adicionarFavoritoPerfil(UUID idPerfil, Conteudo conteudo) throws ElementoNaoExisteException, NaoAssinanteException, JaFavoritoException {
         Perfil favorito = this.controlePerfil.procurarPerfil(idPerfil);
         if (favorito != null) {
-            favorito.adicionarFavoritos(conteudo);
+            if (!favorito.possuiFavoritos(conteudo)) {
+                favorito.adicionarFavoritos(conteudo);
+            } else {
+                throw new JaFavoritoException();
+            }
         } else {
             throw new NaoAssinanteException();
         }
@@ -101,7 +106,7 @@ public class ServiceConteudo {
         }
     }
 
-    public List<Conteudo> procurarConteudo(String titulo){
+    public List<Conteudo> procurarConteudo(String titulo) {
         return this.controleConteudo.procurarPorTitulo(titulo);
     }
 

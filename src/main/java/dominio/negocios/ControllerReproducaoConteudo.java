@@ -63,6 +63,10 @@ public class ControllerReproducaoConteudo {
         return this.repositorio.procurarDono(dono);
     }
 
+    public void removerConteudoRelacionado(Conteudo conteudo){
+        this.repositorio.removerConteudoRelacionado(conteudo);
+    }
+
     public void removerReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
         ReproducaoConteudo removido = procurarReprodutoraConteudo(id);
 

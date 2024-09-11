@@ -60,7 +60,7 @@ public interface ISistemaFachada {
 
     void assistirConteudo(ReproducaoConteudo reproducaoConteudo) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException, ElementoJaExisteException;
 
-    void adicionarFavorito(Conteudo Conteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException;
+    void adicionarFavorito(Conteudo Conteudo) throws ElementoNaoExisteException, NaoAssinanteException, NaoViuException, JaFavoritoException;
 
     void removerFavorito(Conteudo conteudo) throws ElementoNaoExisteException;
 

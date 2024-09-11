@@ -4,6 +4,7 @@ import dominio.dados.interfaces.IRepositorioReproducaoConteudo;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
+import dominio.negocios.beans.Conteudo;
 import dominio.negocios.beans.Perfil;
 import dominio.negocios.beans.ReproducaoConteudo;
 
@@ -43,5 +44,20 @@ public class RepositorioReproducaoConteudoList extends RepositorioGenericoList<R
             }
         }
         return resultado;
+    }
+
+    @Override
+    public List<ReproducaoConteudo> procurarConteudo(Conteudo conteudo) {
+        List<ReproducaoConteudo> resultado = new ArrayList<>();
+        for (ReproducaoConteudo reproducaoConteudo : objectList) {
+            if (reproducaoConteudo.getPerfil().equals(conteudo)) {
+                resultado.add(reproducaoConteudo);
+            }
+        }
+        return resultado;
+    }
+
+    public void removerConteudoRelacionado(Conteudo conteudo){
+        objectList.removeIf(reproducaoConteudo -> reproducaoConteudo.getConteudo().equals(conteudo));
     }
 }

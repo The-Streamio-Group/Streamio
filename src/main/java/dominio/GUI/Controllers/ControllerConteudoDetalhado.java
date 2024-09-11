@@ -1,5 +1,6 @@
 package dominio.GUI.Controllers;
 
+import dominio.exceptions.JaFavoritoException;
 import dominio.negocios.ISistemaFachada;
 import dominio.negocios.SistemaFachada;
 import dominio.negocios.beans.Conteudo;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -56,7 +58,16 @@ public class ControllerConteudoDetalhado implements Initializable {
     public void favoritar(ActionEvent event) throws IOException {
         try {
             sistema.adicionarFavorito(conteudoEspecifico);
+        } catch (JaFavoritoException e1) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO!");
+            alert.setContentText("Esse conteúdo já está favoritado!");
+            alert.setHeaderText("ERRO!!!");
+            alert.showAndWait();
+
         } catch (Exception e) {
+            /* Exception Silenciosa */
         }
         root = FXMLLoader.load(getClass().getResource("/Telas/FluxoAssinante/perfilHomeScreen.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

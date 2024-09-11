@@ -65,7 +65,15 @@ public class ControllerAssinatura implements Initializable {
     public void cancelarAssinatura(ActionEvent event) {
         try {
             sistema.cancelarAssinatura(logado.getUsuarioID());
-            this.sairParaMenu(event);
+
+            //Deslogar
+            sistema.logoff();
+            root = FXMLLoader.load(getClass().getResource("/Telas/login.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
         } catch (Exception e) {
 
         }

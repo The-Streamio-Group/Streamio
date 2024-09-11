@@ -4,11 +4,12 @@ import dominio.dados.interfaces.IRepositorioAssinatura;
 import dominio.exceptions.ElementoNaoExisteException;
 import dominio.exceptions.ElementoNullException;
 // import ElementoJaExisteException para o método cadastrar [?]
-import dominio.negocios.beans.Assinatura;
-import dominio.negocios.beans.Avaliacao;
+import dominio.negocios.beans.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class RepositorioAssinaturaList extends RepositorioGenericoList<Assinatura> implements IRepositorioAssinatura, Serializable {
@@ -53,7 +54,9 @@ public class RepositorioAssinaturaList extends RepositorioGenericoList<Assinatur
             throw new ElementoNaoExisteException();
         } else{
             cancelado.setStatusPagamento(false);
+            cancelado.setDataExpiracao(LocalDate.of(2020,2,13));
         }
     }
+
 }
 

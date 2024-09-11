@@ -54,6 +54,8 @@ public class ServiceAssinatura {
 
     public void atualizarCartaoAssinaturaUsuario(UUID idConta, String numCartao) throws ElementoNaoExisteException, NaoAssinanteException, ElementoNullException {
         Assinatura atualizarCartao = this.buscarAssinatura(idConta);
+        Assinante atualizado = (Assinante) this.controleUsuario.procurarUsuario(idConta);
+        atualizado.getAssinatura().setNumeroCartao(numCartao);
         this.controleAssinatura.cadastrarAssinatura(atualizarCartao);
         this.controleAssinatura.atualizarCartaoAssinatura(atualizarCartao.getAssinaturaID(), numCartao);
     }
