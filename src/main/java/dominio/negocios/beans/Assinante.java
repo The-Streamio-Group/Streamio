@@ -48,7 +48,6 @@ public class Assinante extends Usuario {
 
     public boolean possuiPerfil(Perfil p){
          if(this.perfis.contains(p)){
-            System.out.println("ss");
             return true;
         }
          return false;
