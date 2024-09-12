@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
@@ -35,7 +36,11 @@ public class ControllerAvaliacao {
             stage.show();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO!");
+            alert.setContentText("Assista antes de Avaliar!");
+            alert.setHeaderText("ERRO!!!");
+            alert.showAndWait();
         }
     }
 
