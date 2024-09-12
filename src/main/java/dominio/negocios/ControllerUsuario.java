@@ -34,7 +34,6 @@ public class ControllerUsuario {
 
     }
 
-
     public void removerUsuario(UUID id) throws ElementoNaoExisteException {
         Usuario removido = procurarUsuario(id);
         if (removido != null) {
@@ -86,6 +85,7 @@ public class ControllerUsuario {
             throw new MesmoNomeException();
         }
     }
+
 
 
 }

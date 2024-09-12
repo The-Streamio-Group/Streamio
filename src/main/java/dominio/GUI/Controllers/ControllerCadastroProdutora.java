@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -28,24 +29,32 @@ public class ControllerCadastroProdutora {
 
     // implementar "Cadastrar"
     public void cadastrarProdutora(ActionEvent event) throws IOException {
-        String nome = this.nomeTF.getText();
-        String email = this.emailTF.getText();
-        String senha = this.senhaTF.getText();
 
-        Usuario cadastrado = new Produtora(nome, email, senha);
         try {
-            sistema.cadastrarUsuario(cadastrado);
+            if (!nomeTF.getText().isEmpty() && !emailTF.getText().isEmpty() &&
+                    !senhaTF.getText().isEmpty()) {
+                String nome = this.nomeTF.getText();
+                String email = this.emailTF.getText();
+                String senha = this.senhaTF.getText();
+                Produtora cadastrado = new Produtora(nome, email, senha);
+                sistema.cadastrarUsuario(cadastrado);
+
+                root = FXMLLoader.load(getClass().getResource("/Telas/login.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            else{
+                throw new Exception();
+            }
         } catch (Exception e) {
-            System.out.println("Erro!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO!");
+            alert.setContentText("Erro: Preencha todos os campos");
+            alert.setHeaderText("ERRO!!!");
+            alert.showAndWait();
         }
-
-
-        root = FXMLLoader.load(getClass().getResource("/Telas/login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
     }
 
     public void voltar(ActionEvent event) throws IOException {

@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -56,18 +57,30 @@ public class ControllerAdicionarConteudo implements Initializable {
     }
 
     public void adicionarConteudo(ActionEvent event) {
-        String titulo = tituloFT.getText();
-        String descricao = descricaoFT.getText();
-        long duracao = Long.parseLong(duracaoFT.getText());
-        String cB = comboBox.getSelectionModel().getSelectedItem();
-        TipoGenero genero = comboBoxG.getSelectionModel().getSelectedItem();
+
 
         try {
-            File path = new File(localFT.getText());
-            Conteudo novo = new Conteudo(titulo, descricao, genero, cB, duracao, path);
-            sistema.adicionarConteudo(novo);
-            voltar(event);
+            if (!tituloFT.getText().isEmpty() && !descricaoFT.getText().isEmpty() &&
+                    duracaoFT.getText().isEmpty() && !comboBox.getSelectionModel().isEmpty() &&
+                    !comboBoxG.getSelectionModel().isEmpty()) {
+                String titulo = tituloFT.getText();
+                String descricao = descricaoFT.getText();
+                long duracao = Long.parseLong(duracaoFT.getText());
+                String cB = comboBox.getSelectionModel().getSelectedItem();
+                TipoGenero genero = comboBoxG.getSelectionModel().getSelectedItem();
+                File path = new File(localFT.getText());
+                Conteudo novo = new Conteudo(titulo, descricao, genero, cB, duracao, path);
+                sistema.adicionarConteudo(novo);
+                voltar(event);
+            } else {
+                throw new Exception();
+            }
         } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Campos Inválidos!");
+            alert.setContentText("Complete todos os campos!");
+            alert.setHeaderText("ERRO!!!");
+            alert.showAndWait();
         }
 
 

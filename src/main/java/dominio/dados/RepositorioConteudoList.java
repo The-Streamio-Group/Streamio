@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class RepositorioConteudoList extends RepositorioGenericoList<Conteudo> implements IRepositorioConteudo, Serializable {
+public class RepositorioConteudoList extends RepositorioGenericoList<Conteudo> implements IRepositorioConteudo {
 
     /*
      * Classe que contém o repositório de todos os Conteúdos
@@ -32,58 +32,9 @@ public class RepositorioConteudoList extends RepositorioGenericoList<Conteudo> i
     //Instância do repositório
     public static RepositorioConteudoList getInstance() {
         if (instance == null) {
-            instance = RepositorioConteudoList.lerArquivo();
+            instance = new RepositorioConteudoList();
         }
         return instance;
-    }
-
-    private static RepositorioConteudoList lerArquivo() {
-        RepositorioConteudoList instanciaLocal;
-
-        File in = new File("conteudo.dat");
-        FileInputStream fileInputStream;
-        ObjectInputStream objectInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(in);
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            Object o = objectInputStream.readObject();
-            instanciaLocal = (RepositorioConteudoList) o;
-        } catch (Exception e) {
-            instanciaLocal = new RepositorioConteudoList();
-        } finally {
-            if (objectInputStream != null) {
-                try {
-                    objectInputStream.close();
-                } catch (IOException e) {/* Silent exception */
-                }
-            }
-        }
-        return instanciaLocal;
-    }
-
-    public void salvarArquivos() {
-        if (instance == null) {
-            return;
-        }
-        File out = new File("conteudo.dat");
-        FileOutputStream fileOutputStream;
-        ObjectOutputStream objectOutputStream = null;
-
-        try {
-            fileOutputStream = new FileOutputStream(out);
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(instance);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (objectOutputStream != null) {
-                try {
-                    objectOutputStream.close();
-                } catch (IOException e) {
-                    /* Silent */
-                }
-            }
-        }
     }
 
     @Override

@@ -82,7 +82,6 @@ public class ControllerAssinatura {
         novoCartao.setStatusPagamento(true);
         novoCartao.setDataAssinatura(LocalDate.now());
         novoCartao.setDataExpiracao(LocalDate.now().plusDays(30));
-
     }
 
 
@@ -95,15 +94,11 @@ public class ControllerAssinatura {
         } else {
             throw new AssinaturaNaoExpiradaException();
         }
-
     }
 
     public boolean verificarAssinatura(UUID id) throws ElementoNaoExisteException {
         Assinatura v = procurarAssinatura(id);
         return v.estaExpirada();
         //Se sim, ele retorna true
-
     }
-
-
 }

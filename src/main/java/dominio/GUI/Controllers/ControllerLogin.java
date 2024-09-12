@@ -65,7 +65,7 @@ public class ControllerLogin {
 
             //Alerta
             alert.getButtonTypes().setAll(refazerAssinaturaBT, sair);
-            alert.setContentText("Refaça a sua assinatura, pois ela expirou seu bobão");
+            alert.setContentText("Refaça a sua assinatura pois ela passou da data de validade.");
             alert.setHeaderText("Erro");
 
             //Pegar o valor do que o usuário escolher

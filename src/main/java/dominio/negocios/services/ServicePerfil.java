@@ -64,6 +64,26 @@ public class ServicePerfil {
         this.controllerReproducaoConteudo.removerReprodutoraConteudo(idReproducaoConteudo);
     }
 
+    public void atualizarPerfil(UUID antigoId, Perfil p) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
+        this.controlePerfil.atualizarPerfil(antigoId,p);
+    }
+
+    public void mudarNomePerfil(UUID idPerfil, String novoNome) throws MesmoNomeException, ElementoNaoExisteException {
+        this.controlePerfil.mudarNomePerfil(idPerfil,novoNome);
+    }
+
+    public void mudarFaixaEtaria(UUID idPerfil, int novaIdade) throws ElementoNaoExisteException, MesmoElementoException {
+        this.controlePerfil.mudarFaixaEtaria(idPerfil,novaIdade);
+    }
+
+    public Perfil procurarPerfil(UUID idPerfil) throws ElementoNaoExisteException {
+        return this.controlePerfil.procurarPerfil(idPerfil);
+    }
+
+    public Perfil procurarPerfilPorNome(String nome) throws ElementoNaoExisteException {
+        return this.controlePerfil.procurarPerfilPorNick(nome);
+    }
+
 
     public Perfil trocarPerfil(String nickname, Usuario usuarioLogado, Perfil perfilLogado) throws NaoAssinanteException, ElementoNaoExisteException {
         if (usuarioLogado instanceof Assinante) {

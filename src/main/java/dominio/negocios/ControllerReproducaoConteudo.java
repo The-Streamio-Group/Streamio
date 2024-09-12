@@ -30,7 +30,6 @@ public class ControllerReproducaoConteudo {
     public void cadastrarReprodutoraConteudo(ReproducaoConteudo r) throws ElementoJaExisteException, ElementoNullException {
         if (r != null) {
             if (!existeReprodutoraConteudo(r.getReprodutoraConteudoID())) {
-
                 this.repositorio.cadastrar(r);
             } else {
                 throw new ElementoJaExisteException();
@@ -45,15 +44,12 @@ public class ControllerReproducaoConteudo {
         ReproducaoConteudo r = new ReproducaoConteudo(c, minutos, p);
 
         if (!existeReprodutoraConteudo(r.getReprodutoraConteudoID())) {
-
             this.cadastrarReprodutoraConteudo(r);
         } else {
             throw new ElementoJaExisteException();
         }
         return r;
-
     }
-
 
     public ReproducaoConteudo procurarReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
         return this.repositorio.procurar(id);
@@ -69,11 +65,9 @@ public class ControllerReproducaoConteudo {
 
     public void removerReprodutoraConteudo(UUID id) throws ElementoNaoExisteException {
         ReproducaoConteudo removido = procurarReprodutoraConteudo(id);
-
         if (removido != null) {
             this.repositorio.remover(id);
         }
-
     }
 
     //UPDATE
@@ -111,4 +105,6 @@ public class ControllerReproducaoConteudo {
     public boolean existeReprodutoraConteudo(UUID id) {
         return this.repositorio.existe(id);
     }
+
+
 }

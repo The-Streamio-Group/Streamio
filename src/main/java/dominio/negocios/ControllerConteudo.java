@@ -80,5 +80,6 @@ public class ControllerConteudo {
     public void assistirConteudo(UUID id) throws ElementoNaoExisteException {
         Conteudo conteudo = procurarConteudo(id);
         conteudo.setNumeroViews(1);
+
     }
 }

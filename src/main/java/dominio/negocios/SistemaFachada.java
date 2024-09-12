@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class SistemaFachada implements ISistemaFachada {
-    private final ControllerPerfil controllerPerfil;
     private final ControllerReproducaoConteudo controllerReproducaoConteudo;
     private final ControllerUsuario controllerUsuario;
     private final ServiceAssinatura serviceAssinatura;
@@ -27,7 +26,6 @@ public class SistemaFachada implements ISistemaFachada {
     private ReproducaoConteudo reproducao;
 
     public SistemaFachada() {
-        this.controllerPerfil = ControllerPerfil.getInstance();
         this.controllerReproducaoConteudo = ControllerReproducaoConteudo.getInstance();
         this.serviceAssinatura = ServiceAssinatura.getInstance();
         this.serviceAvaliacao = ServiceAvaliacao.getInstance();
@@ -74,25 +72,25 @@ public class SistemaFachada implements ISistemaFachada {
     }
 
     public void mudarNomePerfil(UUID idPerfil, String novoNome) throws MesmoNomeException, ElementoNaoExisteException {
-        this.controllerPerfil.mudarNomePerfil(idPerfil, novoNome);
+        this.servicePerfil.mudarNomePerfil(idPerfil, novoNome);
 
     }
 
     public void mudarFaixaEtaria(UUID idPerfil, int novaIdade) throws ElementoNaoExisteException, MesmoElementoException {
-        this.controllerPerfil.mudarFaixaEtaria(idPerfil, novaIdade);
+        this.servicePerfil.mudarFaixaEtaria(idPerfil, novaIdade);
 
     }
 
     public void atualizarPerfil(UUID antigoId, Perfil p) throws ElementoNullException, MesmoElementoException, ElementoNaoExisteException, ElementoJaExisteException {
-        this.controllerPerfil.atualizarPerfil(antigoId, p);
+        this.servicePerfil.atualizarPerfil(antigoId, p);
     }
 
     public Perfil procurarPerfil(UUID idPerfil) throws ElementoNaoExisteException {
-        return this.controllerPerfil.procurarPerfil(idPerfil);
+        return this.servicePerfil.procurarPerfil(idPerfil);
     }
 
     public Perfil procurarPerfilPorNome(String nome) throws ElementoNaoExisteException {
-        return this.controllerPerfil.procurarPerfilPorNick(nome);
+        return this.servicePerfil.procurarPerfilPorNome(nome);
     }
 
 

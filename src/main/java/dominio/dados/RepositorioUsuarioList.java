@@ -11,7 +11,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class RepositorioUsuarioList extends RepositorioGenericoList<Usuario> implements IRepositorioUsuario, Serializable {
+public class RepositorioUsuarioList extends RepositorioGenericoList<Usuario> implements IRepositorioUsuario {
     /*
      * Classe que contém o repositório de todos os usuários
      * e seus respectivos CRUDs.
@@ -30,59 +30,9 @@ public class RepositorioUsuarioList extends RepositorioGenericoList<Usuario> imp
     //Instância do repositório
     public static RepositorioUsuarioList getInstance() {
         if (instance == null) {
-            instance = RepositorioUsuarioList.lerArquivo();
+            instance = new RepositorioUsuarioList();
         }
         return instance;
-    }
-
-    private static RepositorioUsuarioList lerArquivo() {
-        RepositorioUsuarioList instanciaLocal;
-
-        File in = new File("usuarios.dat");
-        FileInputStream fis;
-        ObjectInputStream ois = null;
-        try {
-            fis = new FileInputStream(in);
-            ois = new ObjectInputStream(fis);
-            Object o = ois.readObject();
-            instanciaLocal = (RepositorioUsuarioList) o;
-        } catch (Exception e) {
-            instanciaLocal = new RepositorioUsuarioList();
-        } finally {
-            if (ois != null) {
-                try {
-                    ois.close();
-                } catch (IOException e) {/* Silent exception */
-                }
-            }
-        }
-
-        return instanciaLocal;
-    }
-
-    public void salvarArquivo() {
-        if (instance == null) {
-            return;
-        }
-        File out = new File("cadernos.dat");
-        FileOutputStream fos;
-        ObjectOutputStream oos = null;
-
-        try {
-            fos = new FileOutputStream(out);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(instance);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (oos != null) {
-                try {
-                    oos.close();
-                } catch (IOException e) {
-                    /* Silent */
-                }
-            }
-        }
     }
 
     @Override

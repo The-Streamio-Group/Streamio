@@ -29,7 +29,6 @@ public class ControllerPerfil {
             if (!existePerfil(p.getPerfilID())) {
                 this.repositorio.cadastrar(p);
             }
-
         } else {
             throw new ElementoNullException();
         }
@@ -39,14 +38,15 @@ public class ControllerPerfil {
     //DELETE
     public void removerPerfil(UUID id) throws ElementoNaoExisteException {
         Perfil removido = procurarPerfil(id);
-
         if (removido != null) {
             this.repositorio.remover(id);
+
         }
     }
 
     public void removerConteudosPerfil(Conteudo conteudo){
         this.repositorio.removerConteudoDeTodosPerfis(conteudo);
+
     }
 
     //UPDATE

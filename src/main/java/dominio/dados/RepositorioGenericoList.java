@@ -5,6 +5,7 @@ import dominio.exceptions.ElementoNullException;
 import dominio.negocios.beans.Perfil;
 
 import javax.swing.text.Element;
+import java.io.Serializable;
 import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.UUID;
