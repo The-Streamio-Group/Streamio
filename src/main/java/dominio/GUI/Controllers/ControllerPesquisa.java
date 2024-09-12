@@ -85,7 +85,7 @@ public class ControllerPesquisa implements Initializable {
             if (!tabelaConteudo.getItems().isEmpty()) {
                 resultados.setOpacity(1);
                 resultados.setText("RESULTADOS ENCONTRADOS");
-                resultados.setStyle("-fx-text-fill: white green");
+                resultados.setStyle("-fx-text-fill: #27fa6f");
                 assistirBT.setOpacity(1);
             }
 

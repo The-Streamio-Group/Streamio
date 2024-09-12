@@ -61,8 +61,7 @@ public class ControllerAdicionarConteudo implements Initializable {
 
         try {
             if (!tituloFT.getText().isEmpty() && !descricaoFT.getText().isEmpty() &&
-                    duracaoFT.getText().isEmpty() && !comboBox.getSelectionModel().isEmpty() &&
-                    !comboBoxG.getSelectionModel().isEmpty()) {
+                    !duracaoFT.getText().isEmpty()) {
                 String titulo = tituloFT.getText();
                 String descricao = descricaoFT.getText();
                 long duracao = Long.parseLong(duracaoFT.getText());
